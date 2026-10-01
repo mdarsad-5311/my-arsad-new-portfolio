@@ -52,6 +52,8 @@ export const DEVELOPER_INFO = {
 
   email: "mdarsadkgn5311@gmail.com",
   github: "https://github.com/mdarsad-5311",
+  githubUsername: "mdarsad-5311",
+  projectRepo: "https://github.com/mdarsad-5311/my-arsad-new-portfolio",
   linkedin: "https://linkedin.com/in/mdarsad-5311",
   twitter: "",
   resumeUrl: "/resume.pdf",

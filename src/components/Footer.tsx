@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, GitBranch } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
@@ -109,6 +109,17 @@ export default function Footer() {
 
           {/* Action Hub */}
           <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={DEVELOPER_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`GitHub profile: @${DEVELOPER_INFO.githubUsername} (opens in a new tab)`}
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#001033] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 rounded-lg shadow-sm"
+            >
+              <GithubIcon className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <span>@{DEVELOPER_INFO.githubUsername}</span>
+            </a>
+
             {DEVELOPER_INFO.resumeUrl && (
               <a
                 href={DEVELOPER_INFO.resumeUrl}
@@ -185,43 +196,94 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Networks & Direct Channels (Span 4) */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
+          <div className="lg:col-span-4 flex flex-col gap-3">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold block mb-1">
-              External Channels
+              External Channels &amp; Code
             </span>
 
+            {/* GitHub Profile */}
             <a
               href={DEVELOPER_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-colors"
+              aria-label={`Visit GitHub profile @${DEVELOPER_INFO.githubUsername} (opens in a new tab)`}
+              className="group flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-all duration-200"
             >
-              <div className="flex items-center gap-2.5">
-                <GithubIcon className="w-4 h-4 text-[#38BDF8]" />
-                <span>GITHUB REPOSITORIES</span>
+              <div className="flex items-center gap-3">
+                <div className="p-1.5 rounded bg-[#001033] border border-[#1E3A5F] group-hover:border-[#38BDF8]/40 transition-colors">
+                  <GithubIcon className="w-4 h-4 text-[#38BDF8]" />
+                </div>
+                <div>
+                  <div className="font-bold text-white tracking-wider">GITHUB PROFILE</div>
+                  <div className="text-[11px] text-[#38BDF8] font-mono lowercase">
+                    @{DEVELOPER_INFO.githubUsername}
+                  </div>
+                </div>
               </div>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors" />
             </a>
 
+            {/* This Project's GitHub Repository */}
+            <a
+              href={DEVELOPER_INFO.projectRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View this portfolio project repository on GitHub: ${DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio (opens in a new tab)`}
+              className="group flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-all duration-200"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-1.5 rounded bg-[#001033] border border-[#1E3A5F] group-hover:border-[#38BDF8]/40 transition-colors">
+                  <GitBranch className="w-4 h-4 text-[#38BDF8]" />
+                </div>
+                <div>
+                  <div className="font-bold text-white tracking-wider">THIS PROJECT REPO</div>
+                  <div className="text-[11px] text-[#94A3B8] font-mono">
+                    {DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio
+                  </div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors" />
+            </a>
+
+            {/* LinkedIn Network */}
             <a
               href={DEVELOPER_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-colors"
+              aria-label={`Visit LinkedIn network for ${DEVELOPER_INFO.name} (opens in a new tab)`}
+              className="group flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-all duration-200"
             >
-              <div className="flex items-center gap-2.5">
-                <LinkedinIcon className="w-4 h-4 text-[#38BDF8]" />
-                <span>LINKEDIN NETWORK</span>
+              <div className="flex items-center gap-3">
+                <div className="p-1.5 rounded bg-[#001033] border border-[#1E3A5F] group-hover:border-[#38BDF8]/40 transition-colors">
+                  <LinkedinIcon className="w-4 h-4 text-[#38BDF8]" />
+                </div>
+                <div>
+                  <div className="font-bold text-white tracking-wider">LINKEDIN NETWORK</div>
+                  <div className="text-[11px] text-[#94A3B8] font-mono">
+                    in/{DEVELOPER_INFO.githubUsername}
+                  </div>
+                </div>
               </div>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors" />
             </a>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Back to Top */}
+        {/* Bottom Bar: Copyright, Project Repo & Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#94A3B8]">
-          <div>
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1.5 text-center sm:text-left">
             <span>© {new Date().getFullYear()} {DEVELOPER_INFO.name}. All rights reserved.</span>
+            <span className="hidden sm:inline text-[#1E3A5F]">•</span>
+            <a
+              href={DEVELOPER_INFO.projectRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors inline-flex items-center gap-1.5"
+              aria-label="View portfolio source code on GitHub"
+            >
+              <GitBranch className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <span>Project on GitHub: <span className="text-[#38BDF8] font-semibold">{DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio</span></span>
+            </a>
           </div>
 
           <button

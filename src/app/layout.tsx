@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { SITE_CONFIG } from "@/data/portfolioData";
 import "./globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -24,28 +25,31 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://arsad.dev"),
-  title: "MD ARSAD — Full-Stack Engineer",
-  description:
-    "Portfolio of MD ARSAD, a Full-Stack Engineer building modern, scalable, and high-performance web systems using React, Next.js, TypeScript, Python, and Django.",
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
+  title: SITE_CONFIG.title,
+  description: SITE_CONFIG.description,
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "MD ARSAD",
     "Full-Stack Engineer",
-    "Software Engineer",
+    "Freelance Full-Stack Developer",
+    "SaaS Developer",
+    "Web Application Engineer",
     "React Engineer",
     "Next.js Developer",
     "TypeScript",
-    "Python",
-    "Django REST Framework",
+    "Python Django Developer",
     "Software Engineer India",
-    "Web Application Architecture",
+    "Decoupled Web Architecture",
   ],
   authors: [{ name: "MD ARSAD" }],
   creator: "MD ARSAD",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://arsad.dev",
+    url: SITE_CONFIG.siteUrl,
     title: "MD ARSAD — Full-Stack Engineer",
     description:
       "Crafting modern, scalable and high-performance digital systems with React, Next.js, TypeScript, and Django.",

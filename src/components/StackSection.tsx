@@ -49,7 +49,7 @@ export default function StackSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                06 —
+                08 —
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
@@ -139,30 +139,54 @@ export default function StackSection() {
                 </span>
               </div>
 
-              {/* Title & Role */}
-              <div>
-                <h3 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white">
-                  {currentTechObj.name}
-                </h3>
-                <span className="font-mono text-xs text-[#38BDF8] font-bold tracking-wider uppercase block mt-1.5">
-                  Role: {currentTechObj.role}
-                </span>
-              </div>
+              {/* Selected Technology Inspector Fields */}
+              <div className="flex flex-col gap-5 divide-y divide-[#1E3A5F]/50">
+                {/* 1. TECHNOLOGY */}
+                <div className="flex flex-col gap-1.5">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
+                    TECHNOLOGY
+                  </span>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h3 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white">
+                      {currentTechObj.name}
+                    </h3>
+                    <span className="font-mono text-xs text-[#38BDF8] font-semibold">
+                      // {currentTechObj.category}
+                    </span>
+                  </div>
+                </div>
 
-              {/* Architectural Description */}
-              <div className="pt-2 border-t border-[#1E3A5F]/30">
-                <span className="font-mono text-[11px] uppercase tracking-widest text-[#94A3B8] block mb-2 font-semibold">
-                  Architectural Role &amp; Application
-                </span>
-                <p className="font-body text-sm sm:text-base text-[#CBD5E1] leading-relaxed">
-                  {currentTechObj.description}
-                </p>
+                {/* 2. ROLE */}
+                <div className="pt-4 flex flex-col gap-1.5">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
+                    ROLE
+                  </span>
+                  <p className="font-mono text-sm text-[#38BDF8] font-semibold">
+                    {currentTechObj.role}
+                  </p>
+                  <p className="font-body text-xs sm:text-sm text-[#CBD5E1] leading-relaxed mt-1">
+                    {currentTechObj.description}
+                  </p>
+                </div>
+
+                {/* 3. WHERE IT IS USED */}
+                <div className="pt-4 flex flex-col gap-1.5">
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
+                    WHERE IT IS USED
+                  </span>
+                  <p className="font-mono text-xs sm:text-sm text-white font-medium bg-[#001033] p-3 rounded-lg border border-[#1E3A5F]">
+                    {currentTechObj.whereUsed || "Production web applications & full-stack systems"}
+                  </p>
+                </div>
               </div>
 
               {/* Bottom Status Telemetry */}
               <div className="pt-4 border-t border-[#1E3A5F]/50 font-mono text-[11px] text-[#94A3B8] flex items-center justify-between">
-                <span>Production Ready</span>
-                <span className="text-[#38BDF8] font-bold">Modern Standards</span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+                  Production Ready
+                </span>
+                <span className="text-[#38BDF8] font-bold">Verified In Codebase</span>
               </div>
             </div>
           </div>

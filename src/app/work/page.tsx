@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: `Selected Work & Case Studies — ${DEVELOPER_INFO.name}`,
   description:
     "Curated portfolio and architectural case studies of full-stack web applications, enterprise systems, and editorial web experiences by MD ARSAD.",
+  alternates: {
+    canonical: "/work",
+  },
   openGraph: {
     title: `Selected Work — ${DEVELOPER_INFO.technicalIdentity}`,
     description:

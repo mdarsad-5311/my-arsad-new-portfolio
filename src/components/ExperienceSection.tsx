@@ -34,11 +34,11 @@ export default function ExperienceSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                05 —
+                07 —
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Technical Practice
+                Career &amp; Technical Development
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
@@ -48,72 +48,84 @@ export default function ExperienceSection() {
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Core development focus areas across full-stack systems, modern component
-              architecture, and RESTful API integrations.
+              Core development focus areas across full-stack systems, modern component architecture, and production-grade RESTful API integrations.
             </p>
           </div>
         </div>
 
-        {/* Clean Editorial Timeline with Architectural Dividers */}
-        <div className="mt-8 divide-y divide-[#1E3A5F]/40 border-y border-[#1E3A5F]/40">
-          {EXPERIENCES.map((exp, index) => (
-            <div
-              key={exp.period}
-              className="group relative py-10 sm:py-14 px-4 sm:px-8 -mx-4 sm:-mx-8 rounded-xl transition-all duration-300 motion-reduce:transition-none hover:bg-[#030F26]/50"
-            >
-              {/* Electric-Blue Left Accent Border on Hover */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#38BDF8] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-l motion-reduce:transition-none"
-                aria-hidden="true"
-              />
+        {/* Editorial Timeline with Left Vertical Line & Distinct Nodes */}
+        <div className="mt-12 relative">
+          {/* Continuous Vertical Timeline Line */}
+          <div
+            className="hidden lg:block absolute left-[280px] top-6 bottom-6 w-px bg-gradient-to-b from-[#38BDF8] via-[#1E3A5F] to-[#1E3A5F]/40 pointer-events-none"
+            aria-hidden="true"
+          />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                {/* Left Column: Period, Domain Badge & Index */}
-                <div className="lg:col-span-4 flex flex-col gap-3 font-mono">
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="w-2 h-2 rounded-full bg-[#38BDF8] group-hover:shadow-[0_0_8px_rgba(56,189,248,0.8)] transition-all duration-300 shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm sm:text-base font-bold text-[#38BDF8] tracking-widest uppercase">
+          <div className="flex flex-col gap-10 sm:gap-14">
+            {EXPERIENCES.map((exp, index) => (
+              <div
+                key={exp.period}
+                className="group relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start p-6 sm:p-8 rounded-2xl bg-[#0D1D3A]/40 border border-[#1E3A5F]/60 hover:border-[#38BDF8]/60 hover:bg-[#0D1D3A]/80 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+              >
+                {/* Timeline Node (Desktop) */}
+                <div
+                  className="hidden lg:flex absolute left-[280px] top-10 -translate-x-1/2 w-4 h-4 rounded-full bg-[#00081C] border-2 border-[#38BDF8] items-center justify-center group-hover:shadow-[0_0_12px_#38BDF8] transition-all duration-300 z-10"
+                  aria-hidden="true"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+                </div>
+
+                {/* Left Column: Date & Domain Pill (lg:col-span-3) */}
+                <div className="lg:col-span-3 flex flex-col gap-3 font-mono">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#38BDF8] lg:hidden" aria-hidden="true" />
+                    <span className="text-sm sm:text-base font-bold text-white tracking-wider uppercase">
                       {exp.period}
                     </span>
                   </div>
 
-                  <span className="inline-flex items-center px-3 py-1 text-[11px] font-mono tracking-wider uppercase bg-[#000E2E] text-[#94A3B8] group-hover:text-white group-hover:border-[#38BDF8]/60 w-fit border border-[#1E3A5F] rounded transition-colors duration-200 motion-reduce:transition-none">
+                  <span className="inline-flex items-center px-3 py-1 text-[11px] font-mono tracking-wider uppercase bg-[#000E2E] text-[#38BDF8] border border-[#1E3A5F] rounded-md w-fit font-semibold">
                     {exp.type}
                   </span>
 
                   <span className="text-[11px] text-[#64748B] tracking-widest uppercase">
-                    {"// TRACK 0"}{index + 1}
+                    // TRACK 0{index + 1}
                   </span>
                 </div>
 
-                {/* Right Column: Role, Organization, Narrative, Highlights & Technologies */}
-                <div className="lg:col-span-8 flex flex-col gap-5">
+                {/* Right Column: Role, Organization, Narrative, Highlights & Technologies (lg:col-span-9) */}
+                <div className="lg:col-span-9 flex flex-col gap-5 lg:pl-6">
+                  {/* Role Header */}
                   <div>
-                    <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white group-hover:text-[#38BDF8] transition-colors duration-200 motion-reduce:transition-none">
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white group-hover:text-[#38BDF8] transition-colors duration-200">
                       {exp.role}
                     </h3>
-                    <span className="font-mono text-xs text-[#38BDF8] font-semibold tracking-wider uppercase block mt-1.5">
-                      {exp.organization}
-                    </span>
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <span className="font-mono text-xs text-[#38BDF8] font-bold tracking-wider uppercase">
+                        {exp.organization}
+                      </span>
+                      <span className="text-[#64748B] font-mono text-xs">•</span>
+                      <span className="font-mono text-xs text-[#94A3B8]">
+                        Technical Execution
+                      </span>
+                    </div>
                   </div>
 
-                  <p className="font-body text-sm sm:text-base text-[#CBD5E1] leading-relaxed max-w-2xl">
+                  {/* Narrative */}
+                  <p className="font-body text-sm sm:text-base text-[#CBD5E1] leading-relaxed max-w-3xl">
                     {exp.description}
                   </p>
 
                   {/* Bullet Highlights */}
-                  <div className="pt-4 border-t border-[#1E3A5F]/30">
+                  <div className="pt-4 border-t border-[#1E3A5F]/40">
                     <span className="font-mono text-[11px] uppercase tracking-widest text-[#38BDF8] font-bold block mb-3">
-                      Key Engineering Highlights
+                      Key Engineering Responsibilities:
                     </span>
                     <ul className="space-y-2.5 font-mono text-xs sm:text-[13px] text-[#CBD5E1]">
                       {exp.highlights.map((highlight) => (
-                        <li key={highlight} className="flex items-start gap-3 group/item">
+                        <li key={highlight} className="flex items-start gap-3">
                           <span
-                            className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] mt-2 shrink-0 group-hover/item:scale-125 transition-transform duration-200 motion-reduce:transition-none"
+                            className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] mt-2 shrink-0"
                             aria-hidden="true"
                           />
                           <span className="leading-relaxed">{highlight}</span>
@@ -122,12 +134,12 @@ export default function ExperienceSection() {
                     </ul>
                   </div>
 
-                  {/* Technology Pills */}
+                  {/* Technology Badges */}
                   <div className="pt-2 flex flex-wrap gap-2">
                     {exp.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-xs font-mono text-[#38BDF8] bg-[#000B25] border border-[#1E3A5F] rounded hover:border-[#38BDF8]/60 transition-colors duration-200 motion-reduce:transition-none"
+                        className="px-3 py-1 text-xs font-mono text-[#CBD5E1] bg-[#001033] border border-[#1E3A5F] rounded hover:border-[#38BDF8]/60 hover:text-white transition-colors duration-200"
                       >
                         {tech}
                       </span>
@@ -135,8 +147,8 @@ export default function ExperienceSection() {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

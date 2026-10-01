@@ -45,6 +45,7 @@ export interface ServiceItem {
   description: string;
   deliverables: string[];
   technologies: string[];
+  useCases?: string[];
 }
 
 export interface ExperienceItem {
@@ -62,6 +63,7 @@ export interface TechnologyItem {
   category: "Frontend" | "Backend" | "Database" | "DevOps & Tools";
   role: string; // Technical role in stack (no fake years)
   description: string;
+  whereUsed?: string;
   highlight?: boolean;
 }
 
@@ -84,4 +86,20 @@ export interface FaqItem {
   number: string;
   question: string;
   answer: string;
+}
+
+export interface WhyWorkItem {
+  number: string;
+  title: string;
+  tagline: string;
+  description: string;
+  badge: string;
+}
+
+export interface WorkflowStepItem {
+  step: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  deliverables: string[];
 }

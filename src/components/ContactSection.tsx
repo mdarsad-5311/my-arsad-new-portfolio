@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, Send } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, Clock, Copy, Check } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
+import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    projectType: "Full-Stack Web App",
-    budget: "$5,000 - $10,000",
+    projectType: "Web Application",
+    budget: "$3,000 - $6,000",
+    timeline: "1 - 2 Months",
     message: "",
   });
 
@@ -17,13 +19,23 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submittedBrief, setSubmittedBrief] = useState<{
+    name: string;
+    email: string;
+    projectType: string;
+    budget: string;
+    timeline: string;
+    message: string;
+  } | null>(null);
+  const [isCopied, setIsCopied] = useState(false);
 
   const projectTypes = [
-    "Full-Stack Web App",
-    "Next.js / React Frontend",
-    "Django REST Backend",
-    "School ERP / SaaS",
-    "E-Commerce Architecture",
+    "Web Application",
+    "SaaS Development",
+    "E-Commerce Platform",
+    "Custom Business System / ERP",
+    "Dashboard & Admin Panel",
+    "API & Backend Architecture",
   ];
 
   const budgetRanges = [
@@ -32,6 +44,29 @@ export default function ContactSection() {
     "$6,000 - $12,000",
     "$12,000+",
   ];
+
+  const timelineRanges = [
+    "< 1 Month",
+    "1 - 2 Months",
+    "2 - 4 Months",
+    "Flexible / Ongoing",
+  ];
+
+  const copyBriefToClipboard = () => {
+    if (!submittedBrief) return;
+    const text = `PROJECT INQUIRY FOR MD ARSAD\n----------------------------\nName: ${submittedBrief.name}\nEmail: ${submittedBrief.email}\nProject Type: ${submittedBrief.projectType}\nBudget Range: ${submittedBrief.budget}\nTimeline: ${submittedBrief.timeline}\n\nProject Scope:\n${submittedBrief.message}`;
+    navigator.clipboard.writeText(text);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 3000);
+  };
+
+  const mailtoUrl = submittedBrief
+    ? `mailto:${DEVELOPER_INFO.email}?subject=${encodeURIComponent(
+        `Project Inquiry: ${submittedBrief.projectType} — ${submittedBrief.name}`
+      )}&body=${encodeURIComponent(
+        `Hello Arsad,\n\nHere are my project details:\n\n• Name: ${submittedBrief.name}\n• Email: ${submittedBrief.email}\n• Project Type: ${submittedBrief.projectType}\n• Estimated Budget: ${submittedBrief.budget}\n• Expected Timeline: ${submittedBrief.timeline}\n\nProject Brief:\n${submittedBrief.message}\n\nLooking forward to speaking.`
+      )}`
+    : `mailto:${DEVELOPER_INFO.email}`;
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -44,9 +79,9 @@ export default function ContactSection() {
       newErrors.email = "Please enter a valid email address.";
     }
     if (!formData.message.trim()) {
-      newErrors.message = "Please describe your project or inquiry.";
+      newErrors.message = "Please share details regarding your project.";
     } else if (formData.message.trim().length < 15) {
-      newErrors.message = "Please share a few more details (minimum 15 characters).";
+      newErrors.message = "Please provide a few more details (minimum 15 characters).";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -61,18 +96,20 @@ export default function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // Simulate clean asynchronous submission with realistic network latency
-      await new Promise((resolve) => setTimeout(resolve, 1400));
+      // Simulate validation & preparation
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setSubmittedBrief({ ...formData });
       setIsSuccess(true);
       setFormData({
         name: "",
         email: "",
-        projectType: "Full-Stack Web App",
-        budget: "$5,000 - $10,000",
+        projectType: "Web Application",
+        budget: "$3,000 - $6,000",
+        timeline: "1 - 2 Months",
         message: "",
       });
     } catch {
-      setErrorMessage("Something went wrong while sending your inquiry. Please email me directly.");
+      setErrorMessage("Something went wrong. Please reach out directly via email.");
     } finally {
       setIsSubmitting(false);
     }
@@ -96,7 +133,7 @@ export default function ContactSection() {
 
       {/* Subtle Layered Ambient Radial Glows */}
       <div
-        className="absolute -top-40 right-10 w-[550px] h-[450px] rounded-full bg-[#0067FE]/[0.05] blur-[130px] pointer-events-none"
+        className="absolute -top-40 right-10 w-[550px] h-[450px] rounded-full bg-[#0067FE]/[0.06] blur-[130px] pointer-events-none"
         aria-hidden="true"
       />
       <div
@@ -109,28 +146,27 @@ export default function ContactSection() {
         <div className="flex flex-col gap-6 pb-12 sm:pb-16 border-b border-[#1E3A5F]/60">
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-              07 —
+              10 —
             </span>
             <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-              Initiate Collaboration
+              Project Initiation
             </span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <div>
-              <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-[0.94]">
-                <span className="block">LET&apos;S WORK</span>
-                <span className="block text-[#38BDF8]">TOGETHER.</span>
+              <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-[0.96]">
+                <span className="block">LET&apos;S BUILD</span>
+                <span className="block text-[#38BDF8]">SOMETHING USEFUL.</span>
               </h2>
             </div>
 
             <div className="max-w-md flex flex-col gap-4">
               <p className="font-body text-base sm:text-lg text-[#CBD5E1] leading-relaxed">
-                Have a project in mind? Let&apos;s discuss how I can help bring it to life with
-                architectural clean code and modern engineering.
+                Have an idea, product or business problem you want to solve? Let&apos;s talk.
               </p>
-              <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center gap-3 pt-1">
                 <a
                   href={`mailto:${DEVELOPER_INFO.email}`}
                   className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#001238] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#38BDF8] hover:text-white hover:bg-[#002060] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 rounded-lg shadow-sm"
@@ -144,12 +180,11 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Contact Form & Technical Info Grid */}
+        {/* Contact Form & Direct Channels Grid */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left Column: Direct channels and specs */}
+          {/* Left Column: Direct Coordinates Card */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            {/* Direct Channel Specification Card */}
-            <div className="p-6 sm:p-8 bg-[#030F26]/85 border border-[#1E3A5F]/60 rounded-xl backdrop-blur-sm flex flex-col gap-6 shadow-sm">
+            <div className="p-6 sm:p-8 bg-[#0D1D3A]/60 border border-[#1E3A5F]/70 rounded-2xl flex flex-col gap-6 shadow-sm">
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/50">
                 <span className="font-mono text-xs uppercase tracking-widest text-[#38BDF8] font-bold">
                   Direct Channels &amp; Coordinates
@@ -157,324 +192,317 @@ export default function ContactSection() {
                 <span className="inline-block w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse" />
               </div>
 
-              <div className="flex flex-col gap-5">
-                {/* Email Address */}
-                <div className="group">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-[#94A3B8] block mb-1">
-                    Direct Email
-                  </span>
+              <div className="flex flex-col gap-4 font-mono text-xs">
+                {/* Email Direct */}
+                <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1">
+                  <span className="text-[10px] text-[#94A3B8] uppercase">Direct Email</span>
                   <a
                     href={`mailto:${DEVELOPER_INFO.email}`}
-                    className="font-display text-lg sm:text-xl font-bold text-white group-hover:text-[#38BDF8] transition-colors inline-flex items-center gap-1.5"
+                    className="text-white hover:text-[#38BDF8] transition-colors font-semibold text-sm break-all"
                   >
-                    <span>{DEVELOPER_INFO.email}</span>
-                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-[#38BDF8]" />
+                    {DEVELOPER_INFO.email}
                   </a>
                 </div>
 
-                {/* Primary Timezone & Location */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#1E3A5F]/30">
-                  <div>
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-[#94A3B8] block mb-1">
-                      Location / Region
-                    </span>
-                    <div className="flex items-center gap-1.5 text-white font-mono text-sm font-semibold">
-                      <MapPin className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                      <span>{DEVELOPER_INFO.location}</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-[#94A3B8] block mb-1">
-                      Primary Timezone
-                    </span>
-                    <div className="flex items-center gap-1.5 text-white font-mono text-sm font-semibold">
-                      <Globe className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                      <span>IST (UTC +5:30)</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Status Indicator */}
-                <div className="pt-2 border-t border-[#1E3A5F]/30">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-[#94A3B8] block mb-1">
-                    Current Status
+                {/* Location */}
+                <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
+                  <span className="text-[10px] text-[#94A3B8] uppercase">Location</span>
+                  <span className="text-white font-semibold flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    {DEVELOPER_INFO.location} (IST)
                   </span>
-                  <p className="font-mono text-xs text-[#38BDF8] font-bold">
-                    {DEVELOPER_INFO.status} — {DEVELOPER_INFO.availability}
-                  </p>
+                </div>
+
+                {/* Availability */}
+                <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
+                  <span className="text-[10px] text-[#94A3B8] uppercase">Availability</span>
+                  <span className="text-[#38BDF8] font-semibold flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    {DEVELOPER_INFO.availability}
+                  </span>
+                </div>
+
+                {/* Response Time Guarantee */}
+                <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
+                  <span className="text-[10px] text-[#94A3B8] uppercase">Response Time</span>
+                  <span className="text-white font-semibold flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    Within 24 Hours
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {/* Project Engagement Model Card */}
-            <div className="p-6 bg-[#030F26]/60 border border-[#1E3A5F]/60 rounded-xl font-mono text-xs flex flex-col gap-3">
-              <div className="flex items-center gap-2 text-[#38BDF8] uppercase tracking-wider font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
-                <span>Project Engagement Model</span>
-              </div>
-              <p className="font-body text-xs sm:text-sm text-[#94A3B8] leading-relaxed">
-                Available for full project builds, architectural consulting, dedicated sprints, or
-                long-term technical advisory.
-              </p>
-            </div>
-
-            {/* Social / Code Repositories Links */}
-            <div className="p-6 bg-[#030F26]/40 border border-[#1E3A5F]/40 rounded-xl flex flex-col gap-3">
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[#38BDF8] font-bold">
-                Professional Networks
-              </span>
-              <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
-                {DEVELOPER_INFO.github && (
-                  <a
-                    href={DEVELOPER_INFO.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#CBD5E1] hover:text-[#38BDF8] transition-colors"
-                  >
-                    <span>GITHUB</span>
-                    <ArrowUpRight className="w-3 h-3 text-[#38BDF8]" />
-                  </a>
-                )}
-                {DEVELOPER_INFO.linkedin && (
-                  <a
-                    href={DEVELOPER_INFO.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#CBD5E1] hover:text-[#38BDF8] transition-colors"
-                  >
-                    <span>LINKEDIN</span>
-                    <ArrowUpRight className="w-3 h-3 text-[#38BDF8]" />
-                  </a>
-                )}
-                {DEVELOPER_INFO.twitter && (
-                  <a
-                    href={DEVELOPER_INFO.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#CBD5E1] hover:text-[#38BDF8] transition-colors"
-                  >
-                    <span>X / TWITTER</span>
-                    <ArrowUpRight className="w-3 h-3 text-[#38BDF8]" />
-                  </a>
-                )}
+              {/* Social Channels */}
+              <div className="pt-3 border-t border-[#1E3A5F]/50 flex items-center gap-3">
+                <a
+                  href={DEVELOPER_INFO.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
+                >
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  <span>GitHub</span>
+                </a>
+                <a
+                  href={DEVELOPER_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
+                >
+                  <LinkedinIcon className="w-3.5 h-3.5" />
+                  <span>LinkedIn</span>
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Interactive Contact Form */}
+          {/* Right Column: Project Inquiry Form */}
           <div className="lg:col-span-7">
-            {isSuccess ? (
-              <div className="p-8 sm:p-10 bg-[#030F26]/90 border border-[#38BDF8]/40 rounded-xl shadow-[0_12px_40px_rgba(0,103,254,0.15)] flex flex-col gap-6 animate-fadeIn">
-                <div className="flex items-center gap-3 text-[#38BDF8]">
-                  <CheckCircle2 className="w-8 h-8" />
-                  <span className="font-mono text-xs uppercase tracking-widest font-bold">
-                    Transmission Dispatched Successfully
-                  </span>
-                </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-                  Thank you for reaching out!
-                </h3>
-                <p className="font-body text-sm sm:text-base text-[#CBD5E1] leading-relaxed">
-                  I have received your project details and specifications. I will review your requirements
-                  and reply promptly to discuss technical feasibility and next steps.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setIsSuccess(false)}
-                  className="w-fit px-6 py-3.5 bg-[#001A4D] border border-[#38BDF8] text-[#38BDF8] hover:bg-[#38BDF8] hover:text-[#00081C] font-mono text-xs uppercase tracking-widest font-bold transition-all duration-200 rounded-lg shadow-md cursor-pointer"
-                >
-                  SEND ANOTHER MESSAGE
-                </button>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="p-6 sm:p-8 lg:p-10 bg-[#030F26]/85 border border-[#1E3A5F]/70 rounded-xl shadow-lg flex flex-col gap-6"
-                noValidate
-              >
-                {errorMessage && (
-                  <div className="p-4 bg-red-950/70 border border-red-500/80 text-white text-xs font-mono flex items-center gap-2 rounded-lg">
-                    <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
-                    <span>{errorMessage}</span>
+            <div className="p-6 sm:p-8 bg-[#0D1D3A]/60 border border-[#1E3A5F]/70 rounded-2xl shadow-sm">
+              {isSuccess ? (
+                <div className="py-8 sm:py-10 flex flex-col items-center justify-center text-center gap-5 animate-fadeIn">
+                  <div className="w-14 h-14 rounded-full bg-[#002259] border border-[#38BDF8] flex items-center justify-center text-[#38BDF8] shadow-[0_0_24px_rgba(56,189,248,0.35)]">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                )}
+                  
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-[#38BDF8] font-bold block mb-1">
+                      DIRECT INQUIRY DISPATCH
+                    </span>
+                    <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
+                      PROJECT BRIEF PREPARED
+                    </h3>
+                  </div>
 
-                {/* Name & Email Fields */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Name Input */}
-                  <div className="flex flex-col gap-2">
-                    <label
-                      htmlFor="name"
-                      className="font-mono text-xs uppercase tracking-wider text-[#CBD5E1] font-semibold flex items-center justify-between"
+                  <p className="font-body text-sm sm:text-base text-[#CBD5E1] max-w-lg leading-relaxed">
+                    Your project details have been formatted and verified. To ensure direct delivery straight into MD Arsad&apos;s personal inbox without third-party mailer delays, choose an option below:
+                  </p>
+
+                  <div className="w-full max-w-md flex flex-col gap-3 pt-2">
+                    {/* Primary Action: Direct Mailto Dispatch */}
+                    <a
+                      href={mailtoUrl}
+                      className="w-full py-3.5 px-5 rounded-xl bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,103,254,0.4)] group"
                     >
-                      <span>Your Name</span>
-                      <span className="text-[#38BDF8] text-[11px]">*Required</span>
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => {
-                        setFormData({ ...formData, name: e.target.value });
-                        if (errors.name) setErrors({ ...errors, name: "" });
-                      }}
-                      placeholder="e.g. Vikram Malhotra"
-                      className={`px-4 py-3 bg-[#00081C]/90 border text-sm font-body text-white placeholder:text-[#64748B] focus:outline-none rounded-lg transition-colors ${
-                        errors.name
-                          ? "border-rose-500 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30"
-                          : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/30"
-                      }`}
-                      aria-invalid={!!errors.name}
-                      aria-describedby={errors.name ? "name-error" : undefined}
-                    />
-                    <div className="min-h-[18px]">
+                      <span>SEND VIA EMAIL CLIENT</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+
+                    {/* Secondary Action: Copy Formatted Brief to Clipboard */}
+                    <button
+                      type="button"
+                      onClick={copyBriefToClipboard}
+                      className="w-full py-3 px-5 rounded-xl bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white font-mono text-xs uppercase tracking-wider font-semibold transition-all duration-200 flex items-center justify-center gap-2"
+                    >
+                      {isCopied ? (
+                        <>
+                          <Check className="w-4 h-4 text-[#38BDF8]" />
+                          <span className="text-[#38BDF8]">BRIEF COPIED TO CLIPBOARD!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4 text-[#94A3B8]" />
+                          <span>COPY BRIEF TO CLIPBOARD</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsSuccess(false)}
+                    className="mt-2 text-xs font-mono text-[#94A3B8] hover:text-white underline underline-offset-4 transition-colors"
+                  >
+                    Edit Details or Submit Another Inquiry
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
+                  {/* Name and Email */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="contact-name" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                        Your Name <span className="text-[#38BDF8]">*</span>
+                      </label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="Alex Morgan"
+                        className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
+                          errors.name
+                            ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-[#38BDF8]/20"
+                        }`}
+                      />
                       {errors.name && (
-                        <span id="name-error" className="text-rose-400 text-xs font-mono block">
+                        <span className="font-mono text-[11px] text-red-400 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
                           {errors.name}
                         </span>
                       )}
                     </div>
-                  </div>
 
-                  {/* Email Input */}
-                  <div className="flex flex-col gap-2">
-                    <label
-                      htmlFor="email"
-                      className="font-mono text-xs uppercase tracking-wider text-[#CBD5E1] font-semibold flex items-center justify-between"
-                    >
-                      <span>Email Address</span>
-                      <span className="text-[#38BDF8] text-[11px]">*Required</span>
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => {
-                        setFormData({ ...formData, email: e.target.value });
-                        if (errors.email) setErrors({ ...errors, email: "" });
-                      }}
-                      placeholder="e.g. vikram@studio.com"
-                      className={`px-4 py-3 bg-[#00081C]/90 border text-sm font-body text-white placeholder:text-[#64748B] focus:outline-none rounded-lg transition-colors ${
-                        errors.email
-                          ? "border-rose-500 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30"
-                          : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/30"
-                      }`}
-                      aria-invalid={!!errors.email}
-                      aria-describedby={errors.email ? "email-error" : undefined}
-                    />
-                    <div className="min-h-[18px]">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="contact-email" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                        Email Address <span className="text-[#38BDF8]">*</span>
+                      </label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="alex@company.com"
+                        className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
+                          errors.email
+                            ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-[#38BDF8]/20"
+                        }`}
+                      />
                       {errors.email && (
-                        <span id="email-error" className="text-rose-400 text-xs font-mono block">
+                        <span className="font-mono text-[11px] text-red-400 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
                           {errors.email}
                         </span>
                       )}
                     </div>
                   </div>
-                </div>
 
-                {/* Project Type Selectors */}
-                <div className="flex flex-col gap-2.5">
-                  <label className="font-mono text-xs uppercase tracking-wider text-[#CBD5E1] font-semibold">
-                    Project Type
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {projectTypes.map((type) => (
-                      <button
-                        type="button"
-                        key={type}
-                        onClick={() => setFormData({ ...formData, projectType: type })}
-                        className={`px-3 py-1.5 font-mono text-xs tracking-wider transition-all duration-200 rounded border cursor-pointer motion-reduce:transition-none ${
-                          formData.projectType === type
-                            ? "bg-[#001D4D] text-[#38BDF8] font-bold border-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.25)]"
-                            : "bg-[#000B25] text-[#94A3B8] border-[#1E3A5F] hover:border-[#38BDF8]/50 hover:text-white"
-                        }`}
-                      >
-                        {type}
-                      </button>
-                    ))}
+                  {/* Project Type */}
+                  <div className="flex flex-col gap-2">
+                    <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                      Project Type
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {projectTypes.map((type) => {
+                        const isSelected = formData.projectType === type;
+                        return (
+                          <button
+                            key={type}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, projectType: type })}
+                            className={`p-2.5 rounded-lg border font-mono text-[11px] uppercase tracking-wider transition-all text-left truncate ${
+                              isSelected
+                                ? "bg-[#002259] text-white border-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.2)] font-semibold"
+                                : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
+                            }`}
+                          >
+                            {type}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
 
-                {/* Estimated Budget Selector */}
-                <div className="flex flex-col gap-2.5">
-                  <label className="font-mono text-xs uppercase tracking-wider text-[#CBD5E1] font-semibold">
-                    Estimated Budget (USD)
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {budgetRanges.map((range) => (
-                      <button
-                        type="button"
-                        key={range}
-                        onClick={() => setFormData({ ...formData, budget: range })}
-                        className={`px-3 py-2 font-mono text-xs tracking-wider transition-all duration-200 rounded border text-center cursor-pointer motion-reduce:transition-none ${
-                          formData.budget === range
-                            ? "bg-[#001D4D] text-[#38BDF8] font-bold border-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.25)]"
-                            : "bg-[#000B25] text-[#94A3B8] border-[#1E3A5F] hover:border-[#38BDF8]/50 hover:text-white"
-                        }`}
-                      >
-                        {range}
-                      </button>
-                    ))}
+                  {/* Budget & Timeline Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Budget Range */}
+                    <div className="flex flex-col gap-2">
+                      <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                        Estimated Budget
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {budgetRanges.map((budget) => {
+                          const isSelected = formData.budget === budget;
+                          return (
+                            <button
+                              key={budget}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, budget })}
+                              className={`p-2 rounded-lg border font-mono text-[11px] uppercase tracking-wider text-center transition-all ${
+                                isSelected
+                                  ? "bg-[#002259] text-white border-[#38BDF8] font-semibold"
+                                  : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
+                              }`}
+                            >
+                              {budget}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Timeline */}
+                    <div className="flex flex-col gap-2">
+                      <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                        Expected Timeline
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        {timelineRanges.map((timeline) => {
+                          const isSelected = formData.timeline === timeline;
+                          return (
+                            <button
+                              key={timeline}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, timeline })}
+                              className={`p-2 rounded-lg border font-mono text-[11px] uppercase tracking-wider text-center transition-all ${
+                                isSelected
+                                  ? "bg-[#002259] text-white border-[#38BDF8] font-semibold"
+                                  : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
+                              }`}
+                            >
+                              {timeline}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                {/* Message Field */}
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="message"
-                    className="font-mono text-xs uppercase tracking-wider text-[#CBD5E1] font-semibold flex items-center justify-between"
-                  >
-                    <span>Project Details &amp; Objectives</span>
-                    <span className="text-[#38BDF8] text-[11px]">*Required</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => {
-                      setFormData({ ...formData, message: e.target.value });
-                      if (errors.message) setErrors({ ...errors, message: "" });
-                    }}
-                    placeholder="Tell me about your product requirements, current architecture, target timeline, or specific challenges..."
-                    className={`px-4 py-3 bg-[#00081C]/90 border text-sm font-body text-white placeholder:text-[#64748B] focus:outline-none rounded-lg transition-colors resize-y ${
-                      errors.message
-                        ? "border-rose-500 focus:border-rose-500 focus:ring-1 focus:ring-rose-500/30"
-                        : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/30"
-                    }`}
-                    aria-invalid={!!errors.message}
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                  />
-                  <div className="min-h-[18px]">
+                  {/* Project Details */}
+                  <div className="flex flex-col gap-2">
+                    <label htmlFor="contact-details" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
+                      Project Details &amp; Objectives <span className="text-[#38BDF8]">*</span>
+                    </label>
+                    <textarea
+                      id="contact-details"
+                      rows={4}
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Briefly describe what you are looking to build, any existing designs or stack requirements, and key project goals..."
+                      className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all resize-none ${
+                        errors.message
+                          ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-[#38BDF8]/20"
+                      }`}
+                    />
                     {errors.message && (
-                      <span id="message-error" className="text-rose-400 text-xs font-mono block">
+                      <span className="font-mono text-[11px] text-red-400 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
                         {errors.message}
                       </span>
                     )}
                   </div>
-                </div>
 
-                {/* Submit Primary CTA */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-[#0067FE] to-[#2563EB] hover:from-[#2563EB] hover:to-[#38BDF8] text-white font-mono text-xs sm:text-sm tracking-[0.18em] uppercase font-bold rounded-lg transition-all duration-300 motion-reduce:transition-none flex items-center justify-center gap-3 disabled:opacity-60 cursor-pointer shadow-[0_4px_20px_rgba(0,103,254,0.35)] hover:shadow-[0_4px_28px_rgba(56,189,248,0.45)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin text-[#38BDF8]" />
-                      <span>DISPATCHING TRANSMISSION...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 text-[#38BDF8] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      <span>SUBMIT INQUIRY</span>
-                      <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </>
+                  {errorMessage && (
+                    <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-300 font-mono text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+                      <span>{errorMessage}</span>
+                    </div>
                   )}
-                </button>
-              </form>
-            )}
+
+                  {/* Submit CTA */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-2.5 w-full py-4 rounded-xl bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-300 shadow-[0_4px_20px_rgba(0,103,254,0.4)] disabled:opacity-50 disabled:cursor-not-allowed group"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>PROCESSING INQUIRY...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>START A PROJECT</span>
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </div>

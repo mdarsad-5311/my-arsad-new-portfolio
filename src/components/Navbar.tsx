@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 
@@ -15,7 +15,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -24,13 +24,13 @@ export default function Navbar() {
 
   const currentActiveSection = pathname === "/work" ? "work" : activeSection;
 
-  // Section Observer for Active Navigation
+  // Active section observer
   useEffect(() => {
     if (pathname === "/work") return;
 
-    const sectionIds = ["home", "about", "services", "work", "experience", "stack", "contact"];
+    const sectionIds = ["home", "work", "services", "why-me", "workflow", "about", "experience", "stack", "contact"];
     const handleScrollActive = () => {
-      const scrollPosition = window.scrollY + 140;
+      const scrollPosition = window.scrollY + 160;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
         if (el && el.offsetTop <= scrollPosition) {
@@ -45,53 +45,77 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScrollActive);
   }, [pathname]);
 
-  // Close mobile drawer on Escape key
+  // Close mobile drawer on Escape key or resize
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileMenuOpen(false);
     };
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setMobileMenuOpen(false);
+    };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
-    { number: "01", label: "Home", href: "/#home", id: "home" },
-    { number: "02", label: "Work", href: "/work", id: "work" },
-    { number: "03", label: "About", href: "/#about", id: "about" },
-    { number: "04", label: "Services", href: "/#services", id: "services" },
-    { number: "05", label: "Experience", href: "/#experience", id: "experience" },
-    { number: "06", label: "Stack", href: "/#stack", id: "stack" },
-    { number: "07", label: "Contact", href: "/#contact", id: "contact" },
+    { label: "Work", href: "/#work", id: "work" },
+    { label: "Services", href: "/#services", id: "services" },
+    { label: "Why Me", href: "/#why-me", id: "why-me" },
+    { label: "About", href: "/#about", id: "about" },
+    { label: "Experience", href: "/#experience", id: "experience" },
+    { label: "Stack", href: "/#stack", id: "stack" },
+    { label: "Contact", href: "/#contact", id: "contact" },
   ];
 
   return (
     <>
       {/* 
-        Refined Premium Glassmorphism Navbar
-        - Initial state: Transparent dark navy glass with subtle border & ambient glow
-        - Scrolled state: Transitions smoothly into frosted glass surface for maximum contrast
+        Refined Premium Sticky Navbar
+        - Compact on scroll
+        - Subtle backdrop blur
+        - Refined border & active link micro-transitions
       */}
-      <header className="fixed top-0 inset-x-0 z-50 pt-2.5 sm:pt-3.5 px-3 sm:px-6 lg:px-8 pointer-events-none transition-all duration-300">
+      <header
+        className={`fixed top-0 inset-x-0 z-50 pointer-events-none transition-all duration-300 ${
+          scrolled ? "pt-2 sm:pt-2.5 px-3 sm:px-6" : "pt-3 sm:pt-4 px-3 sm:px-6 lg:px-8"
+        }`}
+      >
         <div className="max-w-7xl mx-auto w-full">
           <nav
-            className={`pointer-events-auto flex items-center justify-between px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all duration-300 ease-out ${
+            className={`pointer-events-auto flex items-center justify-between transition-all duration-300 ease-out rounded-full ${
               scrolled
-                ? "bg-[#00081C]/90 backdrop-blur-xl border border-[#38BDF8]/25 shadow-[0_16px_40px_rgba(0,0,0,0.65),0_0_28px_rgba(0,103,254,0.16),inset_0_1px_1px_rgba(255,255,255,0.18)]"
-                : "bg-[#000d28]/45 backdrop-blur-md border border-white/[0.09] shadow-[0_8px_28px_rgba(0,0,0,0.35),0_0_16px_rgba(0,103,254,0.08),inset_0_1px_1px_rgba(255,255,255,0.12)]"
+                ? "px-3.5 sm:px-5 py-1.5 sm:py-2 bg-[#00081C]/92 backdrop-blur-xl border border-[#38BDF8]/25 shadow-[0_16px_36px_rgba(0,0,0,0.7),0_0_24px_rgba(0,103,254,0.14),inset_0_1px_1px_rgba(255,255,255,0.15)]"
+                : "px-4 sm:px-6 py-2 sm:py-2.5 bg-[#00081C]/30 backdrop-blur-md border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)]"
             }`}
             aria-label="Main Navigation"
           >
-            {/* Left: Full Brand Logo with subtle hover drop-shadow */}
+            {/* Left: Brand Logo */}
             <Link
               href="/"
               className="group inline-flex items-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] rounded-full py-0.5 transition-all duration-300 hover:drop-shadow-[0_0_14px_rgba(56,189,248,0.4)]"
               aria-label="MD ARSAD — Full-Stack Engineer"
             >
-              <Logo height={52} />
+              <Logo height={scrolled ? 46 : 50} />
             </Link>
 
-            {/* Desktop Navigation Links with refined electric-blue active & hover state */}
-            <ul className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {/* Desktop Navigation Links */}
+            <ul className="hidden lg:flex items-center gap-1 xl:gap-1.5">
               {navLinks.map((link) => {
                 const isActive = currentActiveSection === link.id;
                 return (
@@ -99,9 +123,9 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
-                      className={`group relative px-3 py-1.5 rounded-full font-mono text-[11px] xl:text-[12px] tracking-[0.16em] uppercase transition-all duration-300 ease-out focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] select-none block ${
+                      className={`group relative px-3 py-1.5 rounded-full font-mono text-[11px] xl:text-[12px] tracking-[0.14em] uppercase transition-all duration-300 ease-out focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] select-none block ${
                         isActive
-                          ? "text-[#38BDF8] font-semibold drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+                          ? "text-[#38BDF8] font-semibold drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]"
                           : "text-[#CBD5E1] hover:text-white"
                       }`}
                     >
@@ -109,17 +133,17 @@ export default function Navbar() {
 
                       {/* Ambient hover & active background glass pill aura */}
                       <span
-                        className={`absolute inset-0 rounded-full transition-all duration-300 ease-out pointer-events-none motion-reduce:transition-none ${
+                        className={`absolute inset-0 rounded-full transition-all duration-300 ease-out pointer-events-none ${
                           isActive
-                            ? "bg-[#38BDF8]/[0.08] border border-[#38BDF8]/25 shadow-[inset_0_0_10px_rgba(56,189,248,0.12)]"
+                            ? "bg-[#38BDF8]/[0.08] border border-[#38BDF8]/30 shadow-[inset_0_0_10px_rgba(56,189,248,0.12)]"
                             : "bg-transparent group-hover:bg-white/[0.05] border border-transparent group-hover:border-white/10"
                         }`}
                         aria-hidden="true"
                       />
 
-                      {/* Minimal animated electric-blue micro underline indicator */}
+                      {/* Animated bottom indicator */}
                       <span
-                        className={`absolute bottom-0 left-3 right-3 h-[2px] rounded-full bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent transition-all duration-300 pointer-events-none motion-reduce:transition-none ${
+                        className={`absolute bottom-0 left-2.5 right-2.5 h-[2px] rounded-full bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent transition-all duration-300 pointer-events-none ${
                           isActive
                             ? "opacity-100 scale-x-100 shadow-[0_0_8px_#38BDF8]"
                             : "opacity-0 scale-x-50 group-hover:opacity-100 group-hover:scale-x-100 group-hover:shadow-[0_0_8px_rgba(56,189,248,0.7)]"
@@ -132,33 +156,35 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* Right: Hire Me CTA & Mobile Toggle */}
-            <div className="flex items-center gap-3 shrink-0">
+            {/* Right: CTA & Mobile Toggle */}
+            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+              {/* Primary Navbar CTA: START A PROJECT */}
               <Link
                 href="/#contact"
-                className="hidden sm:inline-flex relative overflow-hidden items-center justify-center gap-2 h-10 px-5 rounded-full bg-[#2563EB] text-[#FFFFFF] font-mono text-[11px] xl:text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-300 ease-out hover:bg-[#1D4ED8] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] shadow-[0_2px_14px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:shadow-[0_0_24px_rgba(37,99,235,0.7),0_4px_16px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.45)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
+                className="hidden sm:inline-flex relative overflow-hidden items-center justify-center gap-2 h-9 sm:h-10 px-4 sm:px-5 rounded-full bg-[#0067FE] text-white font-mono text-[11px] xl:text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-300 ease-out hover:bg-[#0056EE] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] shadow-[0_2px_14px_rgba(0,103,254,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:shadow-[0_0_24px_rgba(0,103,254,0.65)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
               >
-                {/* Subtle specular reflection sweep on hover */}
+                {/* Specular shimmer */}
                 <span
                   className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none motion-reduce:hidden"
                   aria-hidden="true"
                 />
-                <span className="relative z-10">HIRE ME</span>
-                <ArrowUpRight className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none" />
+                <span className="relative z-10">START A PROJECT</span>
+                <ArrowUpRight className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
-              {/* Mobile Menu Toggle Button */}
+              {/* Mobile Menu Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="size-10 inline-flex items-center justify-center rounded-full border border-white/10 bg-[#0D1D3A]/70 backdrop-blur-md text-[#FFFFFF] hover:text-[#38BDF8] hover:border-[#38BDF8]/50 hover:bg-[#0D1D3A]/90 transition-all duration-300 lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] active:scale-95 shadow-sm"
+                className="size-9 sm:size-10 inline-flex items-center justify-center rounded-full border border-white/10 bg-[#0D1D3A]/80 backdrop-blur-md text-white hover:text-[#38BDF8] hover:border-[#38BDF8]/50 transition-all duration-200 lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
                 aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-navigation"
               >
                 {mobileMenuOpen ? (
-                  <X className="size-4 animate-in fade-in zoom-in-75 duration-200" />
+                  <X className="size-4 text-[#38BDF8]" />
                 ) : (
-                  <Menu className="size-4 animate-in fade-in duration-200" />
+                  <Menu className="size-4 text-white" />
                 )}
               </button>
             </div>
@@ -166,54 +192,44 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Navigation Drawer with Matching Glass Aesthetic */}
+      {/* Refined Animated Mobile Menu */}
       <div
-        className={`fixed inset-0 z-40 bg-[#00081C]/92 backdrop-blur-2xl transition-all duration-350 ease-out lg:hidden flex flex-col justify-between p-6 pt-24 ${
+        id="mobile-navigation"
+        className={`fixed inset-0 z-40 bg-[#00081C]/96 backdrop-blur-2xl transition-all duration-300 ease-out lg:hidden flex flex-col justify-between p-6 pt-24 ${
           mobileMenuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
-            : "opacity-0 pointer-events-none -translate-y-3"
+            : "opacity-0 pointer-events-none -translate-y-4"
         }`}
+        aria-hidden={!mobileMenuOpen}
       >
-        <div className="flex flex-col gap-6">
-          <div className="flex items-center justify-between pb-4 border-b border-white/10">
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className="group inline-flex items-center shrink-0 transition-transform hover:scale-[1.02]"
-              aria-label="MD ARSAD — Full-Stack Engineer"
-            >
-              <Logo height={48} />
-            </Link>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase bg-[#0D1D3A]/80 backdrop-blur-md text-[#38BDF8] rounded-full border border-[#38BDF8]/30 shadow-[0_0_12px_rgba(56,189,248,0.15)]">
+        <div className="flex flex-col gap-6 max-w-md mx-auto w-full">
+          <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/60">
+            <span className="font-mono text-xs text-[#94A3B8] uppercase tracking-wider">
+              NAVIGATION
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[10px] font-mono tracking-wider uppercase bg-[#0D1D3A] text-[#38BDF8] rounded-full border border-[#38BDF8]/30">
               <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
-              Available
+              AVAILABLE
             </span>
           </div>
 
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link, index) => {
-              const isItemActive = currentActiveSection === link.id;
+          <nav className="flex flex-col gap-1.5">
+            {navLinks.map((link, idx) => {
+              const isActive = currentActiveSection === link.id;
               return (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    transitionDelay: mobileMenuOpen ? `${index * 30 + 40}ms` : "0ms",
-                  }}
-                  className={`flex items-center justify-between text-xl font-display font-medium tracking-tight py-3 px-4 rounded-xl transition-all duration-300 border ${
-                    isItemActive
-                      ? "bg-[#0D1D3A]/85 backdrop-blur-md text-[#38BDF8] border-[#38BDF8]/40 shadow-[0_2px_16px_rgba(0,103,254,0.25),inset_0_1px_1px_rgba(255,255,255,0.1)]"
-                      : "bg-[#0D1D3A]/40 backdrop-blur-md text-[#CBD5E1] hover:text-[#38BDF8] hover:bg-[#0D1D3A]/70 hover:border-white/20 border-white/[0.08]"
+                  className={`flex items-center justify-between py-2.5 px-4 rounded-xl font-display text-lg font-bold tracking-tight uppercase transition-all duration-200 border ${
+                    isActive
+                      ? "bg-[#0D1D3A] text-[#38BDF8] border-[#38BDF8]/40 shadow-[0_2px_12px_rgba(0,103,254,0.2)]"
+                      : "bg-[#0D1D3A]/30 text-[#CBD5E1] border-transparent hover:border-white/10 hover:text-white"
                   }`}
                 >
                   <span>{link.label}</span>
-                  <span
-                    className={`font-mono text-xs font-semibold ${
-                      isItemActive ? "text-[#38BDF8]" : "text-[#A8B4C7]"
-                    }`}
-                  >
-                    {link.number}
+                  <span className="font-mono text-xs text-[#64748B]">
+                    0{idx + 1}
                   </span>
                 </Link>
               );
@@ -221,18 +237,20 @@ export default function Navbar() {
           </nav>
         </div>
 
-        <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
+        {/* Mobile Menu Footer CTA */}
+        <div className="pt-6 border-t border-[#1E3A5F]/60 max-w-md mx-auto w-full flex flex-col gap-3">
           <Link
             href="/#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#2563EB] text-[#FFFFFF] border border-white/20 font-mono text-xs font-semibold tracking-wider uppercase hover:bg-[#1D4ED8] transition-all shadow-[0_2px_14px_rgba(37,99,235,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:shadow-[0_0_20px_rgba(37,99,235,0.6)]"
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#0067FE] text-white font-mono text-xs font-bold tracking-wider uppercase hover:bg-[#0056EE] transition-all shadow-[0_4px_16px_rgba(0,103,254,0.4)]"
           >
-            <span>HIRE ME — START A PROJECT</span>
+            <span>START A PROJECT</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
-          <div className="flex justify-between items-center text-xs font-mono text-[#A8B4C7]">
+
+          <div className="flex justify-between items-center text-xs font-mono text-[#94A3B8] px-1 pt-1">
             <span>{DEVELOPER_INFO.email}</span>
-            <span className="text-[#38BDF8]">© 2026 MD ARSAD</span>
+            <span className="text-[#38BDF8]">© {DEVELOPER_INFO.name}</span>
           </div>
         </div>
       </div>

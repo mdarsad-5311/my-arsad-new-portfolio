@@ -35,7 +35,7 @@ export default function GithubSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                07 —
+                09 —
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">

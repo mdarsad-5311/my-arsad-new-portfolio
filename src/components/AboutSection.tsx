@@ -62,7 +62,7 @@ export default function AboutSection() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold">
-                03 —
+                06 —
               </span>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#A8B4C7]">
                 Identity &amp; Philosophy
@@ -160,24 +160,30 @@ export default function AboutSection() {
 
           {/* Right Column: Introduction, Core Capabilities, Disciplines, Principles */}
           <div className="lg:col-span-7 flex flex-col gap-10 sm:gap-12">
-            {/* Professional Introduction & Bio */}
+            {/* Personal Statement Header */}
             <div>
-              <p className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
-                <span className="text-[#38BDF8]">&ldquo;</span>
-                I am a full-stack engineer focused on building modern, scalable and user-friendly web
-                applications.
-                <span className="text-[#38BDF8]">&rdquo;</span>
+              <div className="flex items-center gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-[#38BDF8]">
+                <span>ENGINEER IDENTITY</span>
+                <span className="text-[#38BDF8]/40">•</span>
+                <span>BASED IN INDIA (IST)</span>
+              </div>
+              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-white">
+                MD ARSAD
+              </h3>
+              <p className="font-mono text-sm sm:text-base text-[#38BDF8] font-bold tracking-wider uppercase mt-1 mb-6">
+                FULL-STACK ENGINEER
               </p>
 
-              <p className="mt-6 font-body text-base sm:text-lg text-[#CBD5E1] leading-relaxed">
+              <p className="font-display text-xl sm:text-2xl font-medium tracking-tight text-white leading-snug">
+                &ldquo;I build scalable web applications, custom platforms, and robust digital systems for modern businesses.&rdquo;
+              </p>
+
+              <p className="mt-4 font-body text-base text-[#CBD5E1] leading-relaxed">
                 {DEVELOPER_INFO.bio}
               </p>
 
-              <p className="mt-4 font-body text-sm sm:text-base text-[#A8B4C7] leading-relaxed">
-                I build web software ranging from responsive e-commerce interfaces to structured
-                administrative systems and decoupled REST APIs. I take pride in understanding the
-                complete software lifecycle: from relational database modeling to clean component
-                ergonomics on mobile viewports.
+              <p className="mt-3 font-body text-sm text-[#A8B4C7] leading-relaxed">
+                From relational schema design in PostgreSQL and Python/Django server logic to responsive, kinetic user interfaces in React and Next.js, I take end-to-end ownership of the complete engineering lifecycle.
               </p>
             </div>
 

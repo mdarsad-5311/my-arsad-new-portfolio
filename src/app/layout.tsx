@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     siteName: "MD ARSAD — Full-Stack Engineer",
     images: [
       {
-        url: "/projects/aura-ecommerce.jpg",
+        url: "/projects/al-umaima-ecommerce.png",
         width: 1200,
         height: 630,
         alt: "MD ARSAD — Full-Stack Engineer Portfolio",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     description:
       "Full-stack engineer building modern, scalable web applications with Next.js, TypeScript, and Django.",
     creator: "@mdarsad_dev",
-    images: ["/projects/aura-ecommerce.jpg"],
+    images: ["/projects/al-umaima-ecommerce.png"],
   },
   icons: {
     icon: [
@@ -101,8 +101,19 @@ export default function RootLayout({
       lang="en"
       className={`${bricolageGrotesque.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-[#00081C] text-white selection:bg-[#2563EB] selection:text-white">
-        {children}
+      <body className="min-h-full flex flex-col bg-[#00081C] text-white selection:bg-[#2563EB] selection:text-white relative">
+        {/* Full-Site Neon Cyan & Electric Blue Backlight Atmosphere (From Navbar to Footer) */}
+        <div className="backlight-ambient-container" aria-hidden="true">
+          <div className="backlight-ambient-top" />
+          <div className="backlight-ambient-mid-1" />
+          <div className="backlight-ambient-mid-2" />
+          <div className="backlight-ambient-bottom" />
+        </div>
+
+        {/* Page Content Layers */}
+        <div className="relative z-10 flex flex-col min-h-full">
+          {children}
+        </div>
       </body>
     </html>
   );

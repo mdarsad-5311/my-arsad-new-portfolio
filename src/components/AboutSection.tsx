@@ -88,9 +88,10 @@ export default function AboutSection() {
             {/* Architectural Portrait with Status Tag */}
             <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0D1D3A] border border-[#1E3A5F] rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)] group">
               <Image
-                src="/about/developer.jpg"
+                src="/about/developer-portrait.jpg"
                 alt="MD ARSAD — Full-Stack Engineer at workstation"
                 fill
+                priority
                 className="object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:transform-none"
                 sizes="(max-width: 1024px) 100vw, 480px"
               />

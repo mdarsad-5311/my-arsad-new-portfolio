@@ -21,7 +21,7 @@ export default function Home() {
       {/* 1. Sticky Minimalist Editorial Navigation */}
       <Navbar />
 
-      <main className="min-h-screen bg-[#00081C] text-white">
+      <main className="min-h-screen bg-transparent text-white relative">
         {/* 2. Hero — Editorial Full-Stack Engineer Identity */}
         <Hero />
 

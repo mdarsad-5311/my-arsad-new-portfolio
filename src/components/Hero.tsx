@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Code, Download } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 

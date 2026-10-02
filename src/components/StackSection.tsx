@@ -151,7 +151,7 @@ export default function StackSection() {
                       {currentTechObj.name}
                     </h3>
                     <span className="font-mono text-xs text-[#38BDF8] font-semibold">
-                      // {currentTechObj.category}
+                      {"//"} {currentTechObj.category}
                     </span>
                   </div>
                 </div>

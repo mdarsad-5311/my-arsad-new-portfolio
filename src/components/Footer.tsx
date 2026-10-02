@@ -46,7 +46,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative bg-[#00081C] text-[#94A3B8] pt-20 pb-12 sm:pt-28 sm:pb-16 border-t border-[#1E3A5F]/40 overflow-hidden"
+      className="relative bg-[#00081C] text-[#94A3B8] pt-20 pb-12 sm:pt-28 sm:pb-16 border-t border-[#00F0FF]/25 shadow-[0_-8px_30px_rgba(0,240,255,0.08)] overflow-hidden"
       aria-label="Site Footer"
     >
       {/* Background Architectural Subtle Grid Pattern */}
@@ -59,17 +59,30 @@ export default function Footer() {
         aria-hidden="true"
       />
 
-      {/* Subtle Ambient Radial Glow */}
+      {/* Attachment-inspired Bottom Backlight Floor Reflection Pool */}
       <div
-        className="absolute bottom-0 right-10 w-[500px] h-[350px] rounded-full bg-[#0067FE]/[0.03] blur-[140px] pointer-events-none"
+        className="absolute bottom-0 inset-x-0 h-64 pointer-events-none select-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 55% at 50% 100%, rgba(0, 240, 255, 0.24) 0%, rgba(0, 103, 254, 0.14) 40%, transparent 75%)",
+          filter: "blur(24px)",
+        }}
+        aria-hidden="true"
+      />
+      {/* Luminous cyan backlight floor highlight reflection bar */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 max-w-5xl h-[1.5px] bg-gradient-to-r from-transparent via-[#00F0FF]/60 to-transparent pointer-events-none"
+        style={{
+          boxShadow: "0 0 24px 2px rgba(0, 240, 255, 0.55)",
+        }}
         aria-hidden="true"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Subtle Final CTA Banner */}
-        <div className="mb-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#001D4D]/70 via-[#07152F]/70 to-[#001238]/70 border border-[#38BDF8]/30 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+        {/* Subtle Final CTA Banner with neon cyan backlight border */}
+        <div className="mb-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#001D4D]/70 via-[#07152F]/70 to-[#001238]/70 border border-[#00F0FF]/35 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_0_30px_rgba(0,240,255,0.15),0_8px_32px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,240,255,0.08)]">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#38BDF8] font-bold block mb-1">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#00F0FF] font-bold block mb-1">
               Have a project in mind?
             </span>
             <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-white">

@@ -101,52 +101,52 @@ export const TRUST_TECHNOLOGIES = [
  */
 export const PROJECTS: ProjectItem[] = [
   {
-    id: "aura-ecommerce",
-    slug: "aura-ecommerce",
+    id: "al-umaima-ecommerce",
+    slug: "al-umaima-ecommerce",
     number: "01",
-    title: "AURA Luxe — E-Commerce Platform",
+    title: "AL-UMAIMA — Premium Tech & Lifestyle E-Commerce",
     shortDescription:
-      "A headless luxury e-commerce application featuring responsive product cataloging, cart drawer state management, and decoupled REST backend integration.",
+      "A flagship tech and lifestyle e-commerce platform featuring seasonal collection curation, real-time category filtering, sliding cart drawer, and high-performance decoupled architecture.",
     category: "Full-Stack Web App",
-    year: "2025",
-    technologies: ["Next.js", "TypeScript", "Django REST", "PostgreSQL", "Stripe API", "Tailwind CSS"],
-    image: "/projects/aura-ecommerce.jpg",
+    year: "2026",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Django REST", "PostgreSQL", "Stripe API"],
+    image: "/projects/al-umaima-ecommerce.png",
     role: "Full-Stack Architecture & Engineering",
     projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/aura-ecommerce",
+    githubUrl: "https://github.com/mdarsad-5311/al-umaima-ecommerce",
     featured: true,
     overview:
-      "AURA Luxe is an architectural e-commerce application developed as a demonstration of decoupled full-stack architecture. It brings together Next.js App Router on the client side with a structured Django REST Framework backend and relational database modeling.",
+      "AL-UMAIMA is a premier tech and modern lifestyle storefront application developed as a flagship demonstration of decoupled full-stack architecture. Engineered with Next.js App Router and Django REST Framework, it showcases high-fidelity product cataloging, category badges (Electronics, Wearables, Fashion, Home Goods), instant client-side cart management, and seamless responsive design.",
     problem:
-      "Traditional monolithic storefront architectures often couple presentation logic with heavy backend database queries, leading to slow navigation, rigid templates, and difficult maintenance as product lines grow.",
+      "Multi-category modern storefronts often face performance degradation, cluttered navigation, and high checkout drop-offs when presenting diverse catalogs combining consumer electronics, wearable tech, and lifestyle apparel.",
     solution:
-      "Implemented a decoupled architecture: Next.js frontend with server components for fast initial rendering, client-side optimistic UI state for the shopping bag, and a modular Django REST API for product catalogs and order transactions.",
+      "Engineered an editorial, high-speed decoupled frontend using Next.js with optimistic client-side cart states, rapid category filter pills, dynamic search query handling, and a structured Django REST Framework backend with relational inventory modeling.",
     highlights: [
+      { label: "Collection", value: "Spring 2026 Flagship" },
       { label: "Architecture", value: "Decoupled Headless" },
       { label: "Frontend", value: "Next.js & TypeScript" },
       { label: "API Layer", value: "Django REST Framework" },
-      { label: "Database", value: "PostgreSQL Modeling" },
     ],
     features: [
       {
-        title: "Dynamic Product Catalog",
+        title: "Flagship Hero Showcase",
         description:
-          "Filterable catalog with instant client-side category and attribute filtering built using React state and modular components.",
+          "High-impact editorial hero section with seasonal collection spotlighting, call-to-action routing, and vibrant modern tech visual aesthetic.",
       },
       {
-        title: "Cart & Checkout Flow",
+        title: "Dynamic Multi-Category Discovery",
         description:
-          "Interactive shopping bag drawer with quantity controls, local storage persistence, and integrated checkout workflow prototype.",
+          "Interactive category carousel with live count badges across precision audio, wearable smart tech, home essentials, and fashion.",
+      },
+      {
+        title: "Cart Drawer & Wishlist Flow",
+        description:
+          "Persistent client-side shopping drawer and wishlist state with quantity adjustments, responsive badge notifications, and checkout prototype.",
       },
       {
         title: "Decoupled REST API Endpoints",
         description:
-          "Django REST Framework serializers and viewsets serving structured JSON data with pagination and search query parameters.",
-      },
-      {
-        title: "Editorial Design System",
-        description:
-          "Tailwind CSS styling built around generous whitespace, typography hierarchy, and smooth image hover transitions.",
+          "Django REST Framework serializers and viewsets serving structured JSON data with attribute filtering, search query handling, and inventory tracking.",
       },
     ],
     process: [
@@ -154,274 +154,274 @@ export const PROJECTS: ProjectItem[] = [
         phase: "Phase 01",
         title: "Data Modeling & Architecture",
         description:
-          "Defined relational models for product categories, items, inventory quantities, and customer orders in Django ORM.",
+          "Designed relational models for tech categories, product variants, inventory quantities, and customer orders in Django ORM.",
       },
       {
         phase: "Phase 02",
         title: "RESTful API Implementation",
         description:
-          "Constructed API endpoints with token authentication, query filtering, and structured JSON responses.",
+          "Constructed API endpoints with token authentication, multi-criteria filtering, and structured JSON responses.",
       },
       {
         phase: "Phase 03",
-        title: "Frontend Interface & Interactions",
+        title: "Storefront UI & Micro-Interactions",
         description:
-          "Built responsive UI components, cart drawer modal, and fluid typography layouts in Next.js.",
+          "Built high-contrast dark aesthetic interface, category pills, sliding cart drawer, and responsive layouts in Next.js.",
       },
       {
         phase: "Phase 04",
         title: "Optimization & Verification",
         description:
-          "Tested across desktop, tablet, and mobile viewports; verified semantic markup and responsive image delivery.",
+          "Verified responsive behavior across mobile, tablet, and widescreen viewports; optimized image delivery and core web vitals.",
       },
     ],
     deliverables: [
-      "Decoupled Next.js frontend integrated with Django REST Framework.",
-      "Strict TypeScript definitions for product data and API responses.",
-      "Accessible, responsive layout adhering to modern editorial typography.",
+      "Decoupled Next.js storefront integrated with Django REST Framework.",
+      "Strict TypeScript definitions for multi-category products and API contracts.",
+      "Accessible, high-contrast dark editorial interface inspired by modern flagship commerce.",
     ],
   },
   {
-    id: "edusphere-erp",
-    slug: "edusphere-erp",
+    id: "al-umaima-school-erp",
+    slug: "al-umaima-school-erp",
     number: "02",
-    title: "EduSphere — Enterprise School ERP",
+    title: "AL-Umaima — Modern School Management System",
     shortDescription:
-      "A comprehensive multi-role academic management system prototype coordinating student records, attendance tracking, and timetable schedules.",
+      "A comprehensive cross-device academic ERP solution streamlining student administration, staff coordination, academics, and finances all in one place.",
     category: "EdTech & Enterprise System",
-    year: "2025",
-    technologies: ["React", "Django REST Framework", "PostgreSQL", "Tailwind CSS", "TypeScript"],
-    image: "/projects/edusphere-erp.jpg",
-    role: "Full-Stack Engineer",
+    year: "2026",
+    technologies: ["React", "TypeScript", "Django REST Framework", "PostgreSQL", "Tailwind CSS"],
+    image: "/projects/al-umaima-school-erp.png",
+    role: "Full-Stack Architecture & Engineering",
     projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/edusphere-erp",
+    githubUrl: "https://github.com/mdarsad-5311/al-umaima-school-erp",
     featured: true,
     overview:
-      "EduSphere is an educational resource planning application designed to streamline student data, daily attendance tracking, academic timetables, and teacher administration under a single cohesive interface.",
+      "AL-Umaima is an all-in-one modern school management ERP system built to coordinate institution-wide operations. Engineered with a cross-device responsive React frontend and a robust Django REST Framework backend, the platform enables administrators, educators, and staff to seamlessly manage student records, teacher allocations, academic schedules, and institutional finances in one unified dashboard.",
     problem:
-      "Educational institutions frequently struggle with fragmented data management across separate spreadsheets, physical paper attendance records, and disconnected communication channels.",
+      "Educational institutions frequently struggle with fragmented data management across separate spreadsheets, disconnected communication channels, and cumbersome systems that fail to function reliably across mobile and desktop devices.",
     solution:
-      "Built a unified role-based prototype dashboard (Administrator, Teacher, Student) using React components on the frontend and Django REST Framework on the backend, complete with relational database persistence.",
+      "Engineered a unified, multi-role school ERP platform featuring cross-device responsiveness, role-based access control (Admin, Staff, Student), relational academic data modeling, and centralized dashboards for attendance, academic performance, and administrative reporting.",
     highlights: [
-      { label: "Role Management", value: "Multi-Role Structure" },
+      { label: "Scale Architecture", value: "Multi-Role & Multi-Tenant" },
+      { label: "Platform Target", value: "Cross-Device Responsive" },
       { label: "Frontend", value: "React & TypeScript" },
       { label: "Backend API", value: "Django REST Framework" },
-      { label: "Data Persistence", value: "PostgreSQL Database" },
     ],
     features: [
       {
-        title: "Student Profile & Records Manager",
+        title: "Student & Staff Lifecycle Management",
         description:
-          "Structured records interface allowing administrators to manage enrollments, academic grades, and contact records.",
+          "Centralized record system for enrollment records, staff assignments, contact profiles, and academic histories.",
       },
       {
-        title: "Daily Attendance Tracker",
+        title: "Cross-Device Operations Portal",
         description:
-          "Quick-entry attendance recording table with visual summary indicators and date-range filtering.",
+          "Fully responsive modern interface providing smooth workflows across mobile phones, tablets, and desktop workstations.",
       },
       {
-        title: "Academic Timetable View",
+        title: "Academics & Timetable Scheduler",
         description:
-          "Grid schedule visualizer displaying subject periods, designated classrooms, and assigned instructor details.",
+          "Dynamic timetable visualizer and grade tracking module coordinating subjects, classroom allocations, and exam schedules.",
       },
       {
-        title: "Role-Based Navigation",
+        title: "Administrative & Finance Controls",
         description:
-          "Dynamic sidebar navigation adapting viewable actions based on the active user role.",
+          "Comprehensive reporting modules for fee structures, attendance analytics, and role-based permissions.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Requirement Analysis & Wireframing",
+        title: "Institutional Workflow Modeling",
         description:
-          "Mapped out core academic workflows including attendance registers, course scheduling, and grading structures.",
+          "Mapped out school administrative processes including student records, teacher rosters, and academic terms.",
       },
       {
         phase: "Phase 02",
-        title: "Relational Database Design",
+        title: "Relational Schema Architecture",
         description:
-          "Structured PostgreSQL models establishing relationships between students, classes, teachers, and subjects.",
+          "Structured PostgreSQL database tables linking students, classes, faculty, attendance registers, and finances.",
       },
       {
         phase: "Phase 03",
-        title: "Dashboard UI & State Management",
+        title: "Responsive Frontend Engineering",
         description:
-          "Developed data tables, calendar views, and summary cards with clean responsive layout styling.",
+          "Crafted modern high-contrast interface components, data grids, role-tailored dashboards, and cross-device views.",
       },
       {
         phase: "Phase 04",
-        title: "Testing & Code Refactoring",
+        title: "Security & Role-Based Access",
         description:
-          "Verified form validation, route protections, and consistent component reusability.",
+          "Implemented token-based authorization rules ensuring strict role isolation between administrators, staff, and students.",
       },
     ],
     deliverables: [
-      "Role-based administrative dashboard with responsive navigation.",
-      "Clean REST API endpoints for student, class, and attendance models.",
-      "Modular TypeScript components for data visualization and tables.",
+      "Cross-device responsive React application for modern school administration.",
+      "Robust Django REST Framework API with secure role-based access control.",
+      "Scalable PostgreSQL relational architecture for academic and financial record management.",
     ],
   },
   {
-    id: "pharmflow-system",
-    slug: "pharmflow-system",
+    id: "medicare-hospital-erp",
+    slug: "medicare-hospital-erp",
     number: "03",
-    title: "PharmFlow — Pharmacy Management System",
+    title: "MediCare — Hospital ERP & Clinical Operations",
     shortDescription:
-      "A pharmacy inventory and prescription dispensing application with batch tracking, expiry notification indicators, and supplier order management.",
-    category: "Healthcare & Inventory",
-    year: "2024",
-    technologies: ["React", "Django", "PostgreSQL", "REST API", "Tailwind CSS"],
-    image: "/projects/pharmflow-system.jpg",
-    role: "Full-Stack Engineer",
+      "A comprehensive healthcare management dashboard coordinating OPD/IPD admissions, bed occupancy, doctor appointments, pharmacy, laboratory, and hospital billing.",
+    category: "Healthcare & Enterprise System",
+    year: "2026",
+    technologies: ["React", "TypeScript", "Django REST Framework", "PostgreSQL", "Tailwind CSS"],
+    image: "/projects/medicare-hospital-erp.png",
+    role: "Full-Stack Architecture & Engineering",
     projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/pharmflow-system",
+    githubUrl: "https://github.com/mdarsad-5311/medicare-hospital-erp",
     featured: true,
     overview:
-      "PharmFlow is a web application prototype engineered to explore clean inventory management workflows for pharmacies, focusing on medication batch tracking, expiration monitoring, and point-of-sale efficiency.",
+      "MediCare is an enterprise-grade hospital ERP and clinical management dashboard engineered to orchestrate high-velocity inpatient and outpatient operations. Developed with React and Django REST Framework, the platform centralizes patient registers, real-time bed occupancy tracking (IPD), doctor scheduling, laboratory testing queues, prescription dispensing, and automated billing in a clean, modern interface.",
     problem:
-      "Managing perishable pharmaceutical inventory requires rigorous record-keeping to prevent dispensing expired stock, maintain appropriate reorder levels, and track supplier batches.",
+      "Hospitals often operate across fragmented point solutions for clinical records, pharmacy stocks, bed allocations, and accounts, causing coordination bottlenecks, delayed critical patient admissions, and administrative overhead.",
     solution:
-      "Created an inventory management dashboard that surfaces batch expiration timelines, automated reorder thresholds, and a structured prescription dispensing queue.",
+      "Architected a centralized hospital ERP suite with real-time operational KPI telemetry (active patients, bed occupancy, critical cases, daily appointments), fast patient check-in workflows, integrated doctor appointment queues, and unified clinical records management.",
     highlights: [
-      { label: "Inventory Logic", value: "Batch & Expiry Tracking" },
-      { label: "Frontend", value: "React & Tailwind CSS" },
-      { label: "Backend", value: "Django Application" },
-      { label: "Data Integrity", value: "Relational PostgreSQL" },
+      { label: "Clinical Modules", value: "OPD, IPD & Bed Management" },
+      { label: "Real-Time Telemetry", value: "Live Occupancy & KPI Cards" },
+      { label: "Frontend", value: "React & TypeScript" },
+      { label: "Backend API", value: "Django REST Framework" },
     ],
     features: [
       {
-        title: "Batch Expiration Indicators",
+        title: "Hospital Operational KPI Telemetry",
         description:
-          "Status badges highlighting medication batches nearing expiration dates to assist in FIFO dispensing.",
+          "Real-time summary indicators monitoring total patients, today's appointments, available beds, critical cases, and daily clinical revenue.",
       },
       {
-        title: "Prescription Dispensing Queue",
+        title: "IPD Bed Occupancy & Ward Tracking",
         description:
-          "Clean status column tracking pending, processing, and ready-to-dispense patient prescriptions.",
+          "Visual bed management interface tracking ward availability, patient transfers, and real-time occupancy rates.",
       },
       {
-        title: "Stock Level Visualizations",
+        title: "Appointment & OPD Workflow Queue",
         description:
-          "Categorized stock level meters providing immediate visibility into critical replenishment needs.",
+          "Interactive scheduling queue with doctor assignments, department filtering (Cardiology, General, etc.), and live consultation statuses.",
       },
       {
-        title: "Supplier Order Tracking",
+        title: "Integrated Pharmacy & Lab Orders",
         description:
-          "Order history interface managing purchase requests, supplier contact details, and receipt confirmations.",
+          "Connected clinical dispensing workflows linking patient records directly with laboratory test queues and pharmacy stock.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Domain Workflow Research",
+        title: "Clinical Workflow & Department Mapping",
         description:
-          "Studied standard pharmacy inventory procedures, medication categorization, and prescription handling requirements.",
+          "Mapped multi-department hospital operations spanning OPD consultations, IPD ward admissions, lab tests, and billing.",
       },
       {
         phase: "Phase 02",
-        title: "Django Models & Queries",
+        title: "Relational Schema & Workflow Modeling",
         description:
-          "Wrote Django models with date constraints and custom querysets for expiring and low-stock items.",
+          "Modeled relational PostgreSQL schemas connecting patients, doctors, beds, prescriptions, and departmental invoices.",
       },
       {
         phase: "Phase 03",
-        title: "Clean Healthcare UI",
+        title: "High-Information UI & Quick Actions",
         description:
-          "Constructed high-contrast, accessible cards and data tables tailored for fast readability.",
+          "Engineered responsive dashboard layout with fast-action modal flows for new patients, prescription entry, and medicine dispensing.",
       },
       {
         phase: "Phase 04",
-        title: "Integration & Testing",
+        title: "State Sync & Role-Based Permissions",
         description:
-          "Validated CRUD operations, search filters, and status transitions across the dispensing lifecycle.",
+          "Verified appointment status state machines, bed capacity locks, and role-based permissions for medical administrators and physicians.",
       },
     ],
     deliverables: [
-      "Operational inventory tracking interface with batch expiration alerts.",
-      "Normalized database schema supporting multi-supplier cataloging.",
-      "Clear, accessible visual design system optimized for daily usage.",
+      "Interactive hospital operations dashboard with real-time KPI monitors.",
+      "Normalized PostgreSQL relational schema for clinical records, bed allocations, and invoices.",
+      "Modular TypeScript components designed for high-density medical data management.",
     ],
   },
   {
-    id: "apex-business",
-    slug: "apex-business",
+    id: "kalycor-corporate",
+    slug: "kalycor-corporate",
     number: "04",
-    title: "Apex Venture — Corporate Advisory Engine",
+    title: "KALYCOR. — Corporate & Diversified Enterprise Portal",
     shortDescription:
-      "An editorial, responsive web experience designed for corporate advisory, featuring architectural grid compositions and modern typography.",
+      "A premium editorial corporate web experience for a global enterprise operating across staffing, real estate, agriculture, trade, and security.",
     category: "Corporate Web Experience",
-    year: "2024",
-    technologies: ["Next.js", "Tailwind CSS", "TypeScript", "Responsive Web Design"],
-    image: "/projects/apex-business.jpg",
-    role: "Front-End Developer & UI Designer",
+    year: "2026",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Modern CSS", "Responsive Web Design"],
+    image: "/projects/kalycor-corporate.png",
+    role: "Lead Frontend Architect & UI Engineer",
     projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/apex-venture",
+    githubUrl: "https://github.com/mdarsad-5311/kalycor-corporate",
     featured: true,
     overview:
-      "Apex Venture is a concept corporate website exploring minimal architectural aesthetics, generous negative space, and kinetic typography for an advisory brand.",
+      "KALYCOR. is an editorial, high-impact corporate portal engineered for a modern global enterprise. Built with Next.js App Router and sophisticated typography systems, the experience presents a confident, forward-looking identity spanning diverse commercial verticals: staffing solutions, real estate, commercial agriculture, global trade, and security infrastructure.",
     problem:
-      "Many corporate business websites rely on generic stock-photo templates that fail to convey distinct authority, modern craft, or fast performance.",
+      "Conglomerates and diversified enterprises often battle disjointed brand narratives across their subsidiaries, cluttered navigation structures, and outdated web portals that fail to inspire institutional trust.",
     solution:
-      "Built a custom Next.js web application utilizing modern CSS grid techniques, progressive image loading, and sophisticated typography hierarchy.",
+      "Designed and developed a cohesive, monolithic web experience featuring sleek dark aesthetics, cyan accent glows, fluid editorial typography pairing bold headlines with stylized script accents, and modular interactive service showcases.",
     highlights: [
-      { label: "Design Style", value: "Architectural & Minimal" },
-      { label: "Core Stack", value: "Next.js & Tailwind CSS" },
-      { label: "Typography", value: "Curated Google Fonts" },
-      { label: "Performance", value: "Optimized Asset Delivery" },
+      { label: "Brand Premise", value: "Global. Human. Future." },
+      { label: "Architecture", value: "Next.js App Router & SSR" },
+      { label: "Aesthetic", value: "Dark Editorial & Cyan Glow" },
+      { label: "Typography", value: "Fluid Display & Editorial Serif" },
     ],
     features: [
       {
-        title: "Architectural Grid Composition",
+        title: "Monumental Hero & Editorial Typography",
         description:
-          "Asymmetric multi-column layouts using CSS Grid to create a distinguished, publication-grade feel.",
+          "Immersive dark hero section pairing bold geometric headlines with cyan script accents and glowing interactive call-to-actions.",
       },
       {
-        title: "Kinetic Typography",
+        title: "Diversified Sector Showcase",
         description:
-          "Fluid responsive typography scaling naturally across mobile, tablet, and wide desktop displays.",
+          "Interactive overview highlighting multinational business operations across staffing, real estate, agriculture, trade, and security.",
       },
       {
-        title: "Practice Area Showcase",
+        title: "Client & Partnership Enquiry Engine",
         description:
-          "Modular content sections detailing advisory practices, strategic vision, and corporate capabilities.",
+          "Friction-free intake workflow enabling institutional partners and corporate clients to submit qualified enquiries.",
       },
       {
-        title: "Validated Inquiry Interface",
+        title: "Responsive Cross-Device Layouts",
         description:
-          "Clean client intake form with clear input states and responsive layouts.",
+          "Precision CSS Grid and fluid typography scaling seamlessly from ultra-wide cinema displays to mobile handhelds.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Design Direction & Typography Selection",
+        title: "Brand Identity & Editorial Direction",
         description:
-          "Selected serif and sans-serif typeface pairings and established a warm-neutral color palette.",
+          "Established design tokens, color palette (deep blacks, architectural neutrals, glowing cyan accents), and typography hierarchy.",
       },
       {
         phase: "Phase 02",
-        title: "Component Layout Engineering",
+        title: "Information Architecture & Sector Modeling",
         description:
-          "Developed modular React components for hero banners, editorial feature blocks, and footer navigation.",
+          "Structured content models for diversified commercial practices and corporate leadership profiles.",
       },
       {
         phase: "Phase 03",
-        title: "Responsive Polishing",
+        title: "Interactive UI Engineering",
         description:
-          "Refined breakpoints to ensure balanced whitespace on smartphones and high-resolution monitors.",
+          "Built custom Next.js components, fluid navigation bars, and subtle micro-interaction hover states.",
       },
       {
         phase: "Phase 04",
-        title: "SEO & Accessibility Review",
+        title: "Performance & Accessibility Tuning",
         description:
-          "Added semantic HTML elements, open graph meta tags, and keyboard focus states.",
+          "Optimized Core Web Vitals, image asset delivery, and WCAG AA contrast compliance across all breakpoints.",
       },
     ],
     deliverables: [
-      "Responsive, editorial brand website built with Next.js App Router.",
-      "Design token architecture easily customizable for brand variations.",
-      "Comprehensive accessibility and keyboard navigation support.",
+      "Production-grade Next.js corporate portal with fluid typography and dark mode aesthetic.",
+      "Modular component architecture for diversified enterprise sector pages.",
+      "Optimized Core Web Vitals with zero layout shifts and instant asset rendering.",
     ],
   },
   {

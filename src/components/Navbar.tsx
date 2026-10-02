@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 
@@ -100,8 +100,8 @@ export default function Navbar() {
           <nav
             className={`pointer-events-auto flex items-center justify-between transition-all duration-300 ease-out rounded-full ${
               scrolled
-                ? "px-3.5 sm:px-5 py-1.5 sm:py-2 bg-[#00081C]/92 backdrop-blur-xl border border-[#38BDF8]/25 shadow-[0_16px_36px_rgba(0,0,0,0.7),0_0_24px_rgba(0,103,254,0.14),inset_0_1px_1px_rgba(255,255,255,0.15)]"
-                : "px-4 sm:px-6 py-2 sm:py-2.5 bg-[#00081C]/30 backdrop-blur-md border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)]"
+                ? "px-3.5 sm:px-5 py-1.5 sm:py-2 bg-[#00081C]/92 backdrop-blur-xl border border-[#00F0FF]/35 shadow-[0_0_26px_rgba(0,240,255,0.25),0_16px_36px_rgba(0,0,0,0.8),inset_0_0_12px_rgba(0,240,255,0.12)]"
+                : "px-4 sm:px-6 py-2 sm:py-2.5 bg-[#00081C]/40 backdrop-blur-md border border-[#00F0FF]/25 shadow-[0_0_22px_rgba(0,240,255,0.18),0_4px_24px_rgba(0,0,0,0.35),inset_0_0_8px_rgba(0,240,255,0.08)]"
             }`}
             aria-label="Main Navigation"
           >

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, Clock, Copy, Check } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, Clock, Copy, Check, ChevronDown } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
 
@@ -9,9 +9,10 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    projectType: "Web Application",
-    budget: "$3,000 - $6,000",
-    timeline: "1 - 2 Months",
+    phone: "",
+    company: "",
+    projectType: "Business Website",
+    budget: "Under ₹25,000",
     message: "",
   });
 
@@ -22,39 +23,36 @@ export default function ContactSection() {
   const [submittedBrief, setSubmittedBrief] = useState<{
     name: string;
     email: string;
+    phone?: string;
+    company?: string;
     projectType: string;
     budget: string;
-    timeline: string;
     message: string;
   } | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
   const projectTypes = [
+    "Business Website",
     "Web Application",
     "SaaS Development",
     "E-Commerce Platform",
     "Custom Business System / ERP",
     "Dashboard & Admin Panel",
     "API & Backend Architecture",
+    "Other",
   ];
 
   const budgetRanges = [
-    "< $3,000",
-    "$3,000 - $6,000",
-    "$6,000 - $12,000",
-    "$12,000+",
-  ];
-
-  const timelineRanges = [
-    "< 1 Month",
-    "1 - 2 Months",
-    "2 - 4 Months",
-    "Flexible / Ongoing",
+    "Under ₹25,000",
+    "₹25,000 - ₹50,000",
+    "₹50,000 - ₹1,00,000",
+    "₹1,00,000 - ₹2,50,000",
+    "₹2,50,000+",
   ];
 
   const copyBriefToClipboard = () => {
     if (!submittedBrief) return;
-    const text = `PROJECT INQUIRY FOR MD ARSAD\n----------------------------\nName: ${submittedBrief.name}\nEmail: ${submittedBrief.email}\nProject Type: ${submittedBrief.projectType}\nBudget Range: ${submittedBrief.budget}\nTimeline: ${submittedBrief.timeline}\n\nProject Scope:\n${submittedBrief.message}`;
+    const text = `PROJECT INQUIRY FOR MD ARSAD\n----------------------------\nName: ${submittedBrief.name}\nEmail: ${submittedBrief.email}${submittedBrief.phone ? `\nWhatsApp / Phone: ${submittedBrief.phone}` : ""}${submittedBrief.company ? `\nCompany / Business: ${submittedBrief.company}` : ""}\nProject Type: ${submittedBrief.projectType}\nBudget Range: ${submittedBrief.budget}\n\nProject Scope:\n${submittedBrief.message}`;
     navigator.clipboard.writeText(text);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 3000);
@@ -64,7 +62,7 @@ export default function ContactSection() {
     ? `mailto:${DEVELOPER_INFO.email}?subject=${encodeURIComponent(
         `Project Inquiry: ${submittedBrief.projectType} — ${submittedBrief.name}`
       )}&body=${encodeURIComponent(
-        `Hello Arsad,\n\nHere are my project details:\n\n• Name: ${submittedBrief.name}\n• Email: ${submittedBrief.email}\n• Project Type: ${submittedBrief.projectType}\n• Estimated Budget: ${submittedBrief.budget}\n• Expected Timeline: ${submittedBrief.timeline}\n\nProject Brief:\n${submittedBrief.message}\n\nLooking forward to speaking.`
+        `Hello Arsad,\n\nHere are my project details:\n\n• Name: ${submittedBrief.name}\n• Email: ${submittedBrief.email}${submittedBrief.phone ? `\n• WhatsApp / Phone: ${submittedBrief.phone}` : ""}${submittedBrief.company ? `\n• Company / Business: ${submittedBrief.company}` : ""}\n• Project Type: ${submittedBrief.projectType}\n• Budget Range: ${submittedBrief.budget}\n\nProject Brief:\n${submittedBrief.message}\n\nLooking forward to speaking.`
       )}`
     : `mailto:${DEVELOPER_INFO.email}`;
 
@@ -103,9 +101,10 @@ export default function ContactSection() {
       setFormData({
         name: "",
         email: "",
-        projectType: "Web Application",
-        budget: "$3,000 - $6,000",
-        timeline: "1 - 2 Months",
+        phone: "",
+        company: "",
+        projectType: "Business Website",
+        budget: "Under ₹25,000",
         message: "",
       });
     } catch {
@@ -146,7 +145,7 @@ export default function ContactSection() {
         <div className="flex flex-col gap-6 pb-12 sm:pb-16 border-b border-[#1E3A5F]/60">
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-              10 —
+              12 —
             </span>
             <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
@@ -182,7 +181,7 @@ export default function ContactSection() {
 
         {/* Contact Form & Direct Channels Grid */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Left Column: Direct Coordinates Card */}
+          {/* Left Column: Direct Coordinates Card with Neon Rim */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="p-6 sm:p-8 bg-[#0D1D3A]/60 border border-[#1E3A5F]/70 rounded-2xl flex flex-col gap-6 shadow-sm">
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/50">
@@ -317,19 +316,19 @@ export default function ContactSection() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
-                  {/* Name and Email */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+                  {/* Row 1: Name and Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
-                      <label htmlFor="contact-name" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                        Your Name <span className="text-[#38BDF8]">*</span>
+                      <label htmlFor="contact-name" className="text-sm text-[#A8B4C7]">
+                        Name
                       </label>
                       <input
                         id="contact-name"
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Alex Morgan"
+                        placeholder="Your name"
                         className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
                           errors.name
                             ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -345,15 +344,15 @@ export default function ContactSection() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label htmlFor="contact-email" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                        Email Address <span className="text-[#38BDF8]">*</span>
+                      <label htmlFor="contact-email" className="text-sm text-[#A8B4C7]">
+                        Email
                       </label>
                       <input
                         id="contact-email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="alex@company.com"
+                        placeholder="you@company.com"
                         className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
                           errors.email
                             ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -369,99 +368,94 @@ export default function ContactSection() {
                     </div>
                   </div>
 
-                  {/* Project Type */}
-                  <div className="flex flex-col gap-2">
-                    <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                      Project Type
-                    </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {projectTypes.map((type) => {
-                        const isSelected = formData.projectType === type;
-                        return (
-                          <button
-                            key={type}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, projectType: type })}
-                            className={`p-2.5 rounded-lg border font-mono text-[11px] uppercase tracking-wider transition-all text-left truncate ${
-                              isSelected
-                                ? "bg-[#002259] text-white border-[#38BDF8] shadow-[0_0_12px_rgba(56,189,248,0.2)] font-semibold"
-                                : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
-                            }`}
-                          >
-                            {type}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Budget & Timeline Grid */}
+                  {/* Row 2: WhatsApp / Phone and Company / Business */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    {/* Budget Range */}
                     <div className="flex flex-col gap-2">
-                      <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                        Estimated Budget
+                      <label htmlFor="contact-phone" className="text-sm text-[#A8B4C7]">
+                        WhatsApp / Phone
                       </label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {budgetRanges.map((budget) => {
-                          const isSelected = formData.budget === budget;
-                          return (
-                            <button
-                              key={budget}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, budget })}
-                              className={`p-2 rounded-lg border font-mono text-[11px] uppercase tracking-wider text-center transition-all ${
-                                isSelected
-                                  ? "bg-[#002259] text-white border-[#38BDF8] font-semibold"
-                                  : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
-                              }`}
-                            >
-                              {budget}
-                            </button>
-                          );
-                        })}
+                      <input
+                        id="contact-phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="+91 00000 00000"
+                        className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all"
+                      />
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="contact-company" className="text-sm text-[#A8B4C7]">
+                        Company / Business
+                      </label>
+                      <input
+                        id="contact-company"
+                        type="text"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        placeholder="Optional"
+                        className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 3: Project Type and Budget Range */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="contact-project-type" className="text-sm text-[#A8B4C7]">
+                        Project Type
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="contact-project-type"
+                          value={formData.projectType}
+                          onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all appearance-none cursor-pointer pr-10"
+                        >
+                          {projectTypes.map((type) => (
+                            <option key={type} value={type} className="bg-[#07152F] text-white">
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-[#94A3B8] absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       </div>
                     </div>
 
-                    {/* Timeline */}
                     <div className="flex flex-col gap-2">
-                      <label className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                        Expected Timeline
+                      <label htmlFor="contact-budget" className="text-sm text-[#A8B4C7]">
+                        Budget Range
                       </label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {timelineRanges.map((timeline) => {
-                          const isSelected = formData.timeline === timeline;
-                          return (
-                            <button
-                              key={timeline}
-                              type="button"
-                              onClick={() => setFormData({ ...formData, timeline })}
-                              className={`p-2 rounded-lg border font-mono text-[11px] uppercase tracking-wider text-center transition-all ${
-                                isSelected
-                                  ? "bg-[#002259] text-white border-[#38BDF8] font-semibold"
-                                  : "bg-[#07152F] text-[#CBD5E1] border-[#1E3A5F] hover:border-[#38BDF8]/50"
-                              }`}
-                            >
-                              {timeline}
-                            </button>
-                          );
-                        })}
+                      <div className="relative">
+                        <select
+                          id="contact-budget"
+                          value={formData.budget}
+                          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all appearance-none cursor-pointer pr-10"
+                        >
+                          {budgetRanges.map((budget) => (
+                            <option key={budget} value={budget} className="bg-[#07152F] text-white">
+                              {budget}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown className="w-4 h-4 text-[#94A3B8] absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Project Details */}
+                  {/* Row 4: Project Details */}
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="contact-details" className="font-mono text-xs uppercase tracking-wider text-white font-semibold">
-                      Project Details &amp; Objectives <span className="text-[#38BDF8]">*</span>
+                    <label htmlFor="contact-details" className="text-sm text-[#A8B4C7]">
+                      Project Details
                     </label>
                     <textarea
                       id="contact-details"
-                      rows={4}
+                      rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Briefly describe what you are looking to build, any existing designs or stack requirements, and key project goals..."
-                      className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all resize-none ${
+                      placeholder="What are you building, and what does success look like?"
+                      className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all resize-y ${
                         errors.message
                           ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                           : "border-[#1E3A5F] focus:border-[#38BDF8] focus:ring-[#38BDF8]/20"

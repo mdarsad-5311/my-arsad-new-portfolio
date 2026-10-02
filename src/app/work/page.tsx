@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: `Selected Work — ${DEVELOPER_INFO.technicalIdentity}`,
     description:
       "Explore curated full-stack web applications and software systems built with Next.js, TypeScript, and Django.",
-    images: [{ url: "/projects/aura-ecommerce.jpg" }],
+    images: [{ url: "/projects/al-umaima-ecommerce.png" }],
   },
 };
 

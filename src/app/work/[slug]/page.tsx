@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitBranch, Layers, ShieldCheck, Cpu, Database, Server, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitBranch, ShieldCheck, Cpu, Database, Server, Globe } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { PROJECTS, DEVELOPER_INFO } from "@/data/portfolioData";
@@ -15,14 +15,23 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return PROJECTS.map((p) => ({
-    slug: p.slug,
-  }));
+  return [
+    ...PROJECTS.map((p) => ({ slug: p.slug })),
+    { slug: "aura-ecommerce" },
+    { slug: "edusphere-erp" },
+    { slug: "pharmflow-system" },
+    { slug: "apex-business" },
+  ];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  let resolvedSlug = slug;
+  if (slug === "aura-ecommerce") resolvedSlug = "al-umaima-ecommerce";
+  if (slug === "edusphere-erp") resolvedSlug = "al-umaima-school-erp";
+  if (slug === "pharmflow-system") resolvedSlug = "medicare-hospital-erp";
+  if (slug === "apex-business") resolvedSlug = "kalycor-corporate";
+  const project = PROJECTS.find((p) => p.slug === resolvedSlug);
 
   if (!project) {
     return {
@@ -34,12 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${project.title} — Case Study | ${DEVELOPER_INFO.technicalIdentity}`,
     description: project.shortDescription,
     alternates: {
-      canonical: `/work/${slug}`,
+      canonical: `/work/${project.slug}`,
     },
     openGraph: {
       title: `${project.title} — Case Study | ${DEVELOPER_INFO.technicalIdentity}`,
       description: project.shortDescription,
-      url: `/work/${slug}`,
+      url: `/work/${project.slug}`,
       images: [{ url: project.image }],
     },
   };
@@ -47,6 +56,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
+  if (slug === "aura-ecommerce") {
+    redirect("/work/al-umaima-ecommerce");
+  }
+  if (slug === "edusphere-erp") {
+    redirect("/work/al-umaima-school-erp");
+  }
+  if (slug === "pharmflow-system") {
+    redirect("/work/medicare-hospital-erp");
+  }
+  if (slug === "apex-business") {
+    redirect("/work/kalycor-corporate");
+  }
   const projectIndex = PROJECTS.findIndex((p) => p.slug === slug);
 
   if (projectIndex === -1) {

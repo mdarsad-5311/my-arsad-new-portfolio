@@ -135,7 +135,7 @@ export default function WhyWorkWithMe() {
                       VERIFIED DISCIPLINE
                     </span>
                     <span className="text-[#64748B] group-hover:text-[#38BDF8] group-hover:translate-x-1 transition-all duration-200">
-                      // PRODUCTION READY →
+                      {"// PRODUCTION READY →"}
                     </span>
                   </div>
                 </div>

@@ -89,7 +89,7 @@ export default function ExperienceSection() {
                   </span>
 
                   <span className="text-[11px] text-[#64748B] tracking-widest uppercase">
-                    // TRACK 0{index + 1}
+                    {"// TRACK 0"}{index + 1}
                   </span>
                 </div>
 

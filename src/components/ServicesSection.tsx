@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Check, Plus, Minus, ArrowUpRight, Cpu, Layers } from "lucide-react";
+import { Check, Plus, Minus, ArrowUpRight } from "lucide-react";
 import { SERVICES } from "@/data/portfolioData";
 import Link from "next/link";
 
@@ -96,7 +96,7 @@ export default function ServicesSection() {
                   {/* Number & Service Name */}
                   <div className="flex items-center gap-4 sm:gap-6">
                     <span className="font-mono text-sm sm:text-base font-bold text-[#38BDF8] tracking-widest shrink-0">
-                      // {service.number}
+                      {"//"} {service.number}
                     </span>
                     <h3 className="font-display text-xl sm:text-2xl lg:text-3xl font-bold uppercase tracking-tight text-white group-hover:text-[#38BDF8] transition-colors duration-200">
                       {service.title}

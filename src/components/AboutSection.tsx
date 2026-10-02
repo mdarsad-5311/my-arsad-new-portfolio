@@ -86,25 +86,61 @@ export default function AboutSection() {
         <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           {/* Left Column: Portrait, Compact Technical Metadata Panel, Resume */}
           <div className="lg:col-span-5 flex flex-col gap-6 sm:gap-8">
-            {/* Architectural Portrait with Status Tag */}
-            <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0D1D3A] border border-[#1E3A5F] rounded-2xl shadow-[0_16px_40px_rgba(0,0,0,0.6)] group">
-              <Image
-                src="/about/developer-portrait.jpg"
-                alt="MD ARSAD — Full-Stack Engineer at workstation"
-                fill
-                priority
-                className="object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:transform-none"
-                sizes="(max-width: 1024px) 100vw, 480px"
+            {/* Architectural Portrait with Atmospheric Neon Backlight & Edge Lighting */}
+            <div className="relative group/portrait">
+              {/* Backlight Glow 1: Wide Diffuse Ambient Bloom */}
+              <div
+                className="absolute -inset-4 sm:-inset-6 rounded-3xl bg-gradient-to-tr from-[#0067FE]/45 via-[#38BDF8]/35 to-[#00F0FF]/30 blur-[60px] opacity-75 group-hover/portrait:opacity-100 group-hover/portrait:blur-[85px] transition-all duration-700 pointer-events-none -z-10 motion-reduce:animate-none"
+                style={{ animation: "portraitGlowPulse 6s ease-in-out infinite alternate" }}
+                aria-hidden="true"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#00081C]/75 via-transparent to-transparent pointer-events-none" />
 
-              {/* Floating Status Pill */}
-              <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#00081C]/90 border border-white/10 text-white backdrop-blur-md flex items-center justify-between font-mono text-[11px] tracking-wider uppercase rounded-xl shadow-lg">
-                <span className="font-bold text-white">{DEVELOPER_INFO.name}</span>
-                <span className="text-[#38BDF8] flex items-center gap-1.5 font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
-                  {DEVELOPER_INFO.status}
-                </span>
+              {/* Backlight Glow 2: Intense Cyan Accent Spotlight */}
+              <div
+                className="absolute -top-10 -left-10 w-60 h-60 rounded-full bg-[#38BDF8]/35 blur-[70px] pointer-events-none -z-10 group-hover/portrait:scale-110 transition-transform duration-700"
+                aria-hidden="true"
+              />
+
+              {/* Backlight Glow 3: Rich Royal Blue Spotlight */}
+              <div
+                className="absolute -bottom-10 -right-10 w-64 h-64 rounded-full bg-[#0067FE]/45 blur-[80px] pointer-events-none -z-10 group-hover/portrait:scale-110 transition-transform duration-700"
+                aria-hidden="true"
+              />
+
+              {/* Luminous Specular Border Frame */}
+              <div className="relative p-[1.5px] rounded-2xl bg-gradient-to-b from-[#38BDF8] via-[#0067FE]/60 to-[#1E3A5F]/60 shadow-[0_0_35px_rgba(56,189,248,0.35),0_0_80px_rgba(0,103,254,0.25),0_20px_50px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover/portrait:shadow-[0_0_50px_rgba(56,189,248,0.55),0_0_100px_rgba(0,103,254,0.4),0_25px_60px_rgba(0,0,0,0.9)]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#0A1628] rounded-[15px]">
+                  {/* Subtle Inner Ambient Radial Light Behind the Portrait */}
+                  <div
+                    className="absolute inset-0 bg-radial from-[#38BDF8]/20 via-[#0067FE]/10 to-transparent pointer-events-none z-10 opacity-70"
+                    aria-hidden="true"
+                  />
+
+                  {/* Corner Sci-Fi / Architectural HUD Brackets */}
+                  <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#38BDF8] z-20 pointer-events-none shadow-[0_0_8px_#38BDF8]" />
+                  <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#38BDF8] z-20 pointer-events-none shadow-[0_0_8px_#38BDF8]" />
+                  <div className="absolute bottom-16 left-3 w-4 h-4 border-b-2 border-l-2 border-[#38BDF8]/70 z-20 pointer-events-none" />
+                  <div className="absolute bottom-16 right-3 w-4 h-4 border-b-2 border-r-2 border-[#38BDF8]/70 z-20 pointer-events-none" />
+
+                  <Image
+                    src="/about/developer-portrait.jpg"
+                    alt="MD ARSAD — Full-Stack Engineer at workstation"
+                    fill
+                    priority
+                    className="object-cover opacity-95 group-hover/portrait:opacity-100 transition-all duration-700 ease-out group-hover/portrait:scale-[1.03] motion-reduce:transition-none motion-reduce:transform-none"
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#00081C]/90 via-[#00081C]/25 to-transparent pointer-events-none z-10" />
+
+                  {/* Floating Status Pill */}
+                  <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#00081C]/92 border border-[#38BDF8]/30 text-white backdrop-blur-md flex items-center justify-between font-mono text-[11px] tracking-wider uppercase rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.7),0_0_15px_rgba(56,189,248,0.2)] z-20">
+                    <span className="font-bold text-white tracking-wide">{DEVELOPER_INFO.name}</span>
+                    <span className="text-[#38BDF8] flex items-center gap-1.5 font-semibold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
+                      {DEVELOPER_INFO.status}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -294,6 +330,20 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
+
+      {/* Portrait Ambient Glow Keyframe */}
+      <style>{`
+        @keyframes portraitGlowPulse {
+          0%, 100% {
+            opacity: 0.65;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.95;
+            transform: scale(1.04);
+          }
+        }
+      `}</style>
     </section>
   );
 }

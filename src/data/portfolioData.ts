@@ -34,14 +34,24 @@ export const DEVELOPER_INFO = {
   title: "Full-Stack Engineer",
   role: "FULL-STACK ENGINEER",
   technicalIdentity: "MD ARSAD — Full-Stack Engineer",
-  location: "INDIA",
+  location: "Nashik, Maharashtra, India",
+  shortLocation: "Nashik, MH, India",
+  city: "Nashik",
+  state: "Maharashtra",
+  country: "India",
+  timezone: "IST (UTC+5:30)",
+  coordinates: {
+    lat: "19.9975° N",
+    lng: "73.7898° E",
+    display: "19.99° N, 73.79° E",
+  },
   availability: "AVAILABLE WORLDWIDE",
   status: "AVAILABLE FOR PROJECTS",
   heroHeadingLine1: "FULL-STACK",
   heroHeadingLine2: "ENGINEER",
   heroTagline: "I build scalable websites, SaaS platforms, dashboards and custom digital systems for modern businesses.",
   summary:
-    "Full-stack engineer building modern, scalable and high-performance web applications using React, Next.js, TypeScript and Django. Focused on turning complex business requirements into elegant digital systems.",
+    "Full-stack engineer based in Nashik, Maharashtra, India, building modern, scalable and high-performance web applications using React, Next.js, TypeScript and Django. Focused on turning complex business requirements into elegant digital systems.",
 
   // Neutral technical focus pillars for the hero section
   heroPillars: [
@@ -51,6 +61,9 @@ export const DEVELOPER_INFO = {
   ],
 
   email: "mdarsadkgn5311@gmail.com",
+  phone: "+91 9527635311",
+  whatsappNumber: "9527635311",
+  whatsapp: "https://wa.me/919527635311",
   github: "https://github.com/mdarsad-5311",
   githubUsername: "mdarsad-5311",
   projectRepo: "https://github.com/mdarsad-5311/my-arsad-new-portfolio",

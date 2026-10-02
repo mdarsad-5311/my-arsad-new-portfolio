@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Download, Terminal, Layers, ShieldCheck, Check } from "lucide-react";
 import { DEVELOPER_INFO, COLLABORATION_PRINCIPLES } from "@/data/portfolioData";
+import { WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function AboutSection() {
   const disciplines = [
@@ -123,7 +124,12 @@ export default function AboutSection() {
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
                 <span className="text-[#A8B4C7] uppercase text-[11px]">Location</span>
-                <span className="font-semibold text-white">{DEVELOPER_INFO.location} (IST)</span>
+                <span className="font-semibold text-white text-right">{DEVELOPER_INFO.location}</span>
+              </div>
+
+              <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
+                <span className="text-[#A8B4C7] uppercase text-[11px]">Coordinates</span>
+                <span className="font-semibold text-[#38BDF8]">{DEVELOPER_INFO.coordinates.display}</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
@@ -134,6 +140,19 @@ export default function AboutSection() {
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
                 <span className="text-[#A8B4C7] uppercase text-[11px]">Availability</span>
                 <span className="font-semibold text-white">{DEVELOPER_INFO.availability}</span>
+              </div>
+
+              <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
+                <span className="text-[#A8B4C7] uppercase text-[11px]">WhatsApp</span>
+                <a
+                  href={DEVELOPER_INFO.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[#25D366] hover:underline transition-colors flex items-center gap-1.5"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>+91 9527635311</span>
+                </a>
               </div>
 
               <div className="flex items-center justify-between">
@@ -166,7 +185,7 @@ export default function AboutSection() {
               <div className="flex items-center gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-[#38BDF8]">
                 <span>ENGINEER IDENTITY</span>
                 <span className="text-[#38BDF8]/40">•</span>
-                <span>BASED IN INDIA (IST)</span>
+                <span>BASED IN NASHIK, MAHARASHTRA (IST)</span>
               </div>
               <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-white">
                 MD ARSAD

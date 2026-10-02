@@ -42,6 +42,8 @@ export const metadata: Metadata = {
     "TypeScript",
     "Python Django Developer",
     "Software Engineer India",
+    "Software Engineer Nashik",
+    "Web Developer Nashik Maharashtra",
     "Decoupled Web Architecture",
   ],
   authors: [{ name: "MD ARSAD" }],

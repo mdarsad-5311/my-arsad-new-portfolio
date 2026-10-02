@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, Clock, Copy, Check, ChevronDown } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
-import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
+import LocationCard from "@/components/LocationCard";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -203,6 +204,31 @@ export default function ContactSection() {
                   </a>
                 </div>
 
+                {/* WhatsApp & Direct Line */}
+                <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1.5 hover:border-[#25D366]/40 transition-colors">
+                  <span className="text-[10px] text-[#94A3B8] uppercase">WhatsApp &amp; Direct Line</span>
+                  <div className="flex items-center justify-between">
+                    <a
+                      href={DEVELOPER_INFO.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-[#25D366] transition-colors font-semibold text-sm flex items-center gap-2"
+                    >
+                      <WhatsAppIcon className="w-4 h-4 text-[#25D366] shrink-0" />
+                      <span>{DEVELOPER_INFO.phone}</span>
+                    </a>
+                    <a
+                      href={DEVELOPER_INFO.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-mono text-[#25D366] bg-[#25D366]/10 px-2.5 py-1 rounded-md border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-colors font-semibold"
+                    >
+                      <span>CHAT</span>
+                      <ArrowUpRight className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+
                 {/* Location */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
                   <span className="text-[10px] text-[#94A3B8] uppercase">Location</span>
@@ -231,13 +257,22 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* Social Channels */}
-              <div className="pt-3 border-t border-[#1E3A5F]/50 flex items-center gap-3">
+              {/* Social Channels & WhatsApp */}
+              <div className="pt-3 border-t border-[#1E3A5F]/50 grid grid-cols-3 gap-2">
+                <a
+                  href={DEVELOPER_INFO.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#25D366] text-white hover:text-[#25D366] font-mono text-xs uppercase tracking-wider transition-colors"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>WhatsApp</span>
+                </a>
                 <a
                   href={DEVELOPER_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
                 >
                   <GithubIcon className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -246,13 +281,16 @@ export default function ContactSection() {
                   href={DEVELOPER_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-white hover:text-[#38BDF8] font-mono text-xs uppercase tracking-wider transition-colors"
                 >
                   <LinkedinIcon className="w-3.5 h-3.5" />
                   <span>LinkedIn</span>
                 </a>
               </div>
             </div>
+
+            {/* Interactive Radar Location & Timezone Telemetry */}
+            <LocationCard />
           </div>
 
           {/* Right Column: Project Inquiry Form */}

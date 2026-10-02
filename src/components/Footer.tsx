@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, GitBranch } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, GitBranch, Compass } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
-import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function Footer() {
   const [istTime, setIstTime] = useState<string>("");
@@ -177,6 +177,12 @@ export default function Footer() {
                 </div>
 
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
+                  <Compass className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                  <span>COORDINATES:</span>
+                  <span className="text-[#38BDF8] font-mono font-semibold">{DEVELOPER_INFO.coordinates.display}</span>
+                </div>
+
+                <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <Globe className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
                   <span>AVAILABILITY:</span>
                   <span className="text-[#38BDF8] font-semibold">{DEVELOPER_INFO.availability}</span>
@@ -213,6 +219,33 @@ export default function Footer() {
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold block mb-1">
               External Channels &amp; Code
             </span>
+
+            {/* WhatsApp Direct */}
+            <a
+              href={DEVELOPER_INFO.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Chat directly on WhatsApp with ${DEVELOPER_INFO.name}: +91 9527635311 (opens in a new tab)`}
+              className="group flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#25D366] text-[#CBD5E1] hover:text-white transition-all duration-200"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-1.5 rounded bg-[#001033] border border-[#1E3A5F] group-hover:border-[#25D366]/40 transition-colors">
+                  <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                </div>
+                <div>
+                  <div className="font-bold text-white tracking-wider flex items-center gap-2">
+                    <span>WHATSAPP DIRECT</span>
+                    <span className="text-[10px] text-[#25D366] font-mono font-normal uppercase bg-[#25D366]/10 px-1.5 py-0.5 rounded border border-[#25D366]/20">
+                      INSTANT
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-[#25D366] font-mono">
+                    +91 {DEVELOPER_INFO.whatsappNumber}
+                  </div>
+                </div>
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#25D366] transition-colors" />
+            </a>
 
             {/* GitHub Profile */}
             <a

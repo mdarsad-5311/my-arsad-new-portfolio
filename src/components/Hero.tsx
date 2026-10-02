@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, MapPin } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
-import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function Hero() {
   return (
@@ -52,7 +52,7 @@ export default function Hero() {
 
       {/* Tiny Coordinate Corner Crosshairs */}
       <div className="absolute top-28 left-6 sm:left-10 font-mono text-[10px] text-[#1E3A5F] hidden sm:block select-none pointer-events-none tracking-widest uppercase">
-        + SYS.CORE // LAT 20.59° N / LON 78.96° E
+        + SYS.CORE // NASHIK, MH // LAT 19.99° N / LON 73.79° E
       </div>
       <div className="absolute top-28 right-6 sm:right-10 font-mono text-[10px] text-[#1E3A5F] hidden sm:block select-none pointer-events-none tracking-widest uppercase text-right">
         INDEX: 01 // FREELANCE FULL-STACK +
@@ -72,8 +72,9 @@ export default function Hero() {
               SOFTWARE ENGINEER
             </span>
             <span className="hidden md:inline-block text-[#1E3A5F] select-none">/</span>
-            <span className="hidden md:inline-block text-[#94A3B8] text-xs font-normal tracking-wider normal-case font-body">
-              Independent Practice &amp; Digital Systems
+            <span className="hidden md:inline-flex items-center gap-1.5 text-[#94A3B8] text-xs font-normal tracking-wider normal-case font-body">
+              <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
+              Nashik, Maharashtra, India
             </span>
           </div>
 
@@ -121,6 +122,16 @@ export default function Hero() {
                 </a>
                 <span className="text-[#1E3A5F]">|</span>
                 <a
+                  href={DEVELOPER_INFO.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-[#25D366] transition-colors"
+                >
+                  <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>WHATSAPP</span>
+                </a>
+                <span className="text-[#1E3A5F]">|</span>
+                <a
                   href={DEVELOPER_INFO.resumeUrl}
                   download="MD_Arsad_Resume.pdf"
                   className="inline-flex items-center gap-1.5 hover:text-[#38BDF8] transition-colors"
@@ -157,7 +168,7 @@ export default function Hero() {
                 <div className="flex items-center justify-between text-[#94A3B8]">
                   <span className="flex items-center gap-2 text-white font-semibold tracking-wider uppercase text-[11px]">
                     <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse" />
-                    AVAILABLE WORLDWIDE
+                    NASHIK, MH &bull; WORLDWIDE
                   </span>
                   <span className="text-[#38BDF8] text-[11px] font-medium tracking-widest uppercase">
                     REMOTE COLLABORATION

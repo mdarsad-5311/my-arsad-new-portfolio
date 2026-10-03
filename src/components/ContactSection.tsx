@@ -32,6 +32,9 @@ export default function ContactSection() {
   } | null>(null);
   const [isCopied, setIsCopied] = useState(false);
 
+  const [honeypot, setHoneypot] = useState("");
+  const [initTimestamp] = useState(() => Date.now());
+
   const projectTypes = [
     "Business Website",
     "Web Application",
@@ -95,8 +98,27 @@ export default function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      // Simulate validation & preparation
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          _hp: honeypot,
+          _ts: initTimestamp,
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        if (data.details) {
+          setErrors(data.details);
+        }
+        throw new Error(data.error || "Something went wrong. Please reach out directly via email.");
+      }
+
       setSubmittedBrief({ ...formData });
       setIsSuccess(true);
       setFormData({
@@ -108,8 +130,10 @@ export default function ContactSection() {
         budget: "Under ₹25,000",
         message: "",
       });
-    } catch {
-      setErrorMessage("Something went wrong. Please reach out directly via email.");
+      setErrors({});
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Something went wrong. Please reach out directly via email.";
+      setErrorMessage(msg);
     } finally {
       setIsSubmitting(false);
     }
@@ -307,12 +331,12 @@ export default function ContactSection() {
                       DIRECT INQUIRY DISPATCH
                     </span>
                     <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-                      PROJECT BRIEF PREPARED
+                      ENQUIRY SENT SUCCESSFULLY
                     </h3>
                   </div>
 
                   <p className="font-body text-sm sm:text-base text-[#CBD5E1] max-w-lg leading-relaxed">
-                    Your project details have been formatted and verified. To ensure direct delivery straight into MD Arsad&apos;s personal inbox without third-party mailer delays, choose an option below:
+                    Thank you, <span className="text-white font-semibold">{submittedBrief?.name}</span>! Your project brief has been sent to MD Arsad&apos;s personal inbox (<span className="text-[#38BDF8] font-mono text-xs">{DEVELOPER_INFO.email}</span>). Expect a response within 24 hours.
                   </p>
 
                   <div className="w-full max-w-md flex flex-col gap-3 pt-2">
@@ -321,7 +345,7 @@ export default function ContactSection() {
                       href={mailtoUrl}
                       className="w-full py-3.5 px-5 rounded-xl bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,103,254,0.4)] group"
                     >
-                      <span>SEND VIA EMAIL CLIENT</span>
+                      <span>OPEN IN EMAIL CLIENT</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
 
@@ -347,7 +371,10 @@ export default function ContactSection() {
 
                   <button
                     type="button"
-                    onClick={() => setIsSuccess(false)}
+                    onClick={() => {
+                      setIsSuccess(false);
+                      setErrorMessage("");
+                    }}
                     className="mt-2 text-xs font-mono text-[#94A3B8] hover:text-white underline underline-offset-4 transition-colors"
                   >
                     Edit Details or Submit Another Inquiry
@@ -355,6 +382,19 @@ export default function ContactSection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+                  {/* Anti-spam honeypot - invisible to real users */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="contact-hp-site">Leave this field blank</label>
+                    <input
+                      id="contact-hp-site"
+                      type="text"
+                      name="_hp"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
                   {/* Row 1: Name and Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">

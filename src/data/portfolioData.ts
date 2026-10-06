@@ -438,165 +438,167 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: "nexus-dashboard",
-    slug: "nexus-dashboard",
+    id: "daania-skincare",
+    slug: "daania-skincare",
     number: "05",
-    title: "NexusMetrics — Cloud Admin Dashboard",
+    title: "Daania — Organic Skincare & Botanical E-Commerce",
     shortDescription:
-      "A developer operations interface prototype featuring server latency graphs, API health indicators, and service status monitors.",
-    category: "Developer Tools & Admin UI",
-    year: "2024",
-    technologies: ["React", "TypeScript", "REST API", "Tailwind CSS"],
-    image: "/projects/nexus-dashboard.jpg",
-    role: "Frontend Developer",
-    projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/nexus-dashboard",
+      "An artisanal organic skincare and natural soap boutique storefront featuring cold-pressed botanical collections, dynamic cart & checkout workflows, and full-stack Django architecture.",
+    category: "Full-Stack Web App",
+    year: "2026",
+    technologies: ["Python", "Django", "JavaScript", "HTML5", "CSS3", "SQLite3 / PostgreSQL"],
+    image: "/projects/daania-skincare.png",
+    role: "Full-Stack Architecture & Engineering",
+    projectType: "Full-Stack Production System",
+    liveUrl: "https://mdarsad5311.pythonanywhere.com/",
+    githubUrl: "https://github.com/mdarsad-5311/daniya-project",
     featured: true,
     overview:
-      "NexusMetrics is a dark-themed developer operations dashboard prototype designed to display system metrics, microservice statuses, and simulated telemetric feeds under a clean, developer-focused interface.",
+      "Daania is a boutique organic skincare and botanical wellness e-commerce platform built with Python, Django, and modern responsive design. Tailored for calm, natural aesthetics, the platform features catalog filtering across creams, oils, and artisanal soaps, user authentication, persistent cart sessions, seamless order management, and secure administrative controls.",
     problem:
-      "Developers and operations engineers need clear, un-cluttered dashboards to quickly interpret server latency trends and service health without extraneous visual noise.",
+      "Artisanal wellness and natural skincare brands require an organic, soothing aesthetic with high-conversion e-commerce flows without the sluggish overhead and rigid constraints of generic hosted store templates.",
     solution:
-      "Designed and coded a single-page monitoring dashboard utilizing dark slate tones, crisp line charts, and structured metric indicator cards.",
+      "Developed an end-to-end full-stack Django e-commerce platform hosted on PythonAnywhere, complete with custom botanical product data models, category filtering, cart management, customer accounts, and order processing workflows.",
     highlights: [
-      { label: "Theme", value: "Developer Dark Palette" },
-      { label: "Components", value: "Modular React & TypeScript" },
-      { label: "Data Presentation", value: "Time-Series Visualization" },
-      { label: "Layout", value: "Responsive Admin Suite" },
+      { label: "Deployment", value: "PythonAnywhere Live" },
+      { label: "Architecture", value: "Full-Stack Django" },
+      { label: "Aesthetic", value: "Botanical & Skin-Kind" },
+      { label: "Database", value: "Relational ORM" },
     ],
     features: [
       {
-        title: "Service Health Indicators",
+        title: "Artisanal Product Catalog & Filtering",
         description:
-          "Status badges showing online status, instance counts, and memory usage for multiple services.",
+          "Rich product listings categorized by creams, cold-pressed oils, hand-cut soaps, and bundle rituals with responsive search and category filters.",
       },
       {
-        title: "Performance Metric Visualizers",
+        title: "Interactive Cart & Wishlist",
         description:
-          "Simulated time-series line graphs tracking response latency across regional deployment clusters.",
+          "Session-based persistent shopping cart drawer and user wishlist system with instant quantity recalculations.",
       },
       {
-        title: "Deployment Activity Feed",
+        title: "Secure Customer Accounts & Orders",
         description:
-          "Chronological log detailing recent code deployments, commit tags, and build execution statuses.",
+          "Full user registration, authentication, profile management, and order history tracking.",
       },
       {
-        title: "Clean Dark Mode Styling",
+        title: "Comprehensive Django Admin Dashboard",
         description:
-          "Carefully calibrated slate and graphite surfaces providing contrast without eye strain.",
+          "Back-office catalog management, inventory tracking, order status controls, and customer enquiry handling.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Dashboard Wireframing",
+        title: "Botanical Design System & Architecture",
         description:
-          "Drafted information architecture balancing high-level KPI cards with granular log feeds.",
+          "Created warm cream and forest green color palette, typography hierarchy, and domain models for organic skincare products and categories.",
       },
       {
         phase: "Phase 02",
-        title: "Component Construction",
+        title: "Data Modeling & Django Backend",
         description:
-          "Engineered reusable metric cards, status tags, and navigation sidebars with TypeScript types.",
+          "Constructed relational models for products, categories, shopping carts, order items, customer reviews, and newsletter subscribers.",
       },
       {
         phase: "Phase 03",
-        title: "Chart & Data Mocking",
+        title: "Storefront UI & Micro-Interactions",
         description:
-          "Implemented SVG time-series visualizers with clear axis labeling and legend indicators.",
+          "Built responsive layouts, product gallery carousels, dynamic cart drawers, and checkout forms using clean modern CSS and JavaScript.",
       },
       {
         phase: "Phase 04",
-        title: "Responsive Adaptations",
+        title: "Cloud Deployment & Optimization",
         description:
-          "Ensured charts and tables remain legible and scroll cleanly on smaller screen resolutions.",
+          "Deployed to PythonAnywhere WSGI server with static file compression, secure environment configs, and verified responsive viewports.",
       },
     ],
     deliverables: [
-      "Developer dashboard with modular TypeScript components.",
-      "Clear time-series chart components and system status indicators.",
-      "Responsive layout maintaining usability across mobile and desktop.",
+      "Full-stack Django e-commerce platform deployed live on PythonAnywhere.",
+      "Custom responsive storefront design matching premium organic lifestyle brands.",
+      "Complete customer order pipeline, session cart, and authenticated dashboard.",
     ],
   },
   {
-    id: "docusense-ai",
-    slug: "docusense-ai",
+    id: "educareer360",
+    slug: "educareer360",
     number: "06",
-    title: "DocuSense AI — Document Intelligence System",
+    title: "EduCareer360 — Education, Jobs & Career News Portal",
     shortDescription:
-      "An intelligent document analysis web interface concept featuring split-screen PDF preview and structured clause extraction views.",
-    category: "Document Intelligence & AI UI",
-    year: "2024",
-    technologies: ["Next.js", "Python", "Django REST", "Tailwind CSS", "TypeScript"],
-    image: "/projects/docusense-ai.jpg",
-    role: "Full-Stack Engineer",
-    projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/docusense-ai",
+      "India's leading education, exams, and career news portal delivering real-time updates for government jobs, board exam results, admit cards, college admissions, and scholarships.",
+    category: "Full-Stack Web App",
+    year: "2026",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    image: "/projects/educareer360.png",
+    role: "Full-Stack Architecture & Engineering",
+    projectType: "Full-Stack Production System",
+    liveUrl: "https://career360-zeta.vercel.app/",
+    githubUrl: "https://github.com/mdarsad-5311/career360",
     featured: true,
     overview:
-      "DocuSense AI is a web application concept exploring intuitive user interfaces for document intelligence, contract clause extraction, and automated summary presentation.",
+      "EduCareer360 is a high-traffic education, exams, and employment news portal tailored for students, aspirants, and job seekers across India. Deployed on Vercel with Next.js App Router, the platform centralizes official recruitment notifications (SSC, UPSC, Railways, Banking), university admissions, exam result announcements, admit card download links, and curated career roadmaps.",
     problem:
-      "Dense multi-page agreements and technical documents are time-consuming to read through when searching for key clauses such as liability caps, termination terms, and indemnities.",
+      "Aspirants and job seekers frequently struggle with fragmented official notification boards, misleading employment circulars, and delayed exam result broadcasts across disparate governmental portals.",
     solution:
-      "Constructed a dual-panel interface with an interactive document viewer on the left and structured analysis cards displaying extracted clauses and risk ratings on the right.",
+      "Engineered a high-speed, accessible web portal featuring instant category routing (Latest Jobs, Results, Admit Cards, Admissions, Scholarships, Answer Keys), animated trending bulletin marquees, dark/light theme switching, and fast full-text exam search.",
     highlights: [
-      { label: "Interface", value: "Dual-Panel Document View" },
-      { label: "Frontend", value: "Next.js & TypeScript" },
-      { label: "Backend Concept", value: "Python & Django REST" },
-      { label: "Styling", value: "Editorial Neutral UI" },
+      { label: "Deployment", value: "Vercel Production" },
+      { label: "Framework", value: "Next.js App Router" },
+      { label: "Design System", value: "Tailwind CSS & Dark Mode" },
+      { label: "Category Coverage", value: "Exams, Jobs & Results" },
     ],
     features: [
       {
-        title: "Synchronized Dual-Panel Layout",
+        title: "Real-Time Trending Alert Marquee",
         description:
-          "Split-view layout allowing users to review the source document alongside extracted clause summaries.",
+          "High-visibility breaking alert ticker highlighting new government notifications, vacancy announcements, and urgent recruitment deadlines.",
       },
       {
-        title: "Clause Classification Cards",
+        title: "Category-Driven Resource Discovery",
         description:
-          "Categorized panels highlighting critical provisions such as termination, liability, and payment terms.",
+          "Fast filtering across Latest Jobs, Admit Cards, Exam Results, Admissions, Scholarships, Answer Keys, and Career Guides.",
       },
       {
-        title: "Risk Assessment Indicator",
+        title: "Instant Full-Text Search & Bookmarks",
         description:
-          "Visual gauge providing a high-level severity score based on extracted agreement parameters.",
+          "Client-side search bar and local bookmarking mechanism allowing candidates to save critical exam updates and job posts.",
       },
       {
-        title: "Export & Sharing Actions",
+        title: "Theme Toggle & Responsive UI",
         description:
-          "Formatted action controls for exporting extracted notes and sharing review summaries.",
+          "Tailwind CSS dark and light themes optimized for mobile handhelds, tablets, and high-resolution desktop displays.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Document Workflow Analysis",
+        title: "Information Architecture & Taxonomy",
         description:
-          "Mapped out user reading patterns and common clause extraction categories in business agreements.",
+          "Mapped multi-tier taxonomies covering major Indian entrance examinations, government recruiting agencies (UPSC, SSC, RRB), and academic categories.",
       },
       {
         phase: "Phase 02",
-        title: "Split-Screen Layout Engineering",
+        title: "Frontend Engineering & Next.js Setup",
         description:
-          "Created flexible dual-panel CSS layout with responsive collapse on narrow mobile viewports.",
+          "Implemented Next.js App Router architecture with server components for rapid initial load and SEO indexability.",
       },
       {
         phase: "Phase 03",
-        title: "Data Contract & Mock APIs",
+        title: "Interactive Features & State",
         description:
-          "Defined structured JSON schemas representing document metadata, clause tags, and severity ratings.",
+          "Developed animated breaking news marquees, responsive navigation drawers, search query filtering, and bookmark state handlers.",
       },
       {
         phase: "Phase 04",
-        title: "Accessibility & Polishing",
+        title: "Vercel Deployment & SEO Optimization",
         description:
-          "Refined text contrast ratios, button focus states, and smooth transition animations.",
+          "Deployed to Vercel edge network with dynamic OpenGraph meta tags, accessible contrast ratios, and structured article schemas.",
       },
     ],
     deliverables: [
-      "Dual-panel document intelligence user interface in Next.js.",
-      "Structured TypeScript interfaces for document metadata and clauses.",
-      "Editorial, clean aesthetic designed for focused document review.",
+      "Production Next.js educational news and career portal deployed live on Vercel.",
+      "Comprehensive notification categorization across government jobs and board results.",
+      "Accessible dark/light design system with zero layout shifts and sub-second navigation.",
     ],
   },
 ];

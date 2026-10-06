@@ -98,23 +98,36 @@ export default function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const payload: Record<string, string> = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+        projectType: formData.projectType,
+        budget: formData.budget,
+      };
+
+      if (formData.phone.trim()) {
+        payload.phone = formData.phone.trim();
+      }
+      if (formData.company.trim()) {
+        payload.company = formData.company.trim();
+      }
+
+      const response = await fetch("https://formspree.io/f/mljgddek", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          _hp: honeypot,
-          _ts: initTimestamp,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json().catch(() => ({}));
 
-      if (!response.ok || !data.success) {
-        if (data.details) {
-          setErrors(data.details);
+      if (!response.ok) {
+        if (data && Array.isArray(data.errors) && data.errors.length > 0) {
+          const formspreeError = data.errors.map((err: { field?: string; message?: string }) => err.message).filter(Boolean).join(". ");
+          throw new Error(formspreeError || "Failed to submit form to Formspree.");
         }
         throw new Error(data.error || "Something went wrong. Please reach out directly via email.");
       }

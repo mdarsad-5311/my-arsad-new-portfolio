@@ -19,6 +19,7 @@ export async function generateStaticParams() {
     ...PROJECTS.map((p) => ({ slug: p.slug })),
     { slug: "aura-ecommerce" },
     { slug: "edusphere-erp" },
+    { slug: "al-umaima-school-erp" },
     { slug: "pharmflow-system" },
     { slug: "medicare-hospital-erp" },
     { slug: "apex-business" },
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   let resolvedSlug = slug;
   if (slug === "aura-ecommerce") resolvedSlug = "al-umaima-ecommerce";
-  if (slug === "edusphere-erp") resolvedSlug = "al-umaima-school-erp";
+  if (slug === "edusphere-erp" || slug === "al-umaima-school-erp") resolvedSlug = "docusense-ai";
   if (slug === "pharmflow-system" || slug === "medicare-hospital-erp") resolvedSlug = "nexus-metrics";
   if (slug === "apex-business") resolvedSlug = "kalycor-corporate";
   const project = PROJECTS.find((p) => p.slug === resolvedSlug);
@@ -60,8 +61,8 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   if (slug === "aura-ecommerce") {
     redirect("/work/al-umaima-ecommerce");
   }
-  if (slug === "edusphere-erp") {
-    redirect("/work/al-umaima-school-erp");
+  if (slug === "edusphere-erp" || slug === "al-umaima-school-erp") {
+    redirect("/work/docusense-ai");
   }
   if (slug === "pharmflow-system" || slug === "medicare-hospital-erp") {
     redirect("/work/nexus-metrics");

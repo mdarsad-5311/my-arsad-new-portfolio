@@ -195,84 +195,85 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: "al-umaima-school-erp",
-    slug: "al-umaima-school-erp",
+    id: "docusense-ai",
+    slug: "docusense-ai",
     number: "02",
-    title: "AL-Umaima — Modern School Management System",
+    title: "DocuSense AI — Document Intelligence & Risk Analysis Platform",
     shortDescription:
-      "A comprehensive cross-device academic ERP solution streamlining student administration, staff coordination, academics, and finances all in one place.",
-    category: "EdTech & Enterprise System",
+      "Enterprise AI-powered contract analysis, risk scoring, clause extraction, and covenant audit platform for modern legal and compliance operations.",
+    category: "AI & Legal Tech System",
     year: "2026",
-    technologies: ["React", "TypeScript", "Django REST Framework", "PostgreSQL", "Tailwind CSS"],
-    image: "/projects/al-umaima-school-erp.png",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Django REST Framework", "Lucide React"],
+    image: "/projects/docusense-ai.png",
     role: "Full-Stack Architecture & Engineering",
-    projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/al-umaima-school-erp",
+    projectType: "Full-Stack Production System",
+    liveUrl: "https://ai-frontend-smoky-xi.vercel.app/",
+    githubUrl: "https://github.com/mdarsad-5311/docusense-ai",
     featured: true,
     overview:
-      "AL-Umaima is an all-in-one modern school management ERP system built to coordinate institution-wide operations. Engineered with a cross-device responsive React frontend and a robust Django REST Framework backend, the platform enables administrators, educators, and staff to seamlessly manage student records, teacher allocations, academic schedules, and institutional finances in one unified dashboard.",
+      "DocuSense AI is a next-generation enterprise document intelligence platform engineered for legal, compliance, and procurement teams. Designed to instantly audit complex MSAs, SLAs, SaaS agreements, and technical contracts, the system extracts high-risk clauses, uncapped indemnities, and governing law variances with deterministic precision through an intuitive 3-column synchronized workspace.",
     problem:
-      "Educational institutions frequently struggle with fragmented data management across separate spreadsheets, disconnected communication channels, and cumbersome systems that fail to function reliably across mobile and desktop devices.",
+      "Legal operations and enterprise deal desks face immense bottlenecks manually reviewing multi-page commercial contracts, leading to missed liability caps, overlooked auto-renewal traps, and inconsistent covenant compliance during tight procurement cycles.",
     solution:
-      "Engineered a unified, multi-role school ERP platform featuring cross-device responsiveness, role-based access control (Admin, Staff, Student), relational academic data modeling, and centralized dashboards for attendance, academic performance, and administrative reporting.",
+      "Architected a synchronized document intelligence platform featuring automated risk scoring (0-100 vector analysis), real-time clause extraction (termination, liability caps, non-solicitation, payment terms), and a side-by-side contract viewer with instantaneous AI-generated recommendations.",
     highlights: [
-      { label: "Scale Architecture", value: "Multi-Role & Multi-Tenant" },
-      { label: "Platform Target", value: "Cross-Device Responsive" },
-      { label: "Frontend", value: "React & TypeScript" },
-      { label: "Backend API", value: "Django REST Framework" },
+      { label: "Platform Target", value: "Enterprise Legal Tech" },
+      { label: "Core Capability", value: "Automated Risk Scoring" },
+      { label: "Workspace Layout", value: "Synchronized 3-Column Review" },
+      { label: "Deployment", value: "Vercel Edge & Cloud API" },
     ],
     features: [
       {
-        title: "Student & Staff Lifecycle Management",
+        title: "Automated Risk Scoring Engine",
         description:
-          "Centralized record system for enrollment records, staff assignments, contact profiles, and academic histories.",
+          "Calculates empirical risk vectors across unlimited liability clauses, intellectual property transfers, and unilateral termination triggers with clear risk heatmaps.",
       },
       {
-        title: "Cross-Device Operations Portal",
+        title: "Synchronized 3-Column Review Workspace",
         description:
-          "Fully responsive modern interface providing smooth workflows across mobile phones, tablets, and desktop workstations.",
+          "Side-by-side synchronized review displaying document page pagination, active source contract text, and simultaneous AI extraction with risk assessments.",
       },
       {
-        title: "Academics & Timetable Scheduler",
+        title: "AI-Extracted Clause Summaries & Filters",
         description:
-          "Dynamic timetable visualizer and grade tracking module coordinating subjects, classroom allocations, and exam schedules.",
+          "Instant parsing and classification of critical clauses including Termination (Clause 8.3), Limitation of Liability (Clause 14), Non-Solicitation, and Payment Terms.",
       },
       {
-        title: "Administrative & Finance Controls",
+        title: "Structured JSON Architecture & Export",
         description:
-          "Comprehensive reporting modules for fee structures, attendance analytics, and role-based permissions.",
+          "Enterprise-grade schema validation serving deterministic clause extractions, version comparison, and one-click PDF/report export workflows.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Institutional Workflow Modeling",
+        title: "Legal Domain & Contract Taxonomy Modeling",
         description:
-          "Mapped out school administrative processes including student records, teacher rosters, and academic terms.",
+          "Mapped high-risk clause definitions, liability exceptions, indemnification structures, and compliance criteria across enterprise MSAs and SLAs.",
       },
       {
         phase: "Phase 02",
-        title: "Relational Schema Architecture",
+        title: "Workspace UI & Component Architecture",
         description:
-          "Structured PostgreSQL database tables linking students, classes, faculty, attendance registers, and finances.",
+          "Engineered a high-density dark aesthetic interface with synchronized multi-column layout, interactive risk dials, and document page preview navigation.",
       },
       {
         phase: "Phase 03",
-        title: "Responsive Frontend Engineering",
+        title: "Clause Extraction & Risk Scoring Pipelines",
         description:
-          "Crafted modern high-contrast interface components, data grids, role-tailored dashboards, and cross-device views.",
+          "Constructed structured data pipelines validating extracted contract clauses against customizable risk thresholds and variance heuristics.",
       },
       {
         phase: "Phase 04",
-        title: "Security & Role-Based Access",
+        title: "Production Optimization & Edge Deployment",
         description:
-          "Implemented token-based authorization rules ensuring strict role isolation between administrators, staff, and students.",
+          "Deployed to Vercel edge infrastructure, ensuring sub-second route transitions, dark-mode visual hierarchy, and cross-device responsiveness.",
       },
     ],
     deliverables: [
-      "Cross-device responsive React application for modern school administration.",
-      "Robust Django REST Framework API with secure role-based access control.",
-      "Scalable PostgreSQL relational architecture for academic and financial record management.",
+      "Production Next.js document intelligence platform deployed live on Vercel.",
+      "High-density 3-column synchronized legal review workspace with interactive risk scoring.",
+      "Strict TypeScript contracts modeling clause taxonomies, risk vectors, and analysis reports.",
     ],
   },
   {

@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/work/edusphere-erp",
-        destination: "/work/al-umaima-school-erp",
+        destination: "/work/docusense-ai",
+        permanent: true,
+      },
+      {
+        source: "/work/al-umaima-school-erp",
+        destination: "/work/docusense-ai",
         permanent: true,
       },
       {

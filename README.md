@@ -214,7 +214,7 @@ The enquiry workflow is managed through `POST /api/contact` and `src/lib/mailer.
 {
   "name": "Alex Mercer",
   "email": "alex@example.com",
-  "phone": "+91 9876543210",
+  "phone": "+91 9999999999",
   "company": "Mercer Labs",
   "projectType": "SaaS Platform",
   "budget": "₹50,000 – ₹1,00,000",

@@ -276,84 +276,85 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: "medicare-hospital-erp",
-    slug: "medicare-hospital-erp",
+    id: "nexus-metrics",
+    slug: "nexus-metrics",
     number: "03",
-    title: "MediCare — Hospital ERP & Clinical Operations",
+    title: "NexusMetrics — Cloud Infrastructure & SRE Operations Dashboard",
     shortDescription:
-      "A comprehensive healthcare management dashboard coordinating OPD/IPD admissions, bed occupancy, doctor appointments, pharmacy, laboratory, and hospital billing.",
-    category: "Healthcare & Enterprise System",
+      "A high-density Cloud Infrastructure & SRE Operations Dashboard monitoring real-time API telemetry, pod orchestration, regional latency, and microservice mesh health.",
+    category: "Cloud Operations & Observability",
     year: "2026",
-    technologies: ["React", "TypeScript", "Django REST Framework", "PostgreSQL", "Tailwind CSS"],
-    image: "/projects/medicare-hospital-erp.png",
-    role: "Full-Stack Architecture & Engineering",
-    projectType: "Portfolio / Demonstration Project",
-    githubUrl: "https://github.com/mdarsad-5311/medicare-hospital-erp",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Recharts", "Lucide React"],
+    image: "/projects/nexus-metrics-dashboard.png",
+    role: "Full-Stack & Observability Architecture",
+    projectType: "Full-Stack Production System",
+    liveUrl: "https://nexus-metrics-coral.vercel.app/",
+    githubUrl: "https://github.com/mdarsad-5311/nexus-metrics",
     featured: true,
     overview:
-      "MediCare is an enterprise-grade hospital ERP and clinical management dashboard engineered to orchestrate high-velocity inpatient and outpatient operations. Developed with React and Django REST Framework, the platform centralizes patient registers, real-time bed occupancy tracking (IPD), doctor scheduling, laboratory testing queues, prescription dispensing, and automated billing in a clean, modern interface.",
+      "NexusMetrics is a modern, production-grade Cloud Infrastructure & SRE Operations Dashboard engineered to monitor API performance, microservice cluster health, regional latency, pod deployments, and database pool connections from a unified command center. Designed for DevOps and Site Reliability Engineering teams, it couples high-frequency telemetry cards with interactive latency distribution charts and deep service diagnostics.",
     problem:
-      "Hospitals often operate across fragmented point solutions for clinical records, pharmacy stocks, bed allocations, and accounts, causing coordination bottlenecks, delayed critical patient admissions, and administrative overhead.",
+      "Modern distributed cloud microservices face observability fragmentation across disconnected logging consoles, APM agents, and latency analyzers, slowing down incident detection, triage, and SLA enforcement during critical production degradation.",
     solution:
-      "Architected a centralized hospital ERP suite with real-time operational KPI telemetry (active patients, bed occupancy, critical cases, daily appointments), fast patient check-in workflows, integrated doctor appointment queues, and unified clinical records management.",
+      "Architected an integrated SRE command center featuring real-time operational telemetry (42ms P50 latency, 99.1% quorum across 115 microservices, 0.03% error rate, 3,450 pool connections), interactive percentile curves (P50/P95/P99), multi-region latency graphs (Asia Pacific, EU Central, US East), and detailed microservice diagnostic inspection modals.",
     highlights: [
-      { label: "Clinical Modules", value: "OPD, IPD & Bed Management" },
-      { label: "Real-Time Telemetry", value: "Live Occupancy & KPI Cards" },
-      { label: "Frontend", value: "React & TypeScript" },
-      { label: "Backend API", value: "Django REST Framework" },
+      { label: "Architecture", value: "SRE Observability Mesh" },
+      { label: "Global Latency", value: "42ms Live P50 Edge" },
+      { label: "Microservices", value: "114 / 115 Healthy Quorum" },
+      { label: "Live Deployment", value: "Vercel Production Edge" },
     ],
     features: [
       {
-        title: "Hospital Operational KPI Telemetry",
+        title: "Infrastructure KPI Telemetry Cards",
         description:
-          "Real-time summary indicators monitoring total patients, today's appointments, available beds, critical cases, and daily clinical revenue.",
+          "High-density indicators tracking Global API Latency (42ms), Active Microservices (114/115), Global Error Rate (0.03%), and Database Pool Connections (3,450) with status sparklines and quorum indicators.",
       },
       {
-        title: "IPD Bed Occupancy & Ward Tracking",
+        title: "API Latency Distribution & Multi-Range SLA",
         description:
-          "Visual bed management interface tracking ward availability, patient transfers, and real-time occupancy rates.",
+          "Interactive multi-percentile curve telemetry (P50 Median 34ms, P95 Target 48ms, P99 SLA Limit 72ms) with 1H, 6H, 24H, and 7D temporal intervals.",
       },
       {
-        title: "Appointment & OPD Workflow Queue",
+        title: "Regional Latency Telemetry Probes",
         description:
-          "Interactive scheduling queue with doctor assignments, department filtering (Cardiology, General, etc.), and live consultation statuses.",
+          "Inter-region round-trip telemetry monitoring active edge probes across Asia Pacific, EU Central, and US East with historical trend analysis.",
       },
       {
-        title: "Integrated Pharmacy & Lab Orders",
+        title: "Microservice Diagnostics & Health Inspection",
         description:
-          "Connected clinical dispensing workflows linking patient records directly with laboratory test queues and pharmacy stock.",
+          "Granular pod orchestration tracking status (Operational, Warning, Critical), CPU/Memory saturation metrics, throughput rates, and diagnostic inspect modals.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Clinical Workflow & Department Mapping",
+        title: "SRE Telemetry & Metrics Specification",
         description:
-          "Mapped multi-department hospital operations spanning OPD consultations, IPD ward admissions, lab tests, and billing.",
+          "Mapped distributed cloud metrics including P50/P95/P99 latency curves, pod quorum states, database pool headroom, and regional edge round-trip delays.",
       },
       {
         phase: "Phase 02",
-        title: "Relational Schema & Workflow Modeling",
+        title: "Data Visualization & Dashboard Architecture",
         description:
-          "Modeled relational PostgreSQL schemas connecting patients, doctors, beds, prescriptions, and departmental invoices.",
+          "Constructed dense data visualization layouts combining responsive SVG/canvas telemetry charts, sparkline trends, and status indicator badges.",
       },
       {
         phase: "Phase 03",
-        title: "High-Information UI & Quick Actions",
+        title: "Microservice Diagnostic Modals & State Sync",
         description:
-          "Engineered responsive dashboard layout with fast-action modal flows for new patients, prescription entry, and medicine dispensing.",
+          "Developed interactive service status filters (Healthy, Warning, Degrading), quick-action controls, and deep inspection modal dialogs.",
       },
       {
         phase: "Phase 04",
-        title: "State Sync & Role-Based Permissions",
+        title: "Edge Deployment & Cross-Viewport Optimization",
         description:
-          "Verified appointment status state machines, bed capacity locks, and role-based permissions for medical administrators and physicians.",
+          "Deployed to Vercel edge infrastructure, verified keyboard accessibility, responsive breakpoints, and strict TypeScript contracts.",
       },
     ],
     deliverables: [
-      "Interactive hospital operations dashboard with real-time KPI monitors.",
-      "Normalized PostgreSQL relational schema for clinical records, bed allocations, and invoices.",
-      "Modular TypeScript components designed for high-density medical data management.",
+      "Production-ready Cloud Infrastructure & SRE Operations Dashboard deployed on Vercel.",
+      "High-density data visualization system with Recharts and custom SVG telemetry curves.",
+      "Strict TypeScript architecture modeling distributed microservices, regional probes, and metric intervals.",
     ],
   },
   {

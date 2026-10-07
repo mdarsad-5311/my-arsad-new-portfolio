@@ -15,7 +15,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/work/pharmflow-system",
-        destination: "/work/medicare-hospital-erp",
+        destination: "/work/nexus-metrics",
+        permanent: true,
+      },
+      {
+        source: "/work/medicare-hospital-erp",
+        destination: "/work/nexus-metrics",
         permanent: true,
       },
       {

@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
-import { COLLABORATION_PRINCIPLES } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function TestimonialsSection() {
+  const { collaborationPrinciples, t } = usePortfolio();
+
   return (
     <section
       id="philosophy"
@@ -34,29 +38,28 @@ export default function TestimonialsSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                10 —
+                {t.testimonials.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Collaboration Standards
+                {t.testimonials.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
-              WHAT I VALUE
+              {t.testimonials.title}
             </h2>
           </div>
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Foundational principles guiding my software architecture, technical communication,
-              and code quality.
+              {t.testimonials.description}
             </p>
           </div>
         </div>
 
         {/* Collaboration Principles 3-Column Grid */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {COLLABORATION_PRINCIPLES.map((item, idx) => (
+          {collaborationPrinciples.map((item, idx) => (
             <div
               key={item.id}
               className="group p-6 sm:p-8 bg-[#0D1D3A]/85 border border-[#1E3A5F] flex flex-col justify-between hover:border-[#38BDF8]/70 hover:bg-[#0E2042] transition-all duration-300 motion-reduce:transition-none relative shadow-sm hover:shadow-[0_8px_30px_rgba(56,189,248,0.12)] rounded-xl"
@@ -65,7 +68,7 @@ export default function TestimonialsSection() {
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-[#1E3A5F]/60 mb-6">
                   <span className="font-mono text-xs text-[#38BDF8] font-bold tracking-widest uppercase">
-                    PRINCIPLE 0{idx + 1}
+                    {t.testimonials.principlePrefix} 0{idx + 1}
                   </span>
                   <span
                     className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] group-hover:shadow-[0_0_8px_#38BDF8] transition-all duration-300"
@@ -88,8 +91,8 @@ export default function TestimonialsSection() {
 
               {/* Bottom Technical Status Telemetry */}
               <div className="mt-8 pt-4 border-t border-[#1E3A5F]/60 font-mono text-[11px] text-[#94A3B8] flex items-center justify-between">
-                <span>Code Standards</span>
-                <span className="text-[#38BDF8] font-bold tracking-wider">Strict Focus</span>
+                <span>{t.testimonials.codeStandards}</span>
+                <span className="text-[#38BDF8] font-bold tracking-wider">{t.testimonials.strictFocus}</span>
               </div>
             </div>
           ))}

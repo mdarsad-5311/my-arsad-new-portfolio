@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import { ArrowUpRight, Terminal } from "lucide-react";
 import { REPOSITORIES, DEVELOPER_INFO } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function GithubSection() {
+  const { t } = usePortfolio();
+
   return (
     <section
       id="github"
@@ -35,15 +40,15 @@ export default function GithubSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                09 —
+                {t.github.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Open Source &amp; Code Craft
+                {t.github.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
-              BUILT WITH CODE.
+              {t.github.title}
             </h2>
           </div>
 
@@ -55,7 +60,7 @@ export default function GithubSection() {
               aria-label={`View GitHub profile for ${DEVELOPER_INFO.name} (opens in a new tab)`}
               className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#001D4D] border border-[#38BDF8]/60 hover:border-[#38BDF8] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#002766] transition-all duration-200 rounded-lg shadow-sm focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] motion-reduce:transition-none"
             >
-              <span>VIEW GITHUB PROFILE</span>
+              <span>{t.github.viewProfile}</span>
               <ArrowUpRight className="w-3.5 h-3.5 text-[#38BDF8]" />
             </a>
           </div>
@@ -80,7 +85,7 @@ export default function GithubSection() {
                     <span>{repo.language}</span>
                   </div>
                   <span className="font-mono text-[11px] uppercase tracking-wider text-[#94A3B8]">
-                    Repository Concept
+                    {t.github.repoConcept}
                   </span>
                 </div>
 
@@ -109,7 +114,7 @@ export default function GithubSection() {
                   ))}
                 </div>
                 <span className="text-[#38BDF8] text-xs font-semibold flex items-center gap-1 group-hover:text-white transition-colors duration-200">
-                  <span>Explore Code</span>
+                  <span>{t.github.exploreCode}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#38BDF8]" />
                 </span>
               </div>

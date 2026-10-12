@@ -42,12 +42,13 @@ html {
 }
 
 body {
-  background-color: #00081C;
-  color: #FFFFFF;
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-dm), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
@@ -125,14 +126,13 @@ body {
   background: #2563EB;
 }
 
-
-
 /* Subtle entrance animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -144,6 +144,7 @@ body {
   0% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -162,6 +163,7 @@ body {
 
 /* Accessibility: respect user preferences for reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -193,12 +195,10 @@ body {
   transform: translateX(-50%);
   width: min(1300px, 98vw);
   height: 600px;
-  background: radial-gradient(
-    ellipse 85% 65% at 50% 25%,
-    rgba(0, 240, 255, 0.22) 0%,
-    rgba(0, 103, 254, 0.16) 45%,
-    rgba(0, 8, 28, 0) 75%
-  );
+  background: radial-gradient(ellipse 85% 65% at 50% 25%,
+      rgba(0, 240, 255, 0.22) 0%,
+      rgba(0, 103, 254, 0.16) 45%,
+      rgba(0, 8, 28, 0) 75%);
   filter: blur(45px);
   will-change: transform, opacity;
 }
@@ -210,12 +210,10 @@ body {
   left: -10%;
   width: min(750px, 70vw);
   height: 750px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 240, 255, 0.13) 0%,
-    rgba(0, 103, 254, 0.08) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 240, 255, 0.13) 0%,
+      rgba(0, 103, 254, 0.08) 50%,
+      transparent 75%);
   filter: blur(65px);
 }
 
@@ -225,12 +223,10 @@ body {
   right: -10%;
   width: min(800px, 75vw);
   height: 800px;
-  background: radial-gradient(
-    circle,
-    rgba(0, 240, 255, 0.14) 0%,
-    rgba(0, 103, 254, 0.09) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(circle,
+      rgba(0, 240, 255, 0.14) 0%,
+      rgba(0, 103, 254, 0.09) 50%,
+      transparent 75%);
   filter: blur(70px);
 }
 
@@ -242,12 +238,10 @@ body {
   transform: translateX(-50%);
   width: min(1400px, 100vw);
   height: 480px;
-  background: radial-gradient(
-    ellipse 85% 60% at 50% 85%,
-    rgba(0, 240, 255, 0.26) 0%,
-    rgba(0, 103, 254, 0.16) 40%,
-    rgba(0, 8, 28, 0) 75%
-  );
+  background: radial-gradient(ellipse 85% 60% at 50% 85%,
+      rgba(0, 240, 255, 0.26) 0%,
+      rgba(0, 103, 254, 0.16) 40%,
+      rgba(0, 8, 28, 0) 75%);
   filter: blur(45px);
 }
 
@@ -282,33 +276,1331 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 70% 50% at 50% 50%,
-    rgba(0, 240, 255, 0.05) 0%,
-    rgba(0, 103, 254, 0.03) 50%,
-    transparent 80%
-  );
+  background: radial-gradient(ellipse 70% 50% at 50% 50%,
+      rgba(0, 240, 255, 0.05) 0%,
+      rgba(0, 103, 254, 0.03) 50%,
+      transparent 80%);
   z-index: 0;
 }
 
-/* Allow the continuous neon backlight to shine cleanly from navbar down to footer */
-main,
-main > section {
+/* Allow the continuous neon backlight to shine cleanly from navbar down to footer in dark mode */
+:not(html.light) main,
+:not(html.light) main>section {
   background-color: transparent !important;
 }
 
-/* Attachment-inspired subtle cyan rim backlight on hover for cards */
-[class*="rounded-2xl"][class*="border-[#1E3A5F]"],
-[class*="rounded-xl"][class*="border-[#1E3A5F]"],
-[class*="rounded-3xl"][class*="border-[#1E3A5F]"] {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* ==========================================================================
+/* ==========================================================================
+   FUTURISTIC FROSTED GLASS LIGHT MODE SYSTEM — ATTACHMENT BLUEPRINT
+   - Frosted Glass Navbar with Capsule-Framed Logo & Cyan Edge Glow
+   - Animated Living Aurora Mesh Background (Drifting Cyan & Blue Orbs)
+   - Multi-Layered Frosted Glass Project Cards with Specular Highlight & Hover Shimmer
+   - Frosted Glass Skills & Tech Stack Tiles
+   - Midnight Navy Contact Section with Cyber Showroom Floor Glow
+   - Translucent Glass Cyber Footer with Glowing Dividers & Social Icons
+   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules scoped to html.light)
+   ========================================================================== */
+
+html.light {
+  --background: #F8FAFC;
+  --foreground: #101828;
+  --surface: #FFFFFF;
+  --text-dark: #00081C;
+  --text-slate: #475569;
+  --text-muted: #64748B;
+  --border-navy: #D8E3F0;
+  --border-light: #D8E3F0;
+  --primary-blue: #0066FF;
+  --cyan-accent: #00BFFF;
+  color-scheme: light;
 }
 
-[class*="rounded-2xl"][class*="border-[#1E3A5F]"]:hover,
-[class*="rounded-xl"][class*="border-[#1E3A5F]"]:hover,
-[class*="rounded-3xl"][class*="border-[#1E3A5F]"]:hover {
-  border-color: rgba(0, 240, 255, 0.38) !important;
-  box-shadow: 0 0 25px -4px rgba(0, 240, 255, 0.22), 0 16px 36px rgba(0, 0, 0, 0.6) !important;
+html.light body {
+  background-color: #F8FAFC !important;
+  color: #475569 !important;
 }
 
+/* ==========================================================================
+   HIGH-TECH FUTURISTIC HINDI (DEVANAGARI) TYPOGRAPHY SYSTEM
+   Using Poppins (Wide Geometric Display Sans matching Bricolage Grotesque) & Rajdhani
+   ========================================================================== */
+html[lang="hi"] {
+  --font-display: var(--font-poppins), var(--font-rajdhani), sans-serif;
+  --font-body: var(--font-rajdhani), var(--font-dm), sans-serif;
+  --font-mono: var(--font-rajdhani), monospace;
+}
 
+/* Devanagari Complex Script Ligature & Matra Engine */
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] p,
+html[lang="hi"] span,
+html[lang="hi"] a {
+  font-feature-settings: "blwf" 1, "cjct" 1, "pres" 1, "abvs" 1, "psts" 1, "haln" 1 !important;
+}
+
+/* Giant Hero Headline in Hindi: Balanced width & natural typography */
+html[lang="hi"] #home h1 {
+  font-family: var(--font-poppins), sans-serif !important;
+  font-size: clamp(2.9rem, 12vw, 10.2rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.005em !important;
+  line-height: 1.24 !important;
+  overflow: visible !important;
+}
+
+/* Line 1: "फुल-स्टैक" — Naturally proportioned width */
+html[lang="hi"] #home h1 span.hero-animate-fade-2 {
+  display: block !important;
+  width: fit-content !important;
+  transform: scaleX(1.13) !important;
+  transform-origin: left center !important;
+  padding-bottom: 0.05em !important;
+  overflow: visible !important;
+}
+
+/* Line 2: "इंजीनियर." — Naturally proportioned width & clear spacing */
+html[lang="hi"] #home h1 span.hero-animate-fade-3 {
+  display: block !important;
+  width: fit-content !important;
+  transform: scaleX(1.13) !important;
+  transform-origin: left center !important;
+  margin-top: clamp(2.4rem, 5.5vw, 4.5rem) !important;
+  padding-top: 0.07em !important;
+  overflow: visible !important;
+}
+
+/* First line: "फुल-स्टैक" (Light Mode: Cyber Midnight Titanium Sheen matching English) */
+html.light[lang="hi"] #home h1 span.hero-animate-fade-2 {
+  font-family: var(--font-poppins), sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.035em !important;
+  color: #00081C !important;
+  background: linear-gradient(135deg, #00081C 0%, #0A2540 60%, #003B99 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 18px rgba(0, 102, 255, 0.18)) !important;
+}
+
+/* Second line: "इंजीनियर." (Light Mode: Luminous Electric Blue matching English) */
+html.light[lang="hi"] #home h1 span.hero-animate-fade-3 {
+  font-family: var(--font-poppins), sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.035em !important;
+  background: linear-gradient(135deg, #0056EE 0%, #0088FF 45%, #00C4FF 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 6px 32px rgba(0, 191, 255, 0.38)) !important;
+}
+
+/* Glowing Neon Cyan Dot in Hindi */
+html[lang="hi"] #home h1 span .text-\[\#38BDF8\] {
+  background: none !important;
+  -webkit-text-fill-color: #38BDF8 !important;
+  color: #38BDF8 !important;
+  text-shadow: 0 0 16px #38BDF8, 0 0 32px rgba(56, 189, 248, 0.8) !important;
+  display: inline-block !important;
+}
+
+/* Dark Mode Hindi Headline (Matches the pure white + cyan dot in the user's attachment) */
+html.dark[lang="hi"] #home h1 span.hero-animate-fade-2,
+html.dark[lang="hi"] #home h1 span.hero-animate-fade-3 {
+  font-family: var(--font-poppins), sans-serif !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  background: none !important;
+  letter-spacing: -0.035em !important;
+  filter: drop-shadow(0 4px 24px rgba(255, 255, 255, 0.15)) !important;
+}
+
+/* Subheadings & Section Titles in Hindi */
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] .font-display {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Hindi Navbar Links: Ultra-clean geometric tech look */
+html[lang="hi"] header nav a:not([aria-label*="MD ARSAD"]) {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* Hindi Navbar CTA ("प्रोजेक्ट शुरू करें ↗") */
+html[lang="hi"] header nav a[class*="bg-[#0067FE]"] {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Hindi Hero Meta Pill ("सॉफ्टवेयर इंजीनियर") */
+html[lang="hi"] #home div[class*="hero-animate-fade-1"] {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  letter-spacing: 0.12em !important;
+}
+
+html[lang="hi"] #home div[class*="hero-animate-fade-1"] .text-\[\#38BDF8\] {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+}
+
+@media (min-width: 640px) {
+  html[lang="hi"] #home div[class*="hero-animate-fade-1"] .text-\[\#38BDF8\] {
+    font-size: 13px !important;
+  }
+}
+
+/* Hindi Trust Strip: Keep Devanagari Shirorekha Continuous & Connected */
+html[lang="hi"] [aria-label="Credibility and Core Stack"] div:first-of-type span,
+html[lang="hi"] [aria-label="Credibility and Core Stack"] div:first-of-type div {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  letter-spacing: 0.04em !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* Hindi Work & Case Studies Sub-headers: Keep Shirorekha Connected */
+html[lang="hi"] #work span[class*="tracking-"],
+html[lang="hi"] [aria-label="Work Gallery"] span[class*="tracking-"] {
+  font-family: var(--font-rajdhani), sans-serif !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Hindi Hero CTA Buttons — Exactly Matching Attachment 2 Width, Height & Font Stature */
+html[lang="hi"] #home a[class*="bg-[#0067FE]"] {
+  font-family: var(--font-rajdhani), var(--font-mono), sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  min-width: 236px !important;
+  min-height: 52px !important;
+  padding: 14px 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+html[lang="hi"] #home a[class*="border-white"] {
+  font-family: var(--font-rajdhani), var(--font-mono), sans-serif !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  min-width: 206px !important;
+  min-height: 52px !important;
+  padding: 14px 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+@media (max-width: 639px) {
+
+  html[lang="hi"] #home a[class*="bg-[#0067FE]"],
+  html[lang="hi"] #home a[class*="border-white"] {
+    min-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   1. LIVING CYBER ATMOSPHERE: ANIMATED BACKGROUND (Attachment Matching)
+   Floating Cyan-Blue Orbs & Slow Ambient Aurora Motion
+   ========================================================================== */
+@keyframes lightAuroraDrift1 {
+  0% {
+    transform: translate3d(-50%, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: translate3d(-46%, 28px, 0) scale(1.08);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(-54%, -18px, 0) scale(0.96);
+    opacity: 0.85;
+  }
+}
+
+@keyframes lightAuroraDrift2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translate3d(36px, -40px, 0) scale(1.12);
+    opacity: 0.95;
+  }
+
+  100% {
+    transform: translate3d(-24px, 20px, 0) scale(0.94);
+    opacity: 0.7;
+  }
+}
+
+@keyframes lightAuroraDrift3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translate3d(-40px, 32px, 0) scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(28px, -24px, 0) scale(0.92);
+    opacity: 0.75;
+  }
+}
+
+@keyframes lightGlassShimmer {
+  0% {
+    transform: translateX(-100%) rotate(25deg);
+  }
+
+  100% {
+    transform: translateX(200%) rotate(25deg);
+  }
+}
+
+/* Top Backlight Orb behind Hero */
+html.light .backlight-ambient-top {
+  background: radial-gradient(ellipse 85% 65% at 50% 25%,
+      rgba(0, 191, 255, 0.24) 0%,
+      rgba(0, 102, 255, 0.12) 42%,
+      rgba(248, 250, 252, 0) 72%) !important;
+  filter: blur(50px) !important;
+  animation: lightAuroraDrift1 18s ease-in-out infinite alternate !important;
+}
+
+/* Mid-Page Floating Orbs */
+html.light .backlight-ambient-mid-1 {
+  background: radial-gradient(circle,
+      rgba(0, 191, 255, 0.18) 0%,
+      rgba(0, 102, 255, 0.09) 45%,
+      transparent 70%) !important;
+  filter: blur(65px) !important;
+  opacity: 0.85 !important;
+  animation: lightAuroraDrift2 24s ease-in-out infinite alternate !important;
+}
+
+html.light .backlight-ambient-mid-2 {
+  background: radial-gradient(circle,
+      rgba(0, 102, 255, 0.14) 0%,
+      rgba(0, 191, 255, 0.16) 48%,
+      transparent 72%) !important;
+  filter: blur(70px) !important;
+  opacity: 0.85 !important;
+  animation: lightAuroraDrift3 28s ease-in-out infinite alternate !important;
+}
+
+/* Bottom Floor Glow Layer (behind Contact & Footer) */
+html.light .backlight-ambient-bottom {
+  background: radial-gradient(ellipse 85% 60% at 50% 85%,
+      rgba(0, 191, 255, 0.38) 0%,
+      rgba(0, 102, 255, 0.22) 38%,
+      rgba(0, 8, 28, 0) 75%) !important;
+  filter: blur(45px) !important;
+}
+
+/* ==========================================================================
+   2. DEEP MIDNIGHT NAVY CYBER GLASS NAVBAR
+   - Full Navbar with Deep Midnight Navy Base (#00081C to #011C57)
+   - Luminous Cyan Border Glow & Ambient Specular Glow
+   - Smooth Seamless Logo Integration (no borders or separate box)
+   - Glowing Cyan Active Indicators & Frosted Midnight Control Pills
+   ========================================================================== */
+html.light header nav {
+  background: radial-gradient(ellipse 120% 100% at 50% 30%,
+      rgba(1, 28, 87, 0.96) 0%,
+      rgba(0, 14, 48, 0.94) 55%,
+      rgba(0, 8, 28, 0.98) 100%) !important;
+  background-color: #00081C !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  border: 1px solid rgba(0, 191, 255, 0.45) !important;
+  box-shadow:
+    0 16px 44px rgba(0, 8, 28, 0.55),
+    0 0 28px rgba(0, 191, 255, 0.35),
+    inset 0 1px 2px rgba(0, 191, 255, 0.30),
+    inset 0 -1px 2px rgba(0, 102, 255, 0.22) !important;
+  border-radius: 9999px !important;
+}
+
+/* Logo Integration: Seamless Natural Blend into the Deep Midnight Navy Bar */
+html.light header nav a[aria-label*="MD ARSAD"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 4px !important;
+  border-radius: 9999px !important;
+  transition: all 0.3s ease !important;
+}
+
+html.light header nav a[aria-label*="MD ARSAD"]:hover {
+  filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.6)) !important;
+}
+
+/* Navbar Navigation Links */
+html.light header nav a:not([aria-label*="MD ARSAD"]):not([href*="contact"]) {
+  color: #CBD5E1 !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+html.light header nav a:not([aria-label*="MD ARSAD"]):not([href*="contact"]):hover {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 8px rgba(0, 191, 255, 0.6) !important;
+}
+
+/* Active Link with Glowing Animated Cyan Underline */
+html.light header nav a[aria-current="page"] {
+  color: #38BDF8 !important;
+  font-weight: 700 !important;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.65) !important;
+}
+
+html.light header nav a[aria-current="page"] span[class*="bg-gradient-to-r"] {
+  background: linear-gradient(to right, #00BFFF, #0066FF) !important;
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.95) !important;
+  height: 2.5px !important;
+  opacity: 1 !important;
+}
+
+/* Controls (Language, Theme Toggles & Location Pill) */
+html.light header nav button,
+html.light header nav div[class*="rounded-full"] {
+  background-color: rgba(0, 20, 50, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.35) !important;
+  color: #CBD5E1 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(0, 191, 255, 0.15) !important;
+}
+
+html.light header nav button:hover {
+  border-color: #00BFFF !important;
+  box-shadow: 0 0 16px rgba(0, 191, 255, 0.45) !important;
+  color: #FFFFFF !important;
+}
+
+html.light header nav button .text-\[\#38BDF8\] {
+  color: #38BDF8 !important;
+}
+
+html.light header nav div[class*="rounded-full"] span.text-white {
+  color: #FFFFFF !important;
+}
+
+html.light header nav div[class*="rounded-full"] span.text-\[\#38BDF8\] {
+  color: #38BDF8 !important;
+}
+
+/* WhatsApp Icon Pill */
+html.light header nav a[aria-label*="WhatsApp"] {
+  background-color: rgba(0, 20, 50, 0.7) !important;
+  border: 1px solid rgba(0, 191, 255, 0.35) !important;
+  color: #25D366 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.light header nav a[aria-label*="WhatsApp"]:hover {
+  border-color: #25D366 !important;
+  box-shadow: 0 0 14px rgba(37, 211, 102, 0.5) !important;
+}
+
+/* Navbar Primary CTA ("Start a Project") */
+html.light header nav a[class*="bg-[#0067FE]"] {
+  background: linear-gradient(135deg, #00BFFF, #0066FF) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 2px 14px rgba(0, 102, 255, 0.45) !important;
+  border-radius: 9999px !important;
+  white-space: nowrap !important;
+}
+
+html.light header nav a[class*="bg-[#0067FE]"]:hover {
+  background: linear-gradient(135deg, #0066FF, #00BFFF) !important;
+  box-shadow: 0 4px 20px rgba(0, 191, 255, 0.65) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Mobile Drawer in Light Mode */
+html.light #mobile-navigation {
+  background-color: rgba(248, 250, 252, 0.96) !important;
+  backdrop-filter: blur(28px) !important;
+  border-color: rgba(0, 191, 255, 0.3) !important;
+}
+
+html.light #mobile-navigation a {
+  color: #101828 !important;
+}
+
+html.light #mobile-navigation a[aria-current="page"] {
+  color: #0066FF !important;
+  background-color: rgba(0, 102, 255, 0.08) !important;
+  border-color: rgba(0, 191, 255, 0.4) !important;
+}
+
+html.light #mobile-navigation button,
+html.light #mobile-navigation div[class*="rounded-full"] {
+  background-color: #FFFFFF !important;
+  border-color: #D8E3F0 !important;
+  color: #101828 !important;
+}
+
+/* ==========================================================================
+   3. DELIBERATE ALTERNATING SECTION SURFACES
+   ========================================================================== */
+
+/* Main Cool-White Sections (#F8FAFC) */
+html.light #work,
+html.light #why-me,
+html.light #about,
+html.light #stack,
+html.light #philosophy,
+html.light [aria-label="Work Gallery"],
+html.light main.work-page-main {
+  background-color: #F8FAFC !important;
+}
+
+/* Alternate Soft Blue-Gray Sections (#EDF3FA) */
+html.light [aria-label="Credibility and Core Stack"],
+html.light #workflow,
+html.light #experience,
+html.light #github,
+html.light #faq {
+  background-color: #EDF3FA !important;
+}
+
+/* Midnight Navy Anchor (Home Services, Contact & Footer - Cyber Dark Mode Only) */
+html.light #services,
+html.light .services-section-wrapper,
+html.light #contact,
+html.light footer {
+  background-color: #00081C !important;
+  color: #CBD5E1 !important;
+}
+
+/* Section Borders & Dividers */
+html.light #home,
+html.light [aria-label="Credibility and Core Stack"],
+html.light #work,
+html.light #why-me,
+html.light #workflow,
+html.light #about,
+html.light #experience,
+html.light #stack,
+html.light #github,
+html.light #philosophy,
+html.light #faq,
+html.light [aria-label="Work Gallery"] {
+  border-color: #D8E3F0 !important;
+}
+
+/* Fine Coordinate & Cyber Grid Patterns */
+html.light #home>div[style*="linear-gradient"],
+html.light #home>div[style*="radial-gradient"],
+html.light #work>div[style*="radial-gradient"],
+html.light #why-me>div[style*="radial-gradient"],
+html.light #workflow>div[style*="radial-gradient"],
+html.light #about>div[style*="radial-gradient"],
+html.light #experience>div[style*="radial-gradient"],
+html.light #stack>div[style*="radial-gradient"],
+html.light #github>div[style*="radial-gradient"],
+html.light #philosophy>div[style*="radial-gradient"],
+html.light #faq>div[style*="radial-gradient"] {
+  opacity: 0.08 !important;
+}
+
+/* ==========================================================================
+   4. HERO SECTION (Luminous Arctic Ice Cyber Atmosphere)
+   ========================================================================== */
+
+/* Hero Atmosphere: Arctic Ice-Cyan Depth Gradient & Living Aurora Orbs */
+html.light #home {
+  background: radial-gradient(ellipse 95% 70% at 50% 18%,
+      rgba(0, 191, 255, 0.16) 0%,
+      rgba(0, 102, 255, 0.08) 42%,
+      rgba(238, 245, 253, 0.96) 78%),
+    linear-gradient(180deg, #EEF5FC 0%, #E6F0FA 100%) !important;
+  background-color: #EEF5FC !important;
+  position: relative !important;
+}
+
+/* Enhanced Living Floating Orbs inside Hero */
+html.light #home>div[class*="blur-[160px]"] {
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.28) 0%, rgba(0, 102, 255, 0.12) 50%, transparent 72%) !important;
+  opacity: 0.9 !important;
+  filter: blur(90px) !important;
+}
+
+html.light #home>div[class*="blur-[140px]"] {
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 191, 255, 0.15) 48%, transparent 75%) !important;
+  opacity: 0.85 !important;
+  filter: blur(80px) !important;
+}
+
+/* Subtle High-Tech Blueprint Grid */
+html.light #home>div[style*="linear-gradient"] {
+  opacity: 0.09 !important;
+}
+
+html.light #home>div[style*="radial-gradient"] {
+  opacity: 0.07 !important;
+}
+
+/* Hero Headline: Metallic Midnight Navy to Electric Blue-Cyan Luminous Gradient */
+html.light #home h1 span.hero-animate-fade-2 {
+  color: #00081C !important;
+  background: linear-gradient(135deg, #00081C 0%, #0A2540 60%, #003B99 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: -0.035em !important;
+}
+
+html.light #home h1 span.hero-animate-fade-3 {
+  background: linear-gradient(135deg, #0056EE 0%, #0088FF 45%, #00C4FF 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  letter-spacing: -0.035em !important;
+  filter: drop-shadow(0 4px 20px rgba(0, 102, 255, 0.2)) !important;
+}
+
+html.light #home h1 span .text-\[\#38BDF8\] {
+  background: none !important;
+  -webkit-text-fill-color: #00BFFF !important;
+  color: #00BFFF !important;
+  text-shadow: 0 0 16px rgba(0, 191, 255, 0.95), 0 0 32px rgba(0, 102, 255, 0.6) !important;
+  display: inline-block !important;
+}
+
+html.light #home p.font-display {
+  color: #00081C !important;
+  letter-spacing: -0.02em !important;
+}
+
+html.light #home p.font-body {
+  color: #475569 !important;
+}
+
+/* Developer Badge ("MD ARSAD / SOFTWARE ENGINEER") */
+html.light #home div[class*="hero-animate-fade-1"]>span:first-child {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(235, 245, 255, 0.85)) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.45) !important;
+  color: #00081C !important;
+  border-radius: 9999px !important;
+  padding: 4px 14px !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.08), 0 0 14px rgba(0, 191, 255, 0.2), inset 0 1px 1px #fff !important;
+}
+
+html.light #home div[class*="hero-animate-fade-1"]>span:first-child span[class*="rounded-full"] {
+  background-color: #00BFFF !important;
+  box-shadow: 0 0 8px #00BFFF, 0 0 16px rgba(0, 191, 255, 0.8) !important;
+}
+
+html.light #home div[class*="hero-animate-fade-1"] .text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+html.light #home div[class*="hero-animate-fade-1"] .text-\[\#94A3B8\] {
+  color: #475569 !important;
+}
+
+/* Social & Resume Links Bar */
+html.light #home a[class*="hover:text-\[\#38BDF8\]"] {
+  color: #475569 !important;
+}
+
+html.light #home a[class*="hover:text-\[\#38BDF8\]"]:hover {
+  color: #0066FF !important;
+}
+
+html.light #home div[class*="hero-animate-fade-4"] span.text-\[\#1E3A5F\] {
+  color: #D8E3F0 !important;
+}
+
+/* Primary Hero CTA: Vibrant Cyan-to-Electric-Blue Gradient with Readable White Text */
+html.light #home a[class*="bg-[#0067FE]"] {
+  background: linear-gradient(135deg, #00BFFF, #0066FF) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 24px rgba(0, 102, 255, 0.45), 0 0 16px rgba(0, 191, 255, 0.35) !important;
+  border: none !important;
+  border-radius: 8px !important;
+}
+
+html.light #home a[class*="bg-[#0067FE]"]:hover {
+  background: linear-gradient(135deg, #0066FF, #00BFFF) !important;
+  box-shadow: 0 8px 32px rgba(0, 102, 255, 0.65), 0 0 24px rgba(0, 191, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Secondary Hero CTA: Frosted Ice Glass Button with Cyan Border */
+html.light #home a[class*="border-white"] {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1.5px solid rgba(0, 191, 255, 0.45) !important;
+  color: #00081C !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.08), inset 0 1px 1px #fff !important;
+  border-radius: 8px !important;
+}
+
+html.light #home a[class*="border-white"]:hover {
+  background: #FFFFFF !important;
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+  box-shadow: 0 6px 24px rgba(0, 102, 255, 0.22), 0 0 16px rgba(0, 191, 255, 0.35) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Availability & 3 Pillars Strip */
+html.light #home div[class*="border-t"][class*="border-\[\#1E3A5F\]"] {
+  border-color: #D8E3F0 !important;
+}
+
+html.light #home div[class*="border-t"] span.text-white {
+  color: #101828 !important;
+}
+
+html.light #home div[class*="border-t"] span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+html.light #home div[class*="border-l"][class*="border-\[\#1E3A5F\]"] {
+  border-left-color: rgba(0, 102, 255, 0.3) !important;
+}
+
+html.light #home div[class*="border-l"] span.text-\[\#94A3B8\] {
+  color: #475569 !important;
+}
+
+/* Hero Scroll Prompt */
+html.light #home div.text-\[\#1E3A5F\] {
+  color: #94A3B8 !important;
+}
+
+html.light #home a[aria-label="Scroll to explore work section"] {
+  color: #475569 !important;
+}
+
+html.light #home a[aria-label="Scroll to explore work section"]:hover {
+  color: #0066FF !important;
+}
+
+html.light #home a[aria-label="Scroll to explore work section"] div[class*="border-\[\#1E3A5F\]"] {
+  border-color: #D8E3F0 !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.08) !important;
+}
+
+/* ==========================================================================
+   4.5 TRUST STRIP & TECHNOLOGY MARQUEE (Light Mode High-Contrast System)
+   ========================================================================== */
+html.light [aria-label="Credibility and Core Stack"] {
+  background-color: #EDF3FA !important;
+  border-color: #D8E3F0 !important;
+}
+
+/* Top Editorial Information Band */
+html.light [aria-label="Credibility and Core Stack"] > div:first-of-type {
+  border-bottom-color: #D8E3F0 !important;
+}
+
+html.light [aria-label="Credibility and Core Stack"] .text-\[\#94A3B8\] {
+  color: #1E293B !important;
+  font-weight: 600 !important;
+}
+
+/* Highlight item in Top Band */
+html.light [aria-label="Credibility and Core Stack"] .text-white {
+  color: #00081C !important;
+  font-weight: 700 !important;
+}
+
+/* Accent item in Top Band (e.g. Modern Web Tech) */
+html.light [aria-label="Credibility and Core Stack"] .text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+/* Glowing Blue/Cyan Dot */
+html.light [aria-label="Credibility and Core Stack"] span.bg-\[\#38BDF8\] {
+  background-color: #0066FF !important;
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.7) !important;
+}
+
+/* Slash Separator */
+html.light [aria-label="Credibility and Core Stack"] .text-\[\#1E3A5F\] {
+  color: #94A3B8 !important;
+}
+
+/* Technology Marquee Text */
+html.light [aria-label="Credibility and Core Stack"] .animate-marquee .font-semibold.text-white {
+  color: #00081C !important;
+  font-weight: 800 !important;
+}
+
+html.light [aria-label="Credibility and Core Stack"] .animate-marquee .text-\[\#CBD5E1\] {
+  color: #00081C !important;
+}
+
+html.light [aria-label="Credibility and Core Stack"] .animate-marquee .text-\[\#CBD5E1\]:hover {
+  color: #0066FF !important;
+}
+
+/* Tech Category Tag: [RUNTIME], [FRONTEND], etc. */
+html.light [aria-label="Credibility and Core Stack"] .animate-marquee .text-\[\#64748B\] {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+/* Tech Bullet Dots */
+html.light [aria-label="Credibility and Core Stack"] .animate-marquee span.bg-\[\#38BDF8\]\/60 {
+  background-color: #0066FF !important;
+  box-shadow: 0 0 6px rgba(0, 102, 255, 0.5) !important;
+}
+
+/* Edge Gradient Fades: Smooth transition without dark smears */
+html.light [aria-label="Credibility and Core Stack"] .trust-strip-fade-left,
+html.light [aria-label="Credibility and Core Stack"] div[class*="from-\[\#00091E\]"][class*="bg-gradient-to-r"] {
+  background: linear-gradient(to right, #EDF3FA 15%, rgba(237, 243, 250, 0) 100%) !important;
+}
+
+html.light [aria-label="Credibility and Core Stack"] .trust-strip-fade-right,
+html.light [aria-label="Credibility and Core Stack"] div[class*="from-\[\#00091E\]"][class*="bg-gradient-to-l"] {
+  background: linear-gradient(to left, #EDF3FA 15%, rgba(237, 243, 250, 0) 100%) !important;
+}
+
+/* ==========================================================================
+   5. MULTI-LAYERED FROSTED GLASS PROJECT CARDS (Attachment Blueprint)
+   - Multi-Layered Glass Design
+   - Specular Shine & Depth (inset highlight)
+   - Glowing Border on Hover
+   - Circular Cyan CTA Arrow
+   ========================================================================== */
+
+/* Main Card Surfaces */
+html.light #work [class*="bg-[#0D1D3A]"],
+html.light #why-me [class*="bg-[#0D1D3A]"],
+html.light #workflow [class*="bg-[#0D1D3A]"],
+html.light #about [class*="bg-[#0D1D3A]"],
+html.light #experience [class*="bg-[#0D1D3A]"],
+html.light #stack [class*="bg-[#0D1D3A]"],
+html.light #github [class*="bg-[#0D1D3A]"],
+html.light #philosophy [class*="bg-[#0D1D3A]"],
+html.light #faq [class*="bg-[#0D1D3A]"],
+html.light [aria-label="Work Gallery"] [class*="bg-[#0D1D3A]"],
+html.light main.work-page-main [class*="bg-[#0D1D3A]"] {
+  background-color: rgba(255, 255, 255, 0.86) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(216, 227, 240, 0.95) !important;
+  box-shadow:
+    0 12px 36px rgba(0, 102, 255, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Inner Panels & Tag Badges */
+html.light #work [class*="bg-[#07152F]"],
+html.light #why-me [class*="bg-[#07152F]"],
+html.light #workflow [class*="bg-[#07152F]"],
+html.light #about [class*="bg-[#07152F]"],
+html.light #experience [class*="bg-[#07152F]"],
+html.light #stack [class*="bg-[#07152F]"],
+html.light #github [class*="bg-[#07152F]"],
+html.light #philosophy [class*="bg-[#07152F]"],
+html.light #faq [class*="bg-[#07152F]"],
+html.light [aria-label="Work Gallery"] [class*="bg-[#07152F]"],
+html.light main.work-page-main [class*="bg-[#07152F]"] {
+  background-color: rgba(241, 245, 249, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+/* Card Hover Elevation with Glowing Cyan Rim (Attachment Requirement) */
+html.light #work [class*="rounded-2xl"]:hover,
+html.light #work [class*="rounded-xl"]:hover,
+html.light #why-me [class*="rounded-xl"]:hover,
+html.light #workflow [class*="rounded-xl"]:hover,
+html.light #about [class*="rounded-xl"]:hover,
+html.light #experience [class*="rounded-2xl"]:hover,
+html.light #stack [class*="rounded-xl"]:hover,
+html.light #github [class*="rounded-xl"]:hover,
+html.light #philosophy [class*="rounded-xl"]:hover,
+html.light #faq [class*="rounded-xl"]:hover,
+html.light [aria-label="Work Gallery"] [class*="rounded-2xl"]:hover {
+  border-color: rgba(0, 191, 255, 0.65) !important;
+  box-shadow:
+    0 18px 48px rgba(0, 102, 255, 0.14),
+    0 0 24px rgba(0, 191, 255, 0.25),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1) !important;
+  transform: translateY(-3px) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Project Preview Frame */
+html.light #work a[href^="/work/"]>div[class*="aspect-"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(216, 227, 240, 0.9) !important;
+  box-shadow: 0 10px 32px rgba(0, 102, 255, 0.08) !important;
+}
+
+html.light #work a[href^="/work/"]>div[class*="aspect-"]:hover {
+  border-color: rgba(0, 191, 255, 0.65) !important;
+  box-shadow: 0 20px 50px rgba(0, 102, 255, 0.16), 0 0 24px rgba(0, 191, 255, 0.22) !important;
+}
+
+/* Circular Cyan Action Arrow Button (Matching Attachment) */
+html.light #work div[class*="bottom-5"][class*="bg-[#00081C]"],
+html.light #work div[class*="bottom-6"][class*="bg-[#00081C]"] {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid #00BFFF !important;
+  color: #0066FF !important;
+  box-shadow: 0 4px 18px rgba(0, 102, 255, 0.25), 0 0 14px rgba(0, 191, 255, 0.3) !important;
+}
+
+/* Project Detail Panels (The Challenge & Solution) */
+html.light #work div[class*="p-5"][class*="rounded-xl"] {
+  background-color: rgba(248, 250, 252, 0.95) !important;
+  border-color: #D8E3F0 !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.04) !important;
+}
+
+html.light #work div[class*="p-5"] span[class*="tracking-widest"] {
+  color: #0066FF !important;
+}
+
+html.light #work div[class*="p-5"] p {
+  color: #475569 !important;
+}
+
+/* ==========================================================================
+   SELECTED WORK TYPOGRAPHY & HIGH CONTRAST (Light Mode Blueprint)
+   ========================================================================== */
+
+/* 1. Main Section Heading: "चयनित कार्य" / "SELECTED WORK" */
+html.light #work h2,
+html.light [aria-label="Work Gallery"] h2 {
+  color: #00081C !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+}
+
+/* 2. Section Sub-Category and Section Number */
+html.light #work div.border-b span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+}
+
+html.light #work div.border-b span.text-\[\#94A3B8\] {
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+/* 3. Section Description & Paragraphs */
+html.light #work p.text-\[\#CBD5E1\],
+html.light #work p.font-body,
+html.light [aria-label="Work Gallery"] p.text-\[\#CBD5E1\],
+html.light [aria-label="Work Gallery"] p.font-body {
+  color: #334155 !important;
+}
+
+/* 4. "सभी केस स्टडीज देखें ↗" Pill Button */
+html.light #work a[href="/work"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(0, 102, 255, 0.45) !important;
+  color: #0066FF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 12px rgba(0, 102, 255, 0.12) !important;
+}
+
+html.light #work a[href="/work"]:hover {
+  background: #0066FF !important;
+  color: #FFFFFF !important;
+  border-color: #0066FF !important;
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.35) !important;
+}
+
+/* 5. Project Titles: "AL-UMAIMA — PREMIUM TECH & LIFESTYLE E-COMMERCE" */
+html.light #work h3,
+html.light [aria-label="Work Gallery"] h3 {
+  color: #00081C !important;
+  font-weight: 800 !important;
+}
+
+html.light #work h3:hover,
+html.light [aria-label="Work Gallery"] h3:hover,
+html.light #work a.group\/title:hover h3,
+html.light [aria-label="Work Gallery"] a.group\/title:hover h3 {
+  color: #0066FF !important;
+}
+
+/* 6. Project Metadata Row: Category & Year */
+html.light #work article div.font-mono span.text-white,
+html.light #work article div.font-mono span.text-\[\#CBD5E1\],
+html.light [aria-label="Work Gallery"] span.text-white {
+  color: #1E293B !important;
+  font-weight: 700 !important;
+}
+
+html.light #work span.text-\[\#38BDF8\]\/40,
+html.light #work span.text-\[\#1E3A5F\] {
+  color: #CBD5E1 !important;
+}
+
+/* Project Number (01, 02...) */
+html.light #work span.font-display.text-\[\#38BDF8\],
+html.light #work span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+}
+
+/* 7. Highlights Strip (Stat values) */
+html.light #work div[class*="border-l"] span.text-white {
+  color: #00081C !important;
+  font-weight: 700 !important;
+}
+
+html.light #work div[class*="border-l"] span.text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+html.light #work div[class*="border-l"] {
+  border-left-color: #CBD5E1 !important;
+}
+
+/* 8. Technology Badges */
+html.light #work span[class*="bg-[#07152F]"],
+html.light [aria-label="Work Gallery"] span[class*="bg-[#07152F]"] {
+  background-color: #EEF4FB !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  font-weight: 600 !important;
+}
+
+/* 9. Secondary Action Buttons (Live Demo, Source Code) */
+html.light #work a[class*="bg-[#07152F]"],
+html.light [aria-label="Work Gallery"] a[class*="bg-[#07152F]"] {
+  background-color: #FFFFFF !important;
+  color: #00081C !important;
+  border-color: #D8E3F0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light #work a[class*="bg-[#07152F]"]:hover,
+html.light [aria-label="Work Gallery"] a[class*="bg-[#07152F]"]:hover {
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.15) !important;
+}
+
+/* 10. Dividers & Section Borders */
+html.light #work div.border-b,
+html.light #work article.border-b,
+html.light [aria-label="Work Gallery"] div.border-b {
+  border-bottom-color: #D8E3F0 !important;
+}
+
+/* ==========================================================================
+   6. SKILLS & TECH STACK (Frosted Glass Tiles Blueprint)
+   ========================================================================== */
+html.light #stack div[class*="rounded-xl"][class*="border"] {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(216, 227, 240, 0.95) !important;
+  box-shadow:
+    0 6px 20px rgba(0, 102, 255, 0.05),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light #stack div[class*="rounded-xl"][class*="border"]:hover {
+  border-color: rgba(0, 191, 255, 0.6) !important;
+  box-shadow:
+    0 12px 30px rgba(0, 102, 255, 0.12),
+    0 0 20px rgba(0, 191, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ==========================================================================
+   7. CONTACT SECTION (Dark Cyber Glass & Floor Glow Blueprint)
+   ========================================================================== */
+html.light #contact {
+  background-color: #00081C !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Futuristic Cyber Floor Glow Reflection Beam (Attachment Blueprint) */
+html.light #contact::before {
+  content: "";
+  position: absolute;
+  inset-x: 0;
+  bottom: -20px;
+  height: 380px;
+  pointer-events: none;
+  background: radial-gradient(ellipse 85% 65% at 50% 100%,
+      rgba(0, 191, 255, 0.45) 0%,
+      rgba(0, 102, 255, 0.24) 40%,
+      rgba(0, 8, 28, 0) 75%) !important;
+  filter: blur(35px) !important;
+  z-index: 1;
+}
+
+html.light #contact h1,
+html.light #contact h2,
+html.light #contact h3,
+html.light #contact h4 {
+  color: #F5F7FF !important;
+}
+
+html.light #contact .text-white {
+  color: #F5F7FF !important;
+}
+
+html.light #contact .text-\[\#CBD5E1\] {
+  color: #CBD5E1 !important;
+}
+
+html.light #contact .text-\[\#94A3B8\] {
+  color: #94A3B8 !important;
+}
+
+html.light #contact .text-\[\#38BDF8\] {
+  color: #00BFFF !important;
+  text-shadow: 0 0 16px rgba(0, 191, 255, 0.6) !important;
+}
+
+/* Cyber Glass Form Container */
+html.light #contact [class*="bg-[#0D1D3A]"] {
+  background-color: rgba(13, 29, 58, 0.75) !important;
+  backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.35) !important;
+  box-shadow:
+    0 16px 48px rgba(0, 8, 28, 0.8),
+    0 0 24px rgba(0, 191, 255, 0.15),
+    inset 0 1px 1px rgba(0, 191, 255, 0.2) !important;
+}
+
+/* Cyber Form Inputs */
+html.light #contact input,
+html.light #contact select,
+html.light #contact textarea {
+  background-color: rgba(7, 21, 47, 0.85) !important;
+  color: #F5F7FF !important;
+  border: 1px solid rgba(30, 58, 95, 0.95) !important;
+}
+
+html.light #contact input:focus,
+html.light #contact select:focus,
+html.light #contact textarea:focus {
+  border-color: #00BFFF !important;
+  box-shadow: 0 0 18px rgba(0, 191, 255, 0.4) !important;
+}
+
+html.light #contact input::placeholder,
+html.light #contact textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Send Message / Start Project Action Button (Attachment Blueprint) */
+html.light #contact button[type="submit"] {
+  background: linear-gradient(135deg, #00BFFF, #0066FF) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow:
+    0 6px 24px rgba(0, 102, 255, 0.5),
+    0 0 20px rgba(0, 191, 255, 0.4) !important;
+}
+
+html.light #contact button[type="submit"]:hover {
+  box-shadow:
+    0 8px 32px rgba(0, 102, 255, 0.7),
+    0 0 28px rgba(0, 191, 255, 0.6) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ==========================================================================
+   8. FUTURISTIC FOOTER (Attachment Blueprint)
+   ========================================================================== */
+html.light footer {
+  background-color: #00081C !important;
+  border-top: 1px solid rgba(0, 191, 255, 0.4) !important;
+  box-shadow: 0 -8px 30px rgba(0, 191, 255, 0.15) !important;
+}
+
+html.light footer h1,
+html.light footer h2,
+html.light footer h3,
+html.light footer h4 {
+  color: #F5F7FF !important;
+}
+
+html.light footer .text-white {
+  color: #F5F7FF !important;
+}
+
+html.light footer .text-\[\#CBD5E1\] {
+  color: #CBD5E1 !important;
+}
+
+html.light footer .text-\[\#94A3B8\] {
+  color: #94A3B8 !important;
+}
+
+html.light footer a:hover {
+  color: #00BFFF !important;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5) !important;
+}
+
+/* ==========================================================================
+   9. STANDALONE WORK PAGES & SCROLLBAR
+   ========================================================================== */
+html.light main:not(:has(#home)),
+html.light main.work-page-main {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html.light main.work-page-main [class*="bg-[#0D1D3A]"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(216, 227, 240, 0.95) !important;
+  box-shadow: 0 8px 28px rgba(0, 102, 255, 0.06) !important;
+}
+
+html.light main.work-page-main [class*="bg-[#07152F]"] {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+  border-color: #D8E3F0 !important;
+}
+
+/* Ensure buttons with blue backgrounds retain pure white text */
+html.light main.work-page-main a[class*="bg-[#0067FE]"],
+html.light main.work-page-main button[class*="bg-[#0067FE]"],
+html.light main.work-page-main [class*="bg-[#0067FE]"] span,
+html.light main.work-page-main [class*="bg-[#0067FE]"] svg,
+html.light [aria-label="Work Gallery"] a[class*="bg-[#0067FE]"],
+html.light [aria-label="Work Gallery"] button[class*="bg-[#0067FE]"],
+html.light [aria-label="Work Gallery"] [class*="bg-[#0067FE]"] span {
+  color: #FFFFFF !important;
+}
+
+html.light main.work-page-main .text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+/* Category filter buttons active state in light mode */
+html.light main.work-page-main button[aria-pressed="true"] {
+  background-color: #0067FE !important;
+  color: #FFFFFF !important;
+}
+
+html.light main.work-page-main button[aria-pressed="true"] span {
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   10. HOME SERVICES SECTION (Cyber Dark Mode Enforced - Protected Reference)
+   ========================================================================== */
+#services,
+html.light #services,
+.services-section-wrapper,
+html.light .services-section-wrapper {
+  background-color: #00081C !important;
+  color: #CBD5E1 !important;
+}
+
+/* Headings in Home Services */
+#services h2,
+html.light #services h2,
+.services-section-wrapper h2,
+html.light .services-section-wrapper h2 {
+  color: #FFFFFF !important;
+}
+
+#services h3,
+html.light #services h3,
+.services-section-wrapper h3,
+html.light .services-section-wrapper h3 {
+  color: #FFFFFF !important;
+}
+
+#services p,
+html.light #services p,
+.services-section-wrapper p,
+html.light .services-section-wrapper p {
+  color: #94A3B8 !important;
+}
+
+/* Retain Dark Cyber Card Surfaces in Home Services */
+#services [class*="bg-[#07152F]"],
+html.light #services [class*="bg-[#07152F]"],
+.services-section-wrapper [class*="bg-[#07152F]"],
+html.light .services-section-wrapper [class*="bg-[#07152F]"] {
+  background-color: rgba(7, 21, 47, 0.9) !important;
+  color: #CBD5E1 !important;
+}
+
+#services .text-\[\#38BDF8\],
+html.light #services .text-\[\#38BDF8\],
+.services-section-wrapper .text-\[\#38BDF8\],
+html.light .services-section-wrapper .text-\[\#38BDF8\] {
+  color: #38BDF8 !important;
+}
+
+/* ==========================================================================
+   10.1 DEDICATED SERVICES PAGE (Pale-Blue Canvas with White Glass Cards in Light Mode)
+   ========================================================================== */
+html.light main.services-page-main {
+  background-color: #EDF3FA !important;
+  color: #0F172A !important;
+}
+
+html.light main.services-page-main h1,
+html.light main.services-page-main h2,
+html.light main.services-page-main h3 {
+  color: #00081C !important;
+}
+
+html.light main.services-page-main p {
+  color: #334155 !important;
+}
+
+html.light main.services-page-main .service-card-surface {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #D8E3F0 !important;
+  box-shadow: 0 8px 30px rgba(0, 102, 255, 0.05) !important;
+}
+
+/* Scrollbar in Light Mode */
+html.light ::-webkit-scrollbar-track {
+  background: #EDF3FA;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border: 1px solid #D8E3F0;
+  border-radius: 4px;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #0066FF;
+}

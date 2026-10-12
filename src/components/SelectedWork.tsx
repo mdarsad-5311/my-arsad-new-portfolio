@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, GitBranch, ExternalLink } from "lucide-react";
-import { PROJECTS } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function SelectedWork() {
+  const { projects, t } = usePortfolio();
+
   return (
     <section
       id="work"
@@ -32,27 +36,27 @@ export default function SelectedWork() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                02 —
+                {t.selectedWork.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Curated Case Studies &amp; Production Systems
+                {t.selectedWork.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white select-none">
-              SELECTED WORK
+              {t.selectedWork.title}
             </h2>
           </div>
 
           <div className="max-w-md flex flex-col sm:items-end gap-4">
             <p className="font-body text-sm sm:text-base text-[#CBD5E1] leading-relaxed sm:text-right">
-              Demonstrated capability across full-stack applications, enterprise platforms, and headless systems built to solve real operational problems.
+              {t.selectedWork.description}
             </p>
             <Link
               href="/work"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#38BDF8]/40 text-[#38BDF8] font-mono text-xs uppercase tracking-wider hover:bg-[#38BDF8] hover:text-[#00081C] hover:shadow-[0_0_20px_rgba(56,189,248,0.35)] transition-all duration-300 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
             >
-              <span>VIEW ALL CASE STUDIES</span>
+              <span>{t.selectedWork.viewAll}</span>
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
@@ -60,7 +64,7 @@ export default function SelectedWork() {
 
         {/* Editorial Project Showcase: Alternating Asymmetrical Composition */}
         <div className="mt-16 sm:mt-24 flex flex-col gap-24 sm:gap-36">
-          {PROJECTS.map((project, index) => {
+          {projects.map((project, index) => {
             // Flagship monumental layout for projects 01 & 04
             const isMonumental = index === 0 || index === 3;
             // Alternating split composition for other projects
@@ -189,7 +193,7 @@ export default function SelectedWork() {
                             href={`/work/${project.slug}`}
                             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all shadow-[0_2px_12px_rgba(0,103,254,0.35)]"
                           >
-                            <span>VIEW CASE STUDY</span>
+                            <span>{t.selectedWork.viewCaseStudy}</span>
                             <ArrowUpRight className="w-3.5 h-3.5" />
                           </Link>
 
@@ -201,7 +205,7 @@ export default function SelectedWork() {
                               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8]/60 text-white font-mono text-xs uppercase tracking-wider transition-colors"
                             >
                               <ExternalLink className="w-3.5 h-3.5 text-[#38BDF8]" />
-                              <span>LIVE DEMO</span>
+                              <span>{t.selectedWork.liveDemo}</span>
                             </a>
                           )}
 
@@ -213,7 +217,7 @@ export default function SelectedWork() {
                               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8]/60 text-[#CBD5E1] hover:text-white font-mono text-xs uppercase tracking-wider transition-colors"
                             >
                               <GitBranch className="w-3.5 h-3.5 text-[#38BDF8]" />
-                              <span>SOURCE CODE</span>
+                              <span>{t.selectedWork.sourceCode}</span>
                             </a>
                           )}
                         </div>
@@ -280,7 +284,7 @@ export default function SelectedWork() {
                       <div className="p-4 rounded-xl bg-[#0D1D3A]/60 border border-[#1E3A5F]/70 flex flex-col gap-2.5">
                         <div>
                           <span className="font-mono text-[10px] text-[#38BDF8] uppercase tracking-wider font-bold block">
-                            THE CHALLENGE
+                            {t.selectedWork.theChallenge}
                           </span>
                           <p className="font-body text-xs text-[#94A3B8] leading-relaxed line-clamp-2">
                             {project.problem}
@@ -288,7 +292,7 @@ export default function SelectedWork() {
                         </div>
                         <div className="pt-2 border-t border-[#1E3A5F]/40">
                           <span className="font-mono text-[10px] text-[#38BDF8] uppercase tracking-wider font-bold block">
-                            THE SOLUTION
+                            {t.selectedWork.theSolution}
                           </span>
                           <p className="font-body text-xs text-[#94A3B8] leading-relaxed line-clamp-2">
                             {project.solution}
@@ -314,7 +318,7 @@ export default function SelectedWork() {
                           href={`/work/${project.slug}`}
                           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#38BDF8] hover:text-white font-bold transition-colors group/btn"
                         >
-                          <span>VIEW CASE STUDY</span>
+                          <span>{t.selectedWork.viewCaseStudy}</span>
                           <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                         </Link>
 
@@ -327,7 +331,7 @@ export default function SelectedWork() {
                             className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-[#94A3B8] hover:text-white transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] rounded-sm"
                           >
                             <ExternalLink className="w-3.5 h-3.5 text-[#38BDF8]" />
-                            <span>LIVE DEMO</span>
+                            <span>{t.selectedWork.liveDemo}</span>
                           </a>
                         )}
 
@@ -340,7 +344,7 @@ export default function SelectedWork() {
                             className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-[#94A3B8] hover:text-[#38BDF8] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] rounded-sm"
                           >
                             <GitBranch className="w-3.5 h-3.5 text-[#38BDF8]" />
-                            <span>SOURCE CODE</span>
+                            <span>{t.selectedWork.sourceCode}</span>
                           </a>
                         )}
                       </div>

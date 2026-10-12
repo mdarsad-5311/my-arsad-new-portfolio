@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X, MapPin } from "lucide-react";
+import { ArrowUpRight, Menu, X, MapPin, Sun, Moon } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 import { WhatsAppIcon } from "@/components/SocialIcons";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { language, toggleLanguage, theme, toggleTheme, t } = usePortfolio();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -41,11 +43,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const currentActiveSection = pathname === "/work" ? "work" : activeSection;
+  const currentActiveSection =
+    pathname === "/work"
+      ? "work"
+      : pathname === "/services"
+      ? "services"
+      : activeSection;
 
   // Active section observer
   useEffect(() => {
-    if (pathname === "/work") return;
+    if (pathname === "/work" || pathname === "/services") return;
 
     const sectionIds = ["home", "work", "services", "why-me", "workflow", "about", "experience", "stack", "contact"];
     const handleScrollActive = () => {
@@ -93,13 +100,13 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: "Work", href: "/#work", id: "work" },
-    { label: "Services", href: "/#services", id: "services" },
-    { label: "Why Me", href: "/#why-me", id: "why-me" },
-    { label: "About", href: "/#about", id: "about" },
-    { label: "Experience", href: "/#experience", id: "experience" },
-    { label: "Stack", href: "/#stack", id: "stack" },
-    { label: "Contact", href: "/#contact", id: "contact" },
+    { label: t.navbar.work, href: "/#work", id: "work" },
+    { label: t.navbar.services, href: "/#services", id: "services" },
+    { label: t.navbar.whyMe, href: "/#why-me", id: "why-me" },
+    { label: t.navbar.about, href: "/#about", id: "about" },
+    { label: t.navbar.experience, href: "/#experience", id: "experience" },
+    { label: t.navbar.stack, href: "/#stack", id: "stack" },
+    { label: t.navbar.contact, href: "/#contact", id: "contact" },
   ];
 
   return (
@@ -134,21 +141,21 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <ul className="hidden lg:flex items-center gap-1 xl:gap-1.5">
+            <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
               {navLinks.map((link) => {
                 const isActive = currentActiveSection === link.id;
                 return (
-                  <li key={link.label}>
+                  <li key={link.id} className="shrink-0">
                     <Link
                       href={link.href}
                       aria-current={isActive ? "page" : undefined}
-                      className={`group relative px-3 py-1.5 rounded-full font-mono text-[11px] xl:text-[12px] tracking-[0.14em] uppercase transition-all duration-300 ease-out focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] select-none block ${
+                      className={`group relative px-2.5 xl:px-3 py-1.5 rounded-full font-mono text-[11px] xl:text-[12px] tracking-[0.12em] uppercase transition-all duration-300 ease-out focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] select-none whitespace-nowrap inline-flex items-center justify-center ${
                         isActive
                           ? "text-[#38BDF8] font-semibold drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]"
                           : "text-[#CBD5E1] hover:text-white"
                       }`}
                     >
-                      <span className="relative z-10">{link.label}</span>
+                      <span className="relative z-10 whitespace-nowrap">{link.label}</span>
 
                       {/* Ambient hover & active background glass pill aura */}
                       <span
@@ -175,12 +182,40 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* Right: Location & Time + CTA & Mobile Toggle */}
-            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            {/* Right: Location & Time + Language & Theme Toggles + CTA & Mobile Toggle */}
+            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+              {/* Language Switcher (EN / हिंदी) */}
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                aria-label={`Switch language to ${language === "en" ? "Hindi" : "English"}`}
+                title={`Switch language (${language === "en" ? "हिंदी" : "EN"})`}
+                className="inline-flex items-center gap-1 h-8 sm:h-9 px-2.5 sm:px-3 rounded-full bg-[#0D1D3A]/80 border border-[#1E3A5F] hover:border-[#38BDF8]/60 text-white font-mono text-[11px] font-semibold tracking-wider transition-all duration-200 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
+              >
+                <span className={language === "en" ? "text-[#38BDF8] font-bold" : "text-[#94A3B8]"}>EN</span>
+                <span className="text-[#38BDF8]/40 text-[10px]">/</span>
+                <span className={language === "hi" ? "text-[#38BDF8] font-bold" : "text-[#94A3B8]"}>हिंदी</span>
+              </button>
+
+              {/* Theme Toggle (Dark / Light Mode) */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={`Switch to ${theme === "dark" ? "Light" : "Dark"} mode`}
+                title={`Switch to ${theme === "dark" ? "Light Mode" : "Dark Mode"}`}
+                className="size-8 sm:size-9 inline-flex items-center justify-center rounded-full bg-[#0D1D3A]/80 border border-[#1E3A5F] hover:border-[#38BDF8]/60 text-[#38BDF8] hover:text-white transition-all duration-200 hover:shadow-[0_0_12px_rgba(56,189,248,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
+              >
+                {theme === "dark" ? (
+                  <Sun className="size-4 text-[#38BDF8] transition-transform duration-300 hover:rotate-45" />
+                ) : (
+                  <Moon className="size-4 text-[#0284C7] transition-transform duration-300 hover:-rotate-12" />
+                )}
+              </button>
+
               {/* Subtle Location & Local Time pill */}
               <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0D1D3A]/70 border border-[#1E3A5F] font-mono text-[11px] tracking-wider text-[#94A3B8]">
                 <MapPin className="w-3 h-3 text-[#38BDF8]" />
-                <span className="text-white font-medium">NASHIK, IN</span>
+                <span className="text-white font-medium">{t.navbar.location}</span>
                 <span className="text-[#38BDF8]/40">•</span>
                 <span className="text-[#38BDF8] font-bold">{istTime || "IST"}</span>
               </div>
@@ -192,23 +227,23 @@ export default function Navbar() {
                 rel="noopener noreferrer"
                 title={`Chat on WhatsApp (+91 ${DEVELOPER_INFO.whatsappNumber})`}
                 aria-label="Chat directly on WhatsApp"
-                className="hidden sm:inline-flex items-center justify-center size-9 sm:size-10 rounded-full border border-[#25D366]/40 bg-[#07152F] text-[#25D366] hover:bg-[#25D366]/20 hover:border-[#25D366] transition-all duration-300 shadow-[0_0_12px_rgba(37,211,102,0.2)] hover:shadow-[0_0_20px_rgba(37,211,102,0.45)] hover:-translate-y-0.5"
+                className="hidden sm:inline-flex items-center justify-center size-8 sm:size-8.5 xl:size-9 rounded-full border border-[#25D366]/40 bg-[#07152F] text-[#25D366] hover:bg-[#25D366]/20 hover:border-[#25D366] transition-all duration-300 shadow-[0_0_12px_rgba(37,211,102,0.2)] hover:shadow-[0_0_18px_rgba(37,211,102,0.4)] hover:-translate-y-0.5 shrink-0"
               >
-                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                <WhatsAppIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#25D366]" />
               </a>
 
               {/* Primary Navbar CTA: START A PROJECT */}
               <Link
                 href="/#contact"
-                className="hidden sm:inline-flex relative overflow-hidden items-center justify-center gap-2 h-9 sm:h-10 px-4 sm:px-5 rounded-full bg-[#0067FE] text-white font-mono text-[11px] xl:text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-300 ease-out hover:bg-[#0056EE] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] shadow-[0_2px_14px_rgba(0,103,254,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:shadow-[0_0_24px_rgba(0,103,254,0.65)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
+                className="hidden sm:inline-flex relative overflow-hidden items-center justify-center gap-1.5 h-8 sm:h-8.5 xl:h-9 px-3 sm:px-4 xl:px-4.5 rounded-full bg-[#0067FE] text-white font-mono text-[11px] xl:text-[11.5px] font-semibold tracking-[0.1em] uppercase whitespace-nowrap shrink-0 transition-all duration-300 ease-out hover:bg-[#0056EE] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] shadow-[0_2px_12px_rgba(0,103,254,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:shadow-[0_0_20px_rgba(0,103,254,0.6)] group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8]"
               >
                 {/* Specular shimmer */}
                 <span
                   className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none motion-reduce:hidden"
                   aria-hidden="true"
                 />
-                <span className="relative z-10">START A PROJECT</span>
-                <ArrowUpRight className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span className="relative z-10 whitespace-nowrap">{t.navbar.startProject}</span>
+                <ArrowUpRight className="relative z-10 w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
               {/* Mobile Menu Button */}
@@ -277,6 +312,33 @@ export default function Navbar() {
               );
             })}
           </nav>
+          {/* Mobile Drawer Language & Theme Quick Switcher */}
+          <div className="flex items-center justify-between p-2 rounded-xl bg-[#0D1D3A]/60 border border-[#1E3A5F]/70">
+            <span className="font-mono text-xs uppercase tracking-wider text-[#94A3B8] px-2">
+              {language === "hi" ? "प्राथमिकताएं" : "PREFERENCES"}
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#07152F] border border-[#1E3A5F] text-xs font-mono font-semibold"
+                aria-label="Toggle language"
+              >
+                <span className={language === "en" ? "text-[#38BDF8] font-bold" : "text-[#94A3B8]"}>EN</span>
+                <span className="text-[#38BDF8]/40">/</span>
+                <span className={language === "hi" ? "text-[#38BDF8] font-bold" : "text-[#94A3B8]"}>हिंदी</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="size-8 inline-flex items-center justify-center rounded-lg bg-[#07152F] border border-[#1E3A5F] text-[#38BDF8]"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun className="size-4 text-[#38BDF8]" /> : <Moon className="size-4 text-[#0284C7]" />}
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Mobile Menu Footer CTA */}
@@ -287,7 +349,7 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#0067FE] text-white font-mono text-xs font-bold tracking-wider uppercase hover:bg-[#0056EE] transition-all shadow-[0_4px_16px_rgba(0,103,254,0.4)]"
             >
-              <span>START A PROJECT</span>
+              <span>{t.navbar.startProject}</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
 

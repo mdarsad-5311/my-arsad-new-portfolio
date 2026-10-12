@@ -1,21 +1,22 @@
 "use client";
 
 import React, { useState } from "react";
-import { TECHNOLOGIES } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { Layers, Terminal, Database, Cloud } from "lucide-react";
 
 export default function StackSection() {
+  const { technologies, t } = usePortfolio();
   const [selectedTech, setSelectedTech] = useState<string>("React");
 
   const categories = [
-    { name: "Frontend", icon: Layers },
-    { name: "Backend", icon: Terminal },
-    { name: "Database", icon: Database },
-    { name: "DevOps & Tools", icon: Cloud },
+    { name: "Frontend", label: t.stack.categoryFrontend, icon: Layers },
+    { name: "Backend", label: t.stack.categoryBackend, icon: Terminal },
+    { name: "Database", label: t.stack.categoryDatabase, icon: Database },
+    { name: "DevOps & Tools", label: t.stack.categoryDevOps, icon: Cloud },
   ] as const;
 
   const currentTechObj =
-    TECHNOLOGIES.find((t) => t.name === selectedTech) || TECHNOLOGIES[0];
+    technologies.find((tech) => tech.name === selectedTech) || technologies[0];
 
   return (
     <section
@@ -49,22 +50,21 @@ export default function StackSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                08 —
+                {t.stack.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Technical Arsenal
+                {t.stack.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
-              STACK &amp; TOOLS
+              {t.stack.title}
             </h2>
           </div>
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Hover or click on any technology to inspect architectural usage, experience
-              duration, and production deployment roles.
+              {t.stack.description}
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function StackSection() {
           {/* Left Column: Categorized Technology Matrix */}
           <div className="lg:col-span-7 flex flex-col gap-10">
             {categories.map((cat) => {
-              const items = TECHNOLOGIES.filter((t) => t.category === cat.name);
+              const items = technologies.filter((item) => item.category === cat.name);
               const Icon = cat.icon;
 
               return (
@@ -83,7 +83,7 @@ export default function StackSection() {
                   <div className="flex items-center justify-between pb-2.5 border-b border-[#1E3A5F]/60 font-mono text-xs uppercase tracking-widest text-white">
                     <div className="flex items-center gap-2.5">
                       <Icon className="w-3.5 h-3.5 text-[#38BDF8]" />
-                      <span className="font-bold">{cat.name}</span>
+                      <span className="font-bold">{cat.label}</span>
                     </div>
                     <span className="text-[#64748B] text-[11px] font-medium">
                       {items.length} {items.length === 1 ? "TOOL" : "TOOLS"}
@@ -132,7 +132,7 @@ export default function StackSection() {
               <div className="flex items-center justify-between pb-4 border-b border-[#1E3A5F]/60">
                 <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#38BDF8]">
                   <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse" />
-                  <span className="font-bold">Technical Inspector</span>
+                  <span className="font-bold">{t.stack.inspectorTitle}</span>
                 </div>
                 <span className="font-mono text-xs bg-[#001033] border border-[#1E3A5F] px-2.5 py-0.5 text-[#38BDF8] font-bold rounded">
                   {currentTechObj.category}
@@ -144,7 +144,7 @@ export default function StackSection() {
                 {/* 1. TECHNOLOGY */}
                 <div className="flex flex-col gap-1.5">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
-                    TECHNOLOGY
+                    {t.stack.techCategory}
                   </span>
                   <div className="flex items-baseline justify-between gap-2">
                     <h3 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white">
@@ -159,7 +159,7 @@ export default function StackSection() {
                 {/* 2. ROLE */}
                 <div className="pt-4 flex flex-col gap-1.5">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
-                    ROLE
+                    {t.stack.architectureRole}
                   </span>
                   <p className="font-mono text-sm text-[#38BDF8] font-semibold">
                     {currentTechObj.role}
@@ -172,7 +172,7 @@ export default function StackSection() {
                 {/* 3. WHERE IT IS USED */}
                 <div className="pt-4 flex flex-col gap-1.5">
                   <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">
-                    WHERE IT IS USED
+                    {t.stack.implementationContext}
                   </span>
                   <p className="font-mono text-xs sm:text-sm text-white font-medium bg-[#001033] p-3 rounded-lg border border-[#1E3A5F]">
                     {currentTechObj.whereUsed || "Production web applications & full-stack systems"}
@@ -184,9 +184,9 @@ export default function StackSection() {
               <div className="pt-4 border-t border-[#1E3A5F]/50 font-mono text-[11px] text-[#94A3B8] flex items-center justify-between">
                 <span className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
-                  Production Ready
+                  {t.stack.status}
                 </span>
-                <span className="text-[#38BDF8] font-bold">Verified In Codebase</span>
+                <span className="text-[#38BDF8] font-bold">{t.stack.verifiedProduction}</span>
               </div>
             </div>
           </div>

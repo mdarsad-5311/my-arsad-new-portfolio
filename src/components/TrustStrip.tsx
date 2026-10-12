@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import { TRUST_STRIP_ITEMS, TRUST_TECHNOLOGIES } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function TrustStrip() {
+  const { t } = usePortfolio();
+
   return (
     <section
       aria-label="Credibility and Core Stack"
@@ -34,7 +39,7 @@ export default function TrustStrip() {
                 {item.highlight && (
                   <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
                 )}
-                <span>{item.label}</span>
+                <span>{t.trustStrip.items[idx] || item.label}</span>
               </div>
               {idx < TRUST_STRIP_ITEMS.length - 1 && (
                 <span
@@ -54,8 +59,8 @@ export default function TrustStrip() {
       {/* Slow-Moving Technology Marquee */}
       <div className="relative py-4 sm:py-5 overflow-hidden flex items-center group/marquee">
         {/* Left & Right Edge Gradient Fade */}
-        <div className="absolute left-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-r from-[#00091E] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-l from-[#00091E] to-transparent z-10 pointer-events-none" />
+        <div className="trust-strip-fade-left absolute left-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-r from-[#00091E] to-transparent z-10 pointer-events-none" />
+        <div className="trust-strip-fade-right absolute right-0 inset-y-0 w-16 sm:w-28 bg-gradient-to-l from-[#00091E] to-transparent z-10 pointer-events-none" />
 
         <div className="animate-marquee flex items-center select-none">
           {/* Primary Track */}

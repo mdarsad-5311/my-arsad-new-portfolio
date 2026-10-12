@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { FAQS } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { Plus, Minus } from "lucide-react";
 
 export default function FaqSection() {
+  const { faqs, t } = usePortfolio();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFaq = (idx: number) => {
@@ -43,29 +44,28 @@ export default function FaqSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                11 —
+                {t.faq.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Inquiries &amp; Process
+                {t.faq.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
-              FREQUENTLY ASKED
+              {t.faq.title}
             </h2>
           </div>
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Transparent answers regarding architectural workflow, technical stack synergies,
-              communication protocols, and project onboarding.
+              {t.faq.description}
             </p>
           </div>
         </div>
 
         {/* Accordion List with Premium Dark Architectural Cards */}
         <div className="mt-10 sm:mt-12 flex flex-col gap-4">
-          {FAQS.map((faq, index) => {
+          {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             const answerId = `faq-answer-${faq.number}`;
             const questionId = `faq-question-${faq.number}`;

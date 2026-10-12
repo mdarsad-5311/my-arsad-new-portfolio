@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, GitBranch, Compass } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, Compass } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function Footer() {
+  const { t } = usePortfolio();
   const [istTime, setIstTime] = useState<string>("");
 
   useEffect(() => {
@@ -33,15 +35,15 @@ export default function Footer() {
   };
 
   const navLinks = [
-    { label: "Work", href: "/#work" },
-    { label: "Services", href: "/#services" },
-    { label: "Why Me", href: "/#why-me" },
-    { label: "How I Work", href: "/#workflow" },
-    { label: "About", href: "/#about" },
-    { label: "Experience", href: "/#experience" },
-    { label: "Stack", href: "/#stack" },
-    { label: "FAQ", href: "/#faq" },
-    { label: "Contact", href: "/#contact" },
+    { label: t.navbar.work, href: "/#work" },
+    { label: t.navbar.services, href: "/#services" },
+    { label: t.navbar.whyMe, href: "/#why-me" },
+    { label: t.navbar.howIWork, href: "/#workflow" },
+    { label: t.navbar.about, href: "/#about" },
+    { label: t.navbar.experience, href: "/#experience" },
+    { label: t.navbar.stack, href: "/#stack" },
+    { label: t.navbar.faq, href: "/#faq" },
+    { label: t.navbar.contact, href: "/#contact" },
   ];
 
   return (
@@ -83,10 +85,10 @@ export default function Footer() {
         <div className="mb-16 p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#001D4D]/70 via-[#07152F]/70 to-[#001238]/70 border border-[#00F0FF]/35 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_0_30px_rgba(0,240,255,0.15),0_8px_32px_rgba(0,0,0,0.5),inset_0_0_15px_rgba(0,240,255,0.08)]">
           <div>
             <span className="font-mono text-xs uppercase tracking-widest text-[#00F0FF] font-bold block mb-1">
-              Have a project in mind?
+              {t.footer.ctaSubtitle}
             </span>
             <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-tight text-white">
-              LET&apos;S TALK ABOUT YOUR GOALS.
+              {t.footer.ctaTitle}
             </h3>
           </div>
 
@@ -94,7 +96,7 @@ export default function Footer() {
             href="/#contact"
             className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-300 shadow-[0_4px_20px_rgba(0,103,254,0.4)] shrink-0 group"
           >
-            <span>LET&apos;S TALK</span>
+            <span>{t.footer.ctaButton}</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
@@ -116,7 +118,7 @@ export default function Footer() {
             </h2>
 
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Full-stack engineer building scalable websites, SaaS platforms, dashboards, and custom digital systems for modern businesses worldwide.
+              {t.footer.description}
             </p>
           </div>
 
@@ -140,7 +142,7 @@ export default function Footer() {
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#001033] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#38BDF8] hover:text-white font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 rounded-lg shadow-sm"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>RESUME (CV)</span>
+                <span>{t.footer.resume}</span>
               </a>
             )}
 
@@ -160,31 +162,31 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col justify-between gap-6">
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold block mb-4">
-                Telemetry &amp; Status
+                {t.footer.telemetryStatus}
               </span>
 
               <div className="space-y-3">
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <Clock className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                  <span>IST (INDIA):</span>
+                  <span>{t.footer.istIndia}</span>
                   <span className="text-[#38BDF8] font-bold">{istTime || "12:00:00 PM"}</span>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <MapPin className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                  <span>LOCATION:</span>
+                  <span>{t.footer.locationHeading}</span>
                   <span className="text-white font-semibold">{DEVELOPER_INFO.location}</span>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <Compass className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                  <span>COORDINATES:</span>
+                  <span>{t.footer.coordinatesHeading}</span>
                   <span className="text-[#38BDF8] font-mono font-semibold">{DEVELOPER_INFO.coordinates.display}</span>
                 </div>
 
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <Globe className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                  <span>AVAILABILITY:</span>
+                  <span>{t.footer.availabilityHeading}</span>
                   <span className="text-[#38BDF8] font-semibold">{DEVELOPER_INFO.availability}</span>
                 </div>
               </div>
@@ -199,7 +201,7 @@ export default function Footer() {
           {/* Column 2: Quick Navigation (Span 4) */}
           <div className="lg:col-span-4">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold block mb-4">
-              Navigation
+              {t.footer.navigationHeading}
             </span>
             <div className="grid grid-cols-2 gap-2.5">
               {navLinks.map((link) => (
@@ -217,7 +219,7 @@ export default function Footer() {
           {/* Column 3: Networks & Direct Channels (Span 4) */}
           <div className="lg:col-span-4 flex flex-col gap-3">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold block mb-1">
-              External Channels &amp; Code
+              {t.footer.externalChannels}
             </span>
 
             {/* WhatsApp Direct */}
@@ -234,9 +236,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <div className="font-bold text-white tracking-wider flex items-center gap-2">
-                    <span>WHATSAPP DIRECT</span>
+                    <span>{t.footer.whatsappDirect}</span>
                     <span className="text-[10px] text-[#25D366] font-mono font-normal uppercase bg-[#25D366]/10 px-1.5 py-0.5 rounded border border-[#25D366]/20">
-                      INSTANT
+                      {t.footer.instant}
                     </span>
                   </div>
                   <div className="text-[11px] text-[#25D366] font-mono">
@@ -260,31 +262,9 @@ export default function Footer() {
                   <GithubIcon className="w-4 h-4 text-[#38BDF8]" />
                 </div>
                 <div>
-                  <div className="font-bold text-white tracking-wider">GITHUB PROFILE</div>
+                  <div className="font-bold text-white tracking-wider">{t.footer.githubProfile}</div>
                   <div className="text-[11px] text-[#38BDF8] font-mono lowercase">
                     @{DEVELOPER_INFO.githubUsername}
-                  </div>
-                </div>
-              </div>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#94A3B8] group-hover:text-[#38BDF8] transition-colors" />
-            </a>
-
-            {/* This Project's GitHub Repository */}
-            <a
-              href={DEVELOPER_INFO.projectRepo}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View this portfolio project repository on GitHub: ${DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio (opens in a new tab)`}
-              className="group flex items-center justify-between p-3 rounded-lg bg-[#07152F] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#CBD5E1] hover:text-white transition-all duration-200"
-            >
-              <div className="flex items-center gap-3">
-                <div className="p-1.5 rounded bg-[#001033] border border-[#1E3A5F] group-hover:border-[#38BDF8]/40 transition-colors">
-                  <GitBranch className="w-4 h-4 text-[#38BDF8]" />
-                </div>
-                <div>
-                  <div className="font-bold text-white tracking-wider">THIS PROJECT REPO</div>
-                  <div className="text-[11px] text-[#94A3B8] font-mono">
-                    {DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio
                   </div>
                 </div>
               </div>
@@ -304,7 +284,7 @@ export default function Footer() {
                   <LinkedinIcon className="w-4 h-4 text-[#38BDF8]" />
                 </div>
                 <div>
-                  <div className="font-bold text-white tracking-wider">LINKEDIN NETWORK</div>
+                  <div className="font-bold text-white tracking-wider">{t.footer.linkedinNetwork}</div>
                   <div className="text-[11px] text-[#94A3B8] font-mono">
                     in/{DEVELOPER_INFO.githubUsername}
                   </div>
@@ -315,30 +295,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright, Project Repo & Back to Top */}
+        {/* Bottom Bar: Copyright & Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#94A3B8]">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1.5 text-center sm:text-left">
-            <span>© {new Date().getFullYear()} {DEVELOPER_INFO.name}. All rights reserved.</span>
-            <span className="hidden sm:inline text-[#1E3A5F]">•</span>
-            <a
-              href={DEVELOPER_INFO.projectRepo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors inline-flex items-center gap-1.5"
-              aria-label="View portfolio source code on GitHub"
-            >
-              <GitBranch className="w-3.5 h-3.5 text-[#38BDF8]" />
-              <span>Project on GitHub: <span className="text-[#38BDF8] font-semibold">{DEVELOPER_INFO.githubUsername}/my-arsad-new-portfolio</span></span>
-            </a>
+            <span>© {new Date().getFullYear()} {DEVELOPER_INFO.name}. {t.footer.allRightsReserved}</span>
           </div>
 
           <button
             type="button"
             onClick={scrollToTop}
-            className="inline-flex items-center gap-2 hover:text-[#38BDF8] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] rounded-sm"
+            className="inline-flex items-center gap-2 hover:text-[#38BDF8] transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-[#38BDF8] rounded-sm cursor-pointer"
             aria-label="Back to top of page"
           >
-            <span>BACK TO TOP</span>
+            <span>{t.footer.backToTop}</span>
             <ArrowUp className="w-3.5 h-3.5 text-[#38BDF8]" />
           </button>
         </div>

@@ -1,7 +1,11 @@
+"use client";
+
 import React from "react";
-import { EXPERIENCES } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function ExperienceSection() {
+  const { experiences, t } = usePortfolio();
+
   return (
     <section
       id="experience"
@@ -34,21 +38,21 @@ export default function ExperienceSection() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                07 —
+                {t.experience.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Career &amp; Technical Development
+                {t.experience.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-tight">
-              EXPERIENCE &amp; DEVELOPMENT
+              {t.experience.title}
             </h2>
           </div>
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#94A3B8] leading-relaxed">
-              Core development focus areas across full-stack systems, modern component architecture, and production-grade RESTful API integrations.
+              {t.experience.description}
             </p>
           </div>
         </div>
@@ -62,7 +66,7 @@ export default function ExperienceSection() {
           />
 
           <div className="flex flex-col gap-10 sm:gap-14">
-            {EXPERIENCES.map((exp, index) => (
+            {experiences.map((exp, index) => (
               <div
                 key={exp.period}
                 className="group relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start p-6 sm:p-8 rounded-2xl bg-[#0D1D3A]/40 border border-[#1E3A5F]/60 hover:border-[#38BDF8]/60 hover:bg-[#0D1D3A]/80 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
@@ -106,7 +110,7 @@ export default function ExperienceSection() {
                       </span>
                       <span className="text-[#64748B] font-mono text-xs">•</span>
                       <span className="font-mono text-xs text-[#94A3B8]">
-                        Technical Execution
+                        {t.experience.coreFocus}
                       </span>
                     </div>
                   </div>
@@ -119,7 +123,7 @@ export default function ExperienceSection() {
                   {/* Bullet Highlights */}
                   <div className="pt-4 border-t border-[#1E3A5F]/40">
                     <span className="font-mono text-[11px] uppercase tracking-widest text-[#38BDF8] font-bold block mb-3">
-                      Key Engineering Responsibilities:
+                      {t.experience.keyDeliverables}:
                     </span>
                     <ul className="space-y-2.5 font-mono text-xs sm:text-[13px] text-[#CBD5E1]">
                       {exp.highlights.map((highlight) => (

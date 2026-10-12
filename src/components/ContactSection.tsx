@@ -5,8 +5,11 @@ import { ArrowUpRight, CheckCircle2, AlertCircle, Loader2, Mail, MapPin, Globe, 
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
 import LocationCard from "@/components/LocationCard";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function ContactSection() {
+  const { t } = usePortfolio();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -73,17 +76,17 @@ export default function ContactSection() {
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) {
-      newErrors.name = "Please enter your name.";
+      newErrors.name = t.contact.validation.nameRequired;
     }
     if (!formData.email.trim()) {
-      newErrors.email = "Please enter your email address.";
+      newErrors.email = t.contact.validation.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
+      newErrors.email = t.contact.validation.emailInvalid;
     }
     if (!formData.message.trim()) {
-      newErrors.message = "Please share details regarding your project.";
+      newErrors.message = t.contact.validation.messageRequired;
     } else if (formData.message.trim().length < 15) {
-      newErrors.message = "Please provide a few more details (minimum 15 characters).";
+      newErrors.message = t.contact.validation.messageMinLength;
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -129,7 +132,7 @@ export default function ContactSection() {
           const formspreeError = data.errors.map((err: { field?: string; message?: string }) => err.message).filter(Boolean).join(". ");
           throw new Error(formspreeError || "Failed to submit form to Formspree.");
         }
-        throw new Error(data.error || "Something went wrong. Please reach out directly via email.");
+        throw new Error(data.error || "Failed to submit form to Formspree.");
       }
 
       setSubmittedBrief({ ...formData });
@@ -145,7 +148,7 @@ export default function ContactSection() {
       });
       setErrors({});
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Something went wrong. Please reach out directly via email.";
+      const msg = err instanceof Error ? err.message : "An error occurred while submitting. Please try again or email directly.";
       setErrorMessage(msg);
     } finally {
       setIsSubmitting(false);
@@ -187,21 +190,21 @@ export default function ContactSection() {
             </span>
             <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-              Project Initiation
+              {t.contact.sectionCategory}
             </span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
             <div>
               <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white leading-[0.96]">
-                <span className="block">LET&apos;S BUILD</span>
-                <span className="block text-[#38BDF8]">SOMETHING USEFUL.</span>
+                <span className="block">{t.contact.headingLine1}</span>
+                <span className="block text-[#38BDF8]">{t.contact.headingLine2}</span>
               </h2>
             </div>
 
             <div className="max-w-md flex flex-col gap-4">
               <p className="font-body text-base sm:text-lg text-[#CBD5E1] leading-relaxed">
-                Have an idea, product or business problem you want to solve? Let&apos;s talk.
+                {t.contact.subheading}
               </p>
               <div className="flex items-center gap-3 pt-1">
                 <a
@@ -209,7 +212,7 @@ export default function ContactSection() {
                   className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-[#001238] border border-[#1E3A5F] hover:border-[#38BDF8] text-[#38BDF8] hover:text-white hover:bg-[#002060] font-mono text-xs uppercase tracking-wider font-bold transition-all duration-200 rounded-lg shadow-sm"
                 >
                   <Mail className="w-3.5 h-3.5" />
-                  <span>EMAIL DIRECTLY</span>
+                  <span>{t.contact.emailDirectly}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-70" />
                 </a>
               </div>
@@ -224,7 +227,7 @@ export default function ContactSection() {
             <div className="p-6 sm:p-8 bg-[#0D1D3A]/60 border border-[#1E3A5F]/70 rounded-2xl flex flex-col gap-6 shadow-sm">
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/50">
                 <span className="font-mono text-xs uppercase tracking-widest text-[#38BDF8] font-bold">
-                  Direct Channels &amp; Coordinates
+                  {t.contact.directChannels}
                 </span>
                 <span className="inline-block w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse" />
               </div>
@@ -232,7 +235,7 @@ export default function ContactSection() {
               <div className="flex flex-col gap-4 font-mono text-xs">
                 {/* Email Direct */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1">
-                  <span className="text-[10px] text-[#94A3B8] uppercase">Direct Email</span>
+                  <span className="text-[10px] text-[#94A3B8] uppercase">{t.contact.directEmail}</span>
                   <a
                     href={`mailto:${DEVELOPER_INFO.email}`}
                     className="text-white hover:text-[#38BDF8] transition-colors font-semibold text-sm break-all"
@@ -243,7 +246,7 @@ export default function ContactSection() {
 
                 {/* WhatsApp & Direct Line */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1.5 hover:border-[#25D366]/40 transition-colors">
-                  <span className="text-[10px] text-[#94A3B8] uppercase">WhatsApp &amp; Direct Line</span>
+                  <span className="text-[10px] text-[#94A3B8] uppercase">{t.contact.whatsappDirect}</span>
                   <div className="flex items-center justify-between">
                     <a
                       href={DEVELOPER_INFO.whatsapp}
@@ -260,7 +263,7 @@ export default function ContactSection() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-[11px] font-mono text-[#25D366] bg-[#25D366]/10 px-2.5 py-1 rounded-md border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-colors font-semibold"
                     >
-                      <span>CHAT</span>
+                      <span>{t.contact.chatAction}</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
@@ -268,7 +271,7 @@ export default function ContactSection() {
 
                 {/* Location */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
-                  <span className="text-[10px] text-[#94A3B8] uppercase">Location</span>
+                  <span className="text-[10px] text-[#94A3B8] uppercase">{t.contact.location}</span>
                   <span className="text-white font-semibold flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
                     {DEVELOPER_INFO.location} (IST)
@@ -277,19 +280,19 @@ export default function ContactSection() {
 
                 {/* Availability */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
-                  <span className="text-[10px] text-[#94A3B8] uppercase">Availability</span>
+                  <span className="text-[10px] text-[#94A3B8] uppercase">{t.contact.availability}</span>
                   <span className="text-[#38BDF8] font-semibold flex items-center gap-1.5">
                     <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
-                    {DEVELOPER_INFO.availability}
+                    {t.navbar.available}
                   </span>
                 </div>
 
                 {/* Response Time Guarantee */}
                 <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex items-center justify-between">
-                  <span className="text-[10px] text-[#94A3B8] uppercase">Response Time</span>
+                  <span className="text-[10px] text-[#94A3B8] uppercase">{t.contact.responseTime}</span>
                   <span className="text-white font-semibold flex items-center gap-1.5">
                     <Clock className="w-3.5 h-3.5 text-[#38BDF8]" />
-                    Within 24 Hours
+                    {t.contact.responseTimeValue}
                   </span>
                 </div>
               </div>
@@ -341,15 +344,15 @@ export default function ContactSection() {
                   
                   <div>
                     <span className="font-mono text-[11px] uppercase tracking-widest text-[#38BDF8] font-bold block mb-1">
-                      DIRECT INQUIRY DISPATCH
+                      {t.contact.successTag}
                     </span>
                     <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">
-                      ENQUIRY SENT SUCCESSFULLY
+                      {t.contact.successTitle}
                     </h3>
                   </div>
 
                   <p className="font-body text-sm sm:text-base text-[#CBD5E1] max-w-lg leading-relaxed">
-                    Thank you, <span className="text-white font-semibold">{submittedBrief?.name}</span>! Your project brief has been sent to MD Arsad&apos;s personal inbox (<span className="text-[#38BDF8] font-mono text-xs">{DEVELOPER_INFO.email}</span>). Expect a response within 24 hours.
+                    {t.contact.successMessage} (<span className="text-[#38BDF8] font-mono text-xs">{DEVELOPER_INFO.email}</span>)
                   </p>
 
                   <div className="w-full max-w-md flex flex-col gap-3 pt-2">
@@ -358,7 +361,7 @@ export default function ContactSection() {
                       href={mailtoUrl}
                       className="w-full py-3.5 px-5 rounded-xl bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,103,254,0.4)] group"
                     >
-                      <span>OPEN IN EMAIL CLIENT</span>
+                      <span>{t.contact.openInEmail}</span>
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
 
@@ -371,12 +374,12 @@ export default function ContactSection() {
                       {isCopied ? (
                         <>
                           <Check className="w-4 h-4 text-[#38BDF8]" />
-                          <span className="text-[#38BDF8]">BRIEF COPIED TO CLIPBOARD!</span>
+                          <span className="text-[#38BDF8]">{t.contact.briefCopied}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-4 h-4 text-[#94A3B8]" />
-                          <span>COPY BRIEF TO CLIPBOARD</span>
+                          <span>{t.contact.copyBrief}</span>
                         </>
                       )}
                     </button>
@@ -390,7 +393,7 @@ export default function ContactSection() {
                     }}
                     className="mt-2 text-xs font-mono text-[#94A3B8] hover:text-white underline underline-offset-4 transition-colors"
                   >
-                    Edit Details or Submit Another Inquiry
+                    {t.contact.editOrSubmitAnother}
                   </button>
                 </div>
               ) : (
@@ -412,14 +415,14 @@ export default function ContactSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-name" className="text-sm text-[#A8B4C7]">
-                        Name
+                        {t.contact.nameLabel}
                       </label>
                       <input
                         id="contact-name"
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Your name"
+                        placeholder={t.contact.namePlaceholder}
                         className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
                           errors.name
                             ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -436,14 +439,14 @@ export default function ContactSection() {
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-email" className="text-sm text-[#A8B4C7]">
-                        Email
+                        {t.contact.emailLabel}
                       </label>
                       <input
                         id="contact-email"
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="you@company.com"
+                        placeholder={t.contact.emailPlaceholder}
                         className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all ${
                           errors.email
                             ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -463,28 +466,28 @@ export default function ContactSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-phone" className="text-sm text-[#A8B4C7]">
-                        WhatsApp / Phone
+                        {t.contact.phoneLabel}
                       </label>
                       <input
                         id="contact-phone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+91 00000 00000"
+                        placeholder={t.contact.phonePlaceholder}
                         className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-company" className="text-sm text-[#A8B4C7]">
-                        Company / Business
+                        {t.contact.companyLabel}
                       </label>
                       <input
                         id="contact-company"
                         type="text"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder="Optional"
+                        placeholder={t.contact.companyPlaceholder}
                         className="w-full px-4 py-3 rounded-xl bg-[#07152F] border border-[#1E3A5F] text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#38BDF8] focus:ring-1 focus:ring-[#38BDF8]/20 transition-all"
                       />
                     </div>
@@ -494,7 +497,7 @@ export default function ContactSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-project-type" className="text-sm text-[#A8B4C7]">
-                        Project Type
+                        {t.contact.projectTypeLabel}
                       </label>
                       <div className="relative">
                         <select
@@ -515,7 +518,7 @@ export default function ContactSection() {
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="contact-budget" className="text-sm text-[#A8B4C7]">
-                        Budget Range
+                        {t.contact.budgetLabel}
                       </label>
                       <div className="relative">
                         <select
@@ -538,14 +541,14 @@ export default function ContactSection() {
                   {/* Row 4: Project Details */}
                   <div className="flex flex-col gap-2">
                     <label htmlFor="contact-details" className="text-sm text-[#A8B4C7]">
-                      Project Details
+                      {t.contact.detailsLabel}
                     </label>
                     <textarea
                       id="contact-details"
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="What are you building, and what does success look like?"
+                      placeholder={t.contact.detailsPlaceholder}
                       className={`w-full px-4 py-3 rounded-xl bg-[#07152F] border text-white font-body text-sm placeholder:text-[#64748B] focus:outline-none focus:ring-1 transition-all resize-y ${
                         errors.message
                           ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
@@ -576,11 +579,11 @@ export default function ContactSection() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        <span>PROCESSING INQUIRY...</span>
+                        <span>{t.contact.submittingButton}</span>
                       </>
                     ) : (
                       <>
-                        <span>START A PROJECT</span>
+                        <span>{t.contact.submitButton}</span>
                         <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </>
                     )}

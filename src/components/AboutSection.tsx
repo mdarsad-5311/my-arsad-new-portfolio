@@ -1,40 +1,14 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Download, Terminal, Layers, ShieldCheck, Check } from "lucide-react";
-import { DEVELOPER_INFO, COLLABORATION_PRINCIPLES } from "@/data/portfolioData";
+import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { WhatsAppIcon } from "@/components/SocialIcons";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function AboutSection() {
-  const disciplines = [
-    {
-      title: "Frontend Engineering",
-      desc: "Architecting responsive, kinetic user interfaces using React, Next.js, and TypeScript with strict type-safety and accessible semantic markup.",
-    },
-    {
-      title: "Backend Development",
-      desc: "Writing clean, scalable Python and Django server architectures handling complex business logic, asynchronous task queues, and data integrity.",
-    },
-    {
-      title: "API Development",
-      desc: "Building clean, secure, and well-documented REST APIs with Django REST Framework, rate-limiting, token-based auth, and predictable data serialization.",
-    },
-    {
-      title: "Database Integration",
-      desc: "Designing normalized relational databases in PostgreSQL, writing optimized query pipelines, caching frequently requested data with Redis, and handling migrations.",
-    },
-    {
-      title: "Responsive Design",
-      desc: "Translating sophisticated editorial visual hierarchy into fluid layouts that maintain visual balance and impeccable ergonomics across mobile, tablet, and ultra-wide screens.",
-    },
-    {
-      title: "Deployment & DevOps",
-      desc: "Containerizing services via Docker, automating deployments through GitHub Actions, and configuring edge CDN routing on Vercel and cloud VPS providers.",
-    },
-    {
-      title: "Problem Solving",
-      desc: "Approaching engineering challenges from first principles — diagnosing bottlenecks, eliminating dead code, and engineering systems built for long-term maintainability.",
-    },
-  ];
+  const { coreCompetencies, disciplines, collaborationPrinciples, t } = usePortfolio();
 
   return (
     <section
@@ -63,21 +37,20 @@ export default function AboutSection() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold">
-                06 —
+                {t.about.sectionNum}
               </span>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#A8B4C7]">
-                Identity &amp; Philosophy
+                {t.about.sectionCategory}
               </span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white select-none">
-              ABOUT ME
+              {t.about.title}
             </h2>
           </div>
 
           <div className="max-w-md">
             <p className="font-body text-sm sm:text-base text-[#A8B4C7] leading-relaxed md:text-right">
-              Architecting full-stack digital systems with clean syntax, relational data modeling,
-              and resilient component structures built for longevity.
+              {t.about.tagline}
             </p>
           </div>
         </div>
@@ -149,37 +122,37 @@ export default function AboutSection() {
               <div className="flex items-center gap-2 pb-2 border-b border-[#1E3A5F]/60">
                 <Terminal className="w-3.5 h-3.5 text-[#38BDF8]" />
                 <span className="text-xs uppercase tracking-widest text-[#38BDF8] font-bold">
-                  Technical Identity
+                  {t.about.techIdentityHeading}
                 </span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Role</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaRole}</span>
                 <span className="font-bold text-white">{DEVELOPER_INFO.role}</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Location</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaLocation}</span>
                 <span className="font-semibold text-white text-right">{DEVELOPER_INFO.location}</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Coordinates</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaCoordinates}</span>
                 <span className="font-semibold text-[#38BDF8]">{DEVELOPER_INFO.coordinates.display}</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Core Stack</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaCoreStack}</span>
                 <span className="font-semibold text-[#38BDF8]">React • Next.js • Django</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Availability</span>
-                <span className="font-semibold text-white">{DEVELOPER_INFO.availability}</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaAvailability}</span>
+                <span className="font-semibold text-white">{t.navbar.available}</span>
               </div>
 
               <div className="flex items-center justify-between pb-3 border-b border-[#1E3A5F]/40">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">WhatsApp</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaWhatsApp}</span>
                 <a
                   href={DEVELOPER_INFO.whatsapp}
                   target="_blank"
@@ -192,7 +165,7 @@ export default function AboutSection() {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-[#A8B4C7] uppercase text-[11px]">Direct Contact</span>
+                <span className="text-[#A8B4C7] uppercase text-[11px]">{t.about.metaDirectContact}</span>
                 <a
                   href={`mailto:${DEVELOPER_INFO.email}`}
                   className="font-semibold text-[#38BDF8] hover:text-white transition-colors"
@@ -210,7 +183,7 @@ export default function AboutSection() {
               title="Download Resume (CV)"
             >
               <Download className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
-              <span>DOWNLOAD RESUME (CV)</span>
+              <span>{t.about.downloadResume}</span>
             </a>
           </div>
 
@@ -219,27 +192,27 @@ export default function AboutSection() {
             {/* Personal Statement Header */}
             <div>
               <div className="flex items-center gap-3 mb-2 font-mono text-xs uppercase tracking-widest text-[#38BDF8]">
-                <span>ENGINEER IDENTITY</span>
+                <span>{t.about.engineerIdentity}</span>
                 <span className="text-[#38BDF8]/40">•</span>
-                <span>BASED IN NASHIK, MAHARASHTRA (IST)</span>
+                <span>{t.about.basedIn}</span>
               </div>
               <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-tight text-white">
                 MD ARSAD
               </h3>
               <p className="font-mono text-sm sm:text-base text-[#38BDF8] font-bold tracking-wider uppercase mt-1 mb-6">
-                FULL-STACK ENGINEER
+                {t.about.role}
               </p>
 
               <p className="font-display text-xl sm:text-2xl font-medium tracking-tight text-white leading-snug">
-                &ldquo;I build scalable web applications, custom platforms, and robust digital systems for modern businesses.&rdquo;
+                {t.about.quote}
               </p>
 
               <p className="mt-4 font-body text-base text-[#CBD5E1] leading-relaxed">
-                {DEVELOPER_INFO.bio}
+                {t.about.bioParagraph1}
               </p>
 
               <p className="mt-3 font-body text-sm text-[#A8B4C7] leading-relaxed">
-                From relational schema design in PostgreSQL and Python/Django server logic to responsive, kinetic user interfaces in React and Next.js, I take end-to-end ownership of the complete engineering lifecycle.
+                {t.about.bioParagraph2}
               </p>
             </div>
 
@@ -248,12 +221,12 @@ export default function AboutSection() {
               <div className="flex items-center gap-2 mb-6">
                 <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
                 <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-[#38BDF8] font-bold">
-                  Core Technical Capabilities
+                  {t.about.coreCapabilitiesHeading}
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
-                {DEVELOPER_INFO.coreCompetencies.map((item) => (
+                {coreCompetencies.map((item) => (
                   <div
                     key={item}
                     className="flex items-center gap-2.5 p-3 rounded-lg bg-[#0D1D3A]/50 border border-[#1E3A5F] hover:border-[#38BDF8]/50 hover:bg-[#0D1D3A]/80 transition-all duration-300"
@@ -270,7 +243,7 @@ export default function AboutSection() {
               <div className="flex items-center gap-2 mb-6">
                 <Layers className="w-4 h-4 text-[#38BDF8]" />
                 <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-[#38BDF8] font-bold">
-                  Core Disciplines &amp; Architecture Pillars
+                  {t.about.disciplinesHeading}
                 </h3>
               </div>
 
@@ -302,12 +275,12 @@ export default function AboutSection() {
               <div className="flex items-center gap-2 mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#38BDF8]" />
                 <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-[#38BDF8] font-bold">
-                  Engineering Philosophy &amp; Approach
+                  {t.about.philosophyHeading}
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 gap-4">
-                {COLLABORATION_PRINCIPLES.map((principle) => (
+                {collaborationPrinciples.map((principle) => (
                   <div
                     key={principle.id}
                     className="p-5 bg-[#0D1D3A]/50 border-l-2 border-l-[#38BDF8] border-y border-r border-[#1E3A5F] rounded-r-xl hover:bg-[#0D1D3A]/80 transition-all duration-300"

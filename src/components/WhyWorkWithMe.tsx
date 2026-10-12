@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
-import { WHY_WORK_WITH_ME } from "@/data/portfolioData";
 import { Layers, ShieldCheck, MessageSquare, Target, Clock, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function WhyWorkWithMe() {
+  const { whyWorkWithMe, t } = usePortfolio();
+
   const iconMap: Record<string, React.ElementType> = {
     "01": Layers,
     "02": ShieldCheck,
@@ -42,22 +46,22 @@ export default function WhyWorkWithMe() {
           <div className="lg:col-span-5 lg:sticky lg:top-28 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#38BDF8] font-bold">
-                04 —
+                {t.whyWorkWithMe.sectionNum}
               </span>
               <span className="h-px w-6 bg-[#1E3A5F]" aria-hidden="true" />
               <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#94A3B8] font-semibold">
-                Client Advantage
+                {t.whyWorkWithMe.sectionCategory}
               </span>
             </div>
 
             {/* Giant Editorial Statement */}
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-[1.05]">
-              FROM IDEA<br />
-              <span className="text-[#38BDF8]">TO PRODUCTION.</span>
+              {t.whyWorkWithMe.headlinePart1}<br />
+              <span className="text-[#38BDF8]">{t.whyWorkWithMe.headlinePart2}</span>
             </h2>
 
             <p className="font-body text-base text-[#CBD5E1] leading-relaxed">
-              Direct technical execution without layers of agency bureaucracy. Built on verified full-stack capability, clean architectural discipline, and transparent communication.
+              {t.whyWorkWithMe.description}
             </p>
 
             {/* Architectural Trust Points */}
@@ -82,7 +86,7 @@ export default function WhyWorkWithMe() {
                 href="/#contact"
                 className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-[#0067FE] text-white font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#0056EE] transition-all duration-200 shadow-[0_4px_20px_rgba(0,103,254,0.35)] group"
               >
-                <span>DISCUSS YOUR PROJECT</span>
+                <span>{t.whyWorkWithMe.cta}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
@@ -90,7 +94,7 @@ export default function WhyWorkWithMe() {
 
           {/* Right Column: 5 Supporting Reasons in Strong Vertical Rhythm */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            {WHY_WORK_WITH_ME.map((item) => {
+            {whyWorkWithMe.map((item) => {
               const Icon = iconMap[item.number] || ShieldCheck;
 
               return (

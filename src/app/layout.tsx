@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono, Rajdhani, Teko, Poppins } from "next/font/google";
 import { SITE_CONFIG } from "@/data/portfolioData";
 import "./globals.css";
 
@@ -22,6 +22,27 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600"],
+});
+
+const rajdhani = Rajdhani({
+  variable: "--font-rajdhani",
+  subsets: ["devanagari", "latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
+
+const teko = Teko({
+  variable: "--font-teko",
+  subsets: ["devanagari", "latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["devanagari", "latin"],
+  display: "swap",
+  weight: ["600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -93,6 +114,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+import { PortfolioProvider } from "@/context/PortfolioContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -101,22 +124,50 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolageGrotesque.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
+      className={`${bricolageGrotesque.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${rajdhani.variable} ${teko.variable} ${poppins.variable} h-full antialiased scroll-smooth`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var savedTheme = localStorage.getItem('portfolio_theme');
+                  if (savedTheme === 'light') {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                  }
+                  var savedLang = localStorage.getItem('portfolio_language');
+                  if (savedLang === 'hi') {
+                    document.documentElement.lang = 'hi';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#00081C] text-white selection:bg-[#2563EB] selection:text-white relative">
-        {/* Full-Site Neon Cyan & Electric Blue Backlight Atmosphere (From Navbar to Footer) */}
-        <div className="backlight-ambient-container" aria-hidden="true">
-          <div className="backlight-ambient-top" />
-          <div className="backlight-ambient-mid-1" />
-          <div className="backlight-ambient-mid-2" />
-          <div className="backlight-ambient-bottom" />
-        </div>
+        <PortfolioProvider>
+          {/* Full-Site Neon Cyan & Electric Blue Backlight Atmosphere (From Navbar to Footer) */}
+          <div className="backlight-ambient-container" aria-hidden="true">
+            <div className="backlight-ambient-top" />
+            <div className="backlight-ambient-mid-1" />
+            <div className="backlight-ambient-mid-2" />
+            <div className="backlight-ambient-bottom" />
+          </div>
 
-        {/* Page Content Layers */}
-        <div className="relative z-10 flex flex-col min-h-full">
-          {children}
-        </div>
+          {/* Page Content Layers */}
+          <div className="relative z-10 flex flex-col min-h-full">
+            {children}
+          </div>
+        </PortfolioProvider>
       </body>
     </html>
   );
 }
+

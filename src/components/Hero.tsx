@@ -1,10 +1,15 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Download, MapPin } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function Hero() {
+  const { t } = usePortfolio();
+
   return (
     <section
       id="home"
@@ -69,7 +74,7 @@ export default function Hero() {
             </span>
             <span className="text-[#38BDF8]/60 select-none">/</span>
             <span className="text-[#38BDF8] font-bold tracking-[0.2em]">
-              SOFTWARE ENGINEER
+              {t.hero.roleTag}
             </span>
             <span className="hidden md:inline-block text-[#1E3A5F] select-none">/</span>
             <span className="hidden md:inline-flex items-center gap-1.5 text-[#94A3B8] text-xs font-normal tracking-wider normal-case font-body">
@@ -81,10 +86,10 @@ export default function Hero() {
           {/* STEP 2: GIANT TYPOGRAPHIC HEADLINE — "FULL-STACK ENGINEER." */}
           <h1 className="font-display text-[clamp(2.6rem,11vw,9.2rem)] font-bold uppercase leading-[0.88] tracking-[-0.035em] text-white select-none">
             <span className="block hero-animate-fade-2 text-white">
-              FULL-STACK
+              {t.hero.headingLine1}
             </span>
             <span className="block hero-animate-fade-3 text-white">
-              ENGINEER<span className="text-[#38BDF8]">.</span>
+              {t.hero.headingLine2}<span className="text-[#38BDF8]">.</span>
             </span>
           </h1>
 
@@ -93,10 +98,10 @@ export default function Hero() {
             {/* Left: Short Client-Focused Statement */}
             <div className="lg:col-span-7 hero-animate-fade-4 flex flex-col gap-4">
               <p className="font-display text-xl sm:text-2xl lg:text-[28px] font-semibold tracking-tight text-white leading-snug">
-                Building scalable web applications, SaaS platforms, dashboards and custom digital systems for modern businesses.
+                {t.hero.subheading}
               </p>
               <p className="font-body text-sm sm:text-base text-[#94A3B8] max-w-xl leading-relaxed">
-                Specializing in decoupled frontend architectures with Next.js &amp; TypeScript and resilient backend integrations with Python &amp; Django. Focused on architectural clarity, performance, and commercial utility.
+                {t.hero.description}
               </p>
 
               {/* Profiles & Resume */}
@@ -150,7 +155,7 @@ export default function Hero() {
                   href="#contact"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#0067FE] text-white font-mono text-xs sm:text-sm font-bold tracking-[0.14em] uppercase transition-all duration-300 ease-out shadow-[0_4px_24px_rgba(0,103,254,0.45)] hover:bg-[#0056EE] hover:shadow-[0_6px_32px_rgba(0,103,254,0.7)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] rounded-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0067FE]"
                 >
-                  <span>START A PROJECT</span>
+                  <span>{t.hero.ctaPrimary}</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Link>
 
@@ -158,7 +163,7 @@ export default function Hero() {
                   href="#work"
                   className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 sm:py-4 bg-transparent border border-white/80 text-white font-mono text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase transition-all duration-300 ease-out hover:bg-white hover:text-[#00081C] hover:border-white hover:shadow-[0_6px_24px_rgba(56,189,248,0.25)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] rounded-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
-                  <span>VIEW MY WORK</span>
+                  <span>{t.hero.ctaSecondary}</span>
                   <ArrowDown className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-y-1" />
                 </Link>
               </div>
@@ -171,19 +176,23 @@ export default function Hero() {
                     NASHIK, MH &bull; WORLDWIDE
                   </span>
                   <span className="text-[#38BDF8] text-[11px] font-medium tracking-widest uppercase">
-                    REMOTE COLLABORATION
+                    {t.hero.remoteBadge}
                   </span>
                 </div>
 
                 {/* 3 Pillars */}
                 <div className="grid grid-cols-3 gap-2.5 pt-1 text-[11px]">
-                  {DEVELOPER_INFO.heroPillars.map((pillar) => (
+                  {DEVELOPER_INFO.heroPillars.map((pillar, idx) => (
                     <div
                       key={pillar.label}
                       className="border-l border-[#1E3A5F] pl-2.5 py-0.5 hover:border-[#38BDF8] transition-colors"
                     >
                       <span className="text-[#38BDF8] font-bold block uppercase text-[10px] tracking-wider">
-                        {pillar.label}
+                        {idx === 0
+                          ? t.hero.pillars.frontend
+                          : idx === 1
+                          ? t.hero.pillars.backend
+                          : t.hero.pillars.systems}
                       </span>
                       <span className="text-[#94A3B8] block text-[10px] truncate mt-0.5">
                         {pillar.tech.split("/")[0]}
@@ -208,7 +217,7 @@ export default function Hero() {
                   style={{ animation: "heroScrollDot 1.8s ease-in-out infinite" }}
                 />
               </div>
-              <span className="font-medium tracking-[0.2em]">SCROLL TO EXPLORE</span>
+              <span className="font-medium tracking-[0.2em]">{t.hero.scrollPrompt}</span>
               <ArrowDown className="w-3 h-3 text-[#38BDF8] transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
           </div>

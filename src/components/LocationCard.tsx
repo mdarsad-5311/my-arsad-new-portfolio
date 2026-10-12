@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Compass, Globe, ExternalLink, Radio } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
+import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function LocationCard() {
+  const { t } = usePortfolio();
   const [istTime, setIstTime] = useState<string>("");
   const [visitorTime, setVisitorTime] = useState<string>("");
   const [visitorTz, setVisitorTz] = useState<string>("");
@@ -55,18 +57,18 @@ export default function LocationCard() {
         const diffHours = diffMinutes / 60;
 
         if (Math.abs(diffHours) < 0.25) {
-          setTimeDiffText("Same timezone as you");
+          setTimeDiffText(t.locationCard.sameTimezone);
         } else if (diffHours > 0) {
           const absH = Math.floor(diffHours);
           const absM = Math.round((diffHours - absH) * 60);
           const timeStr = absM > 0 ? `${absH}h ${absM}m` : `${absH}h`;
-          setTimeDiffText(`You are ${timeStr} ahead of IST`);
+          setTimeDiffText(`${timeStr} ${t.locationCard.aheadIST}`);
         } else {
           const posHours = Math.abs(diffHours);
           const absH = Math.floor(posHours);
           const absM = Math.round((posHours - absH) * 60);
           const timeStr = absM > 0 ? `${absH}h ${absM}m` : `${absH}h`;
-          setTimeDiffText(`You are ${timeStr} behind IST`);
+          setTimeDiffText(`${timeStr} ${t.locationCard.behindIST}`);
         }
       } catch {
         setTimeDiffText("Global Remote Collaboration");
@@ -76,7 +78,7 @@ export default function LocationCard() {
     updateTimes();
     const interval = setInterval(updateTimes, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [t]);
 
   return (
     <div className="p-6 sm:p-7 bg-[#0D1D3A]/60 border border-[#1E3A5F]/80 rounded-2xl flex flex-col gap-6 shadow-sm relative overflow-hidden backdrop-blur-sm group hover:border-[#38BDF8]/40 transition-all duration-300">
@@ -91,7 +93,7 @@ export default function LocationCard() {
         <div className="flex items-center gap-2">
           <Radio className="w-3.5 h-3.5 text-[#38BDF8] animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#38BDF8] font-bold">
-            Location &amp; Radar Telemetry
+            {t.locationCard.liveTelemetry}
           </span>
         </div>
         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono tracking-wider uppercase bg-[#001238] border border-[#1E3A5F] text-[#CBD5E1]">
@@ -100,7 +102,7 @@ export default function LocationCard() {
               isWorkingHours ? "bg-emerald-400 animate-pulse" : "bg-[#38BDF8]"
             }`}
           />
-          {isWorkingHours ? "ACTIVE NOW" : "STANDBY (IST)"}
+          {isWorkingHours ? t.locationCard.statusActive : t.locationCard.statusOffHours}
         </span>
       </div>
 
@@ -194,8 +196,8 @@ export default function LocationCard() {
         <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1">
           <div className="flex items-center justify-between text-[#94A3B8]">
             <span className="text-[10px] uppercase flex items-center gap-1">
-              <Clock className="w-3 h-3 text-[#38BDF8]" />
-              Local Time (IST)
+              <Clock className="w-3.5 h-3.5 text-[#38BDF8]" />
+              {t.locationCard.localTime}
             </span>
             <span className="text-[9px] text-[#38BDF8] font-bold">UTC+5:30</span>
           </div>
@@ -203,7 +205,7 @@ export default function LocationCard() {
             {istTime || "Loading..."}
           </span>
           <span className="text-[10px] text-[#94A3B8]">
-            {isWorkingHours ? "Standard Active Business Hours" : "Off-Hours • Async Responses Active"}
+            {isWorkingHours ? t.locationCard.activeWindow : t.locationCard.statusOffHours}
           </span>
         </div>
 
@@ -211,8 +213,8 @@ export default function LocationCard() {
         <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-1">
           <div className="flex items-center justify-between text-[#94A3B8]">
             <span className="text-[10px] uppercase flex items-center gap-1">
-              <Globe className="w-3 h-3 text-[#38BDF8]" />
-              Your Local Time
+              <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
+              {t.locationCard.yourTime}
             </span>
             <span className="text-[9px] text-[#94A3B8] truncate max-w-[90px]">
               {visitorTz ? visitorTz.split("/").pop()?.replace(/_/g, " ") : "Local"}
@@ -230,13 +232,13 @@ export default function LocationCard() {
       {/* Geolocation Telemetry Breakdown */}
       <div className="p-3.5 rounded-xl bg-[#07152F] border border-[#1E3A5F] flex flex-col gap-2.5 font-mono text-xs">
         <div className="flex items-center justify-between pb-2 border-b border-[#1E3A5F]/50">
-          <span className="text-[#94A3B8] text-[11px] uppercase">Base City</span>
+          <span className="text-[#94A3B8] text-[11px] uppercase">{t.locationCard.baseStation}</span>
           <span className="text-white font-semibold">Nashik, Maharashtra</span>
         </div>
         <div className="flex items-center justify-between pb-2 border-b border-[#1E3A5F]/50">
           <span className="text-[#94A3B8] text-[11px] uppercase flex items-center gap-1">
-            <Compass className="w-3 h-3 text-[#38BDF8]" />
-            Coordinates
+            <Compass className="w-3.5 h-3.5 text-[#38BDF8]" />
+            {t.locationCard.radarCoordinate}
           </span>
           <span className="text-[#38BDF8] font-semibold">{DEVELOPER_INFO.coordinates.lat}, {DEVELOPER_INFO.coordinates.lng}</span>
         </div>
@@ -261,7 +263,7 @@ export default function LocationCard() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-[#38BDF8] hover:text-white transition-colors duration-200 group/link"
         >
-          <span>VIEW NASHIK ON GOOGLE MAPS</span>
+          <span>{t.locationCard.quickCoordinateNote ? "VIEW NASHIK ON GOOGLE MAPS" : "VIEW MAP"}</span>
           <ExternalLink className="w-3.5 h-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
         </a>
 

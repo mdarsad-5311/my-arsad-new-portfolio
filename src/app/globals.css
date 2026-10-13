@@ -618,136 +618,233 @@ html.light .backlight-ambient-bottom {
 }
 
 /* ==========================================================================
-   2. DEEP MIDNIGHT NAVY CYBER GLASS NAVBAR
-   - Full Navbar with Deep Midnight Navy Base (#00081C to #011C57)
-   - Luminous Cyan Border Glow & Ambient Specular Glow
-   - Smooth Seamless Logo Integration (no borders or separate box)
-   - Glowing Cyan Active Indicators & Frosted Midnight Control Pills
+   2. FROSTED GLASS LIGHT MODE NAVBAR (Luminous Clean White & Cyan Ambient Glow)
+   - Luminous Frosted White Base with Subtle Sky Tint in Light Mode Only
+   - High-contrast Crisp Typography (#334155 to #0066FF)
+   - Luminous Soft Ambient Blue/Cyan Logo Glow (no dark blotch on light header)
+   - High-contrast Frosted Glass Control Pills (Language, Theme & Location)
+   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules scoped to html.light)
    ========================================================================== */
 html.light header nav {
-  background: radial-gradient(ellipse 120% 100% at 50% 30%,
-      rgba(1, 28, 87, 0.96) 0%,
-      rgba(0, 14, 48, 0.94) 55%,
-      rgba(0, 8, 28, 0.98) 100%) !important;
-  background-color: #00081C !important;
-  backdrop-filter: blur(28px) saturate(200%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
-  border: 1px solid rgba(0, 191, 255, 0.45) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(240, 248, 255, 0.65) 45%,
+    rgba(224, 242, 254, 0.60) 100%
+  ) !important;
+  background-color: rgba(255, 255, 255, 0.70) !important;
+  backdrop-filter: blur(24px) saturate(190%) contrast(102%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) contrast(102%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
   box-shadow:
-    0 16px 44px rgba(0, 8, 28, 0.55),
-    0 0 28px rgba(0, 191, 255, 0.35),
-    inset 0 1px 2px rgba(0, 191, 255, 0.30),
-    inset 0 -1px 2px rgba(0, 102, 255, 0.22) !important;
+    0 18px 45px -10px rgba(0, 102, 255, 0.14),
+    0 4px 16px rgba(15, 23, 42, 0.04),
+    0 0 28px rgba(0, 191, 255, 0.22),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 2px rgba(0, 191, 255, 0.16),
+    inset 0 0 16px rgba(255, 255, 255, 0.45) !important;
   border-radius: 9999px !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Logo Integration: Seamless Natural Blend into the Deep Midnight Navy Bar */
+html.light header.header-scrolled nav {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.86) 0%,
+    rgba(238, 246, 255, 0.76) 50%,
+    rgba(224, 242, 254, 0.70) 100%
+  ) !important;
+  backdrop-filter: blur(28px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+  box-shadow:
+    0 22px 50px -10px rgba(0, 102, 255, 0.18),
+    0 6px 18px rgba(15, 23, 42, 0.06),
+    0 0 34px rgba(0, 191, 255, 0.28),
+    inset 0 1.5px 1.5px #FFFFFF,
+    inset 0 -1.5px 2px rgba(0, 191, 255, 0.20) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ==========================================================================
+   LOGO THEME SWITCHING (Dark Mode vs Light Mode)
+   - Dark Mode: original logo1.png with ambient blur glow (100% UNTOUCHED)
+   - Light Mode: crystal-clear transparent logo-light.png with zero dark patch
+   ========================================================================== */
+.logo-dark-img,
+.logo-dark-glow {
+  display: block !important;
+}
+
+.logo-light-img {
+  display: none !important;
+}
+
+html.light .logo-dark-img,
+html.light .logo-dark-glow {
+  display: none !important;
+}
+
+html.light .logo-light-img {
+  display: block !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 102, 255, 0.10));
+  transition: filter 0.3s ease;
+}
+
+html.light a:hover .logo-light-img {
+  filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.6)) !important;
+}
+
+/* Logo Integration in Header */
 html.light header nav a[aria-label*="MD ARSAD"] {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 4px !important;
   border-radius: 9999px !important;
-  transition: all 0.3s ease !important;
 }
 
-html.light header nav a[aria-label*="MD ARSAD"]:hover {
-  filter: drop-shadow(0 0 14px rgba(0, 191, 255, 0.6)) !important;
-}
-
-/* Navbar Navigation Links */
-html.light header nav a:not([aria-label*="MD ARSAD"]):not([href*="contact"]) {
-  color: #CBD5E1 !important;
+/* Navbar Navigation Links: Crisp High-Contrast Slate */
+html.light header nav ul a {
+  color: #334155 !important;
   font-weight: 600 !important;
   white-space: nowrap !important;
 }
 
-html.light header nav a:not([aria-label*="MD ARSAD"]):not([href*="contact"]):hover {
-  color: #FFFFFF !important;
-  text-shadow: 0 0 8px rgba(0, 191, 255, 0.6) !important;
+html.light header nav ul a:hover {
+  color: #0066FF !important;
+  text-shadow: none !important;
 }
 
-/* Active Link with Glowing Animated Cyan Underline */
+/* Inactive Link Hover Pill Aura */
+html.light header nav ul a span[class*="group-hover:bg-white"] {
+  background-color: rgba(0, 102, 255, 0.06) !important;
+  border-color: rgba(0, 102, 255, 0.15) !important;
+}
+
+/* Active Link with Glowing Animated Cyan/Blue Underline & High-Contrast Blue Text */
 html.light header nav a[aria-current="page"] {
-  color: #38BDF8 !important;
+  color: #0066FF !important;
   font-weight: 700 !important;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.65) !important;
+  text-shadow: none !important;
+}
+
+html.light header nav a[aria-current="page"] span[class*="bg-\[\#38BDF8\]"] {
+  background-color: rgba(0, 102, 255, 0.08) !important;
+  border-color: rgba(0, 102, 255, 0.25) !important;
+  box-shadow: inset 0 0 10px rgba(0, 102, 255, 0.08) !important;
 }
 
 html.light header nav a[aria-current="page"] span[class*="bg-gradient-to-r"] {
   background: linear-gradient(to right, #00BFFF, #0066FF) !important;
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.95) !important;
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.7) !important;
   height: 2.5px !important;
   opacity: 1 !important;
 }
 
-/* Controls (Language, Theme Toggles & Location Pill) */
+/* Controls (Language, Theme Toggles & Location Pill) in Light Mode */
 html.light header nav button,
-html.light header nav div[class*="rounded-full"] {
-  background-color: rgba(0, 20, 50, 0.7) !important;
+html.light header nav div[class*="rounded-full"]:not([aria-hidden]) {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(240, 248, 255, 0.65) 100%) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(0, 191, 255, 0.35) !important;
-  color: #CBD5E1 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(0, 191, 255, 0.15) !important;
+  border: 1px solid rgba(0, 191, 255, 0.28) !important;
+  color: #1E293B !important;
+  box-shadow:
+    0 2px 8px rgba(0, 102, 255, 0.06),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 html.light header nav button:hover {
-  border-color: #00BFFF !important;
-  box-shadow: 0 0 16px rgba(0, 191, 255, 0.45) !important;
-  color: #FFFFFF !important;
+  border-color: rgba(0, 191, 255, 0.65) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 191, 255, 0.25),
+    0 0 12px rgba(0, 191, 255, 0.35),
+    inset 0 1px 1.5px #FFFFFF !important;
+  color: #0066FF !important;
+  transform: translateY(-1px);
 }
 
-html.light header nav button .text-\[\#38BDF8\] {
-  color: #38BDF8 !important;
+/* Language Switcher Text Colors in Light Mode */
+html.light header nav button span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+html.light header nav button span.text-\[\#94A3B8\] {
+  color: #64748B !important;
+  font-weight: 600 !important;
+}
+
+/* Theme Toggle Moon/Sun Icon */
+html.light header nav button svg {
+  color: #0066FF !important;
+}
+
+/* Location Pill in Light Mode */
+html.light header nav div[class*="rounded-full"] svg {
+  color: #0066FF !important;
 }
 
 html.light header nav div[class*="rounded-full"] span.text-white {
-  color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 600 !important;
 }
 
 html.light header nav div[class*="rounded-full"] span.text-\[\#38BDF8\] {
-  color: #38BDF8 !important;
+  color: #0066FF !important;
+  font-weight: 700 !important;
 }
 
 /* WhatsApp Icon Pill */
 html.light header nav a[aria-label*="WhatsApp"] {
-  background-color: rgba(0, 20, 50, 0.7) !important;
-  border: 1px solid rgba(0, 191, 255, 0.35) !important;
-  color: #25D366 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  background-color: rgba(37, 211, 102, 0.12) !important;
+  border: 1px solid rgba(37, 211, 102, 0.45) !important;
+  color: #16A34A !important;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.12) !important;
 }
 
 html.light header nav a[aria-label*="WhatsApp"]:hover {
+  background-color: rgba(37, 211, 102, 0.22) !important;
   border-color: #25D366 !important;
-  box-shadow: 0 0 14px rgba(37, 211, 102, 0.5) !important;
+  box-shadow: 0 0 16px rgba(37, 211, 102, 0.4) !important;
 }
 
 /* Navbar Primary CTA ("Start a Project") */
 html.light header nav a[class*="bg-[#0067FE]"] {
   background: linear-gradient(135deg, #00BFFF, #0066FF) !important;
   color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 2px 14px rgba(0, 102, 255, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
   border-radius: 9999px !important;
   white-space: nowrap !important;
 }
 
 html.light header nav a[class*="bg-[#0067FE]"]:hover {
   background: linear-gradient(135deg, #0066FF, #00BFFF) !important;
-  box-shadow: 0 4px 20px rgba(0, 191, 255, 0.65) !important;
+  box-shadow: 0 6px 22px rgba(0, 191, 255, 0.55) !important;
   transform: translateY(-1px) !important;
 }
 
 /* Mobile Drawer in Light Mode */
 html.light #mobile-navigation {
-  background-color: rgba(248, 250, 252, 0.96) !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
   backdrop-filter: blur(28px) !important;
-  border-color: rgba(0, 191, 255, 0.3) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border-bottom: 1px solid #D8E3F0 !important;
+}
+
+html.light #mobile-navigation div.border-b {
+  border-bottom-color: #E2E8F0 !important;
+}
+
+html.light #mobile-navigation span.text-white {
+  color: #0F172A !important;
 }
 
 html.light #mobile-navigation a {
-  color: #101828 !important;
+  color: #1E293B !important;
 }
 
 html.light #mobile-navigation a[aria-current="page"] {
@@ -757,7 +854,7 @@ html.light #mobile-navigation a[aria-current="page"] {
 }
 
 html.light #mobile-navigation button,
-html.light #mobile-navigation div[class*="rounded-full"] {
+html.light #mobile-navigation div[class*="rounded-xl"] {
   background-color: #FFFFFF !important;
   border-color: #D8E3F0 !important;
   color: #101828 !important;
@@ -767,39 +864,12 @@ html.light #mobile-navigation div[class*="rounded-full"] {
    3. DELIBERATE ALTERNATING SECTION SURFACES
    ========================================================================== */
 
-/* Main Cool-White Sections (#F8FAFC) */
-html.light #work,
-html.light #why-me,
-html.light #about,
-html.light #stack,
-html.light #philosophy,
-html.light [aria-label="Work Gallery"],
-html.light main.work-page-main {
-  background-color: #F8FAFC !important;
-}
-
-/* Alternate Soft Blue-Gray Sections (#EDF3FA) */
-html.light [aria-label="Credibility and Core Stack"],
-html.light #workflow,
-html.light #experience,
-html.light #github,
-html.light #faq {
-  background-color: #EDF3FA !important;
-}
-
-/* Midnight Navy Anchor (Home Services, Contact & Footer - Cyber Dark Mode Only) */
-html.light #services,
-html.light .services-section-wrapper,
-html.light #contact,
-html.light footer {
-  background-color: #00081C !important;
-  color: #CBD5E1 !important;
-}
-
-/* Section Borders & Dividers */
+/* Unified Arctic Ice-Cyan Architectural Blueprint Canvas across all sections */
 html.light #home,
 html.light [aria-label="Credibility and Core Stack"],
 html.light #work,
+html.light #services,
+html.light .services-section-wrapper,
 html.light #why-me,
 html.light #workflow,
 html.light #about,
@@ -808,11 +878,65 @@ html.light #stack,
 html.light #github,
 html.light #philosophy,
 html.light #faq,
-html.light [aria-label="Work Gallery"] {
-  border-color: #D8E3F0 !important;
+html.light #contact,
+html.light footer,
+html.light [aria-label="Work Gallery"],
+html.light main.work-page-main,
+html.light main.services-page-main,
+html.light main.project-detail-main {
+  background-image:
+    /* Layer 1: Blueprint Hairline Square Grid (48px) */
+    linear-gradient(to right, rgba(56, 189, 248, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.14) 1px, transparent 1px),
+    /* Layer 2: Crosshair Intersection Dots (48px) */
+    radial-gradient(circle 1.2px at 0 0, rgba(0, 102, 255, 0.16) 1.2px, transparent 1.2px),
+    /* Layer 3: Center Ambient Luminous Lighting Depth */
+    radial-gradient(ellipse 95% 70% at 50% 18%,
+      rgba(0, 191, 255, 0.16) 0%,
+      rgba(0, 102, 255, 0.08) 42%,
+      rgba(238, 245, 253, 0.96) 78%),
+    /* Layer 4: Base Arctic Sky Canvas Gradient */
+    linear-gradient(180deg, #EEF5FC 0%, #E6F0FA 100%) !important;
+  background-size:
+    48px 48px,
+    48px 48px,
+    48px 48px,
+    100% 100%,
+    100% 100% !important;
+  background-position:
+    center top,
+    center top,
+    center top,
+    center top,
+    center top !important;
+  background-color: #EEF5FC !important;
+  position: relative !important;
 }
 
-/* Fine Coordinate & Cyber Grid Patterns */
+/* Unified Blueprint Dividers between sections */
+html.light #home,
+html.light [aria-label="Credibility and Core Stack"],
+html.light #work,
+html.light #services,
+html.light .services-section-wrapper,
+html.light #why-me,
+html.light #workflow,
+html.light #about,
+html.light #experience,
+html.light #stack,
+html.light #github,
+html.light #philosophy,
+html.light #faq,
+html.light #contact,
+html.light footer,
+html.light [aria-label="Work Gallery"] {
+  border-color: rgba(0, 102, 255, 0.12) !important;
+}
+
+/* Subtle High-Tech Blueprint Component Grids in Light Mode */
+html.light section>div[style*="linear-gradient"],
+html.light section>div[style*="radial-gradient"],
+html.light footer>div[style*="radial-gradient"],
 html.light #home>div[style*="linear-gradient"],
 html.light #home>div[style*="radial-gradient"],
 html.light #work>div[style*="radial-gradient"],
@@ -824,23 +948,22 @@ html.light #stack>div[style*="radial-gradient"],
 html.light #github>div[style*="radial-gradient"],
 html.light #philosophy>div[style*="radial-gradient"],
 html.light #faq>div[style*="radial-gradient"] {
-  opacity: 0.08 !important;
+  opacity: 0.04 !important;
+}
+
+/* Ambient Floating Blur Orbs across all sections */
+html.light section>div[class*="blur-[150px]"],
+html.light section>div[class*="blur-[140px]"],
+html.light section>div[class*="blur-[160px]"],
+html.light section>div[class*="blur-[120px]"],
+html.light footer>div[class*="blur-[150px]"] {
+  background: radial-gradient(circle, rgba(0, 191, 255, 0.22) 0%, rgba(0, 102, 255, 0.10) 48%, transparent 75%) !important;
+  opacity: 0.85 !important;
 }
 
 /* ==========================================================================
    4. HERO SECTION (Luminous Arctic Ice Cyber Atmosphere)
    ========================================================================== */
-
-/* Hero Atmosphere: Arctic Ice-Cyan Depth Gradient & Living Aurora Orbs */
-html.light #home {
-  background: radial-gradient(ellipse 95% 70% at 50% 18%,
-      rgba(0, 191, 255, 0.16) 0%,
-      rgba(0, 102, 255, 0.08) 42%,
-      rgba(238, 245, 253, 0.96) 78%),
-    linear-gradient(180deg, #EEF5FC 0%, #E6F0FA 100%) !important;
-  background-color: #EEF5FC !important;
-  position: relative !important;
-}
 
 /* Enhanced Living Floating Orbs inside Hero */
 html.light #home>div[class*="blur-[160px]"] {
@@ -857,11 +980,20 @@ html.light #home>div[class*="blur-[140px]"] {
 
 /* Subtle High-Tech Blueprint Grid */
 html.light #home>div[style*="linear-gradient"] {
-  opacity: 0.09 !important;
+  opacity: 0.04 !important;
 }
 
 html.light #home>div[style*="radial-gradient"] {
-  opacity: 0.07 !important;
+  opacity: 0.04 !important;
+}
+
+/* Technical Coordinate Telemetry & Corner Crosshairs */
+html.light #home div.font-mono.text-\[10px\] {
+  color: #0066FF !important;
+  opacity: 0.85 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.4) !important;
 }
 
 /* Hero Headline: Metallic Midnight Navy to Electric Blue-Cyan Luminous Gradient */
@@ -1020,7 +1152,7 @@ html.light [aria-label="Credibility and Core Stack"] {
 }
 
 /* Top Editorial Information Band */
-html.light [aria-label="Credibility and Core Stack"] > div:first-of-type {
+html.light [aria-label="Credibility and Core Stack"]>div:first-of-type {
   border-bottom-color: #D8E3F0 !important;
 }
 
@@ -1097,8 +1229,17 @@ html.light [aria-label="Credibility and Core Stack"] div[class*="from-\[\#00091E
    - Circular Cyan CTA Arrow
    ========================================================================== */
 
-/* Main Card Surfaces */
+/* ==========================================================================
+   5. UNIVERSAL MULTI-LAYERED FROSTED GLASS CARDS (ALL PAGES & SECTIONS)
+   - Luminous, crystalline frosted glass surfaces across Home, Work & Services
+   - High backdrop blur (20px) with rich specular shine & double inset highlights
+   - Glowing cyber cyan rim on hover
+   ========================================================================== */
+
+/* Main Card Surfaces across all pages & sections */
 html.light #work [class*="bg-[#0D1D3A]"],
+html.light #services [class*="bg-[#0D1D3A]"],
+html.light .services-section-wrapper [class*="bg-[#0D1D3A]"],
 html.light #why-me [class*="bg-[#0D1D3A]"],
 html.light #workflow [class*="bg-[#0D1D3A]"],
 html.light #about [class*="bg-[#0D1D3A]"],
@@ -1107,20 +1248,38 @@ html.light #stack [class*="bg-[#0D1D3A]"],
 html.light #github [class*="bg-[#0D1D3A]"],
 html.light #philosophy [class*="bg-[#0D1D3A]"],
 html.light #faq [class*="bg-[#0D1D3A]"],
+html.light #contact [class*="bg-[#0D1D3A]"],
 html.light [aria-label="Work Gallery"] [class*="bg-[#0D1D3A]"],
-html.light main.work-page-main [class*="bg-[#0D1D3A]"] {
-  background-color: rgba(255, 255, 255, 0.86) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  border: 1px solid rgba(216, 227, 240, 0.95) !important;
+html.light main.work-page-main [class*="bg-[#0D1D3A]"],
+html.light main.work-page-main [class*="rounded-xl"][class*="bg-white"],
+html.light main.work-page-main [class*="rounded-2xl"][class*="bg-white"],
+html.light main.services-page-main .service-card-surface,
+html.light main.services-page-main [class*="rounded-xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="rounded-xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="rounded-2xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="bg-white/70"],
+html.light main.project-detail-main section[class*="bg-white"] {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(240, 248, 255, 0.72) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(180%) contrast(102%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) contrast(102%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.90) !important;
   box-shadow:
-    0 12px 36px rgba(0, 102, 255, 0.06),
-    0 2px 8px rgba(0, 0, 0, 0.03),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95) !important;
+    0 12px 32px -8px rgba(0, 102, 255, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.03),
+    0 0 20px rgba(0, 191, 255, 0.12),
+    inset 0 1.5px 1.5px #FFFFFF,
+    inset 0 -1px 1px rgba(0, 191, 255, 0.14) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Inner Panels & Tag Badges */
+/* Inner Panels & Sub-Cards across all pages */
 html.light #work [class*="bg-[#07152F]"],
+html.light #services [class*="bg-[#07152F]"],
+html.light .services-section-wrapper [class*="bg-[#07152F]"],
 html.light #why-me [class*="bg-[#07152F]"],
 html.light #workflow [class*="bg-[#07152F]"],
 html.light #about [class*="bg-[#07152F]"],
@@ -1129,15 +1288,27 @@ html.light #stack [class*="bg-[#07152F]"],
 html.light #github [class*="bg-[#07152F]"],
 html.light #philosophy [class*="bg-[#07152F]"],
 html.light #faq [class*="bg-[#07152F]"],
+html.light #contact [class*="bg-[#07152F]"],
 html.light [aria-label="Work Gallery"] [class*="bg-[#07152F]"],
-html.light main.work-page-main [class*="bg-[#07152F]"] {
-  background-color: rgba(241, 245, 249, 0.85) !important;
-  backdrop-filter: blur(12px) !important;
+html.light main.work-page-main [class*="bg-[#07152F]"],
+html.light main.services-page-main [class*="bg-[#07152F]"],
+html.light main.project-detail-main [class*="bg-[#EDF3FA]"] {
+  background: linear-gradient(
+    135deg,
+    rgba(241, 245, 249, 0.85) 0%,
+    rgba(235, 245, 255, 0.75) 100%
+  ) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.20) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
 }
 
-/* Card Hover Elevation with Glowing Cyan Rim (Attachment Requirement) */
+/* Card Hover Elevation across all pages */
 html.light #work [class*="rounded-2xl"]:hover,
 html.light #work [class*="rounded-xl"]:hover,
+html.light #services [class*="rounded-xl"]:hover,
+html.light .services-section-wrapper [class*="rounded-xl"]:hover,
 html.light #why-me [class*="rounded-xl"]:hover,
 html.light #workflow [class*="rounded-xl"]:hover,
 html.light #about [class*="rounded-xl"]:hover,
@@ -1146,7 +1317,14 @@ html.light #stack [class*="rounded-xl"]:hover,
 html.light #github [class*="rounded-xl"]:hover,
 html.light #philosophy [class*="rounded-xl"]:hover,
 html.light #faq [class*="rounded-xl"]:hover,
-html.light [aria-label="Work Gallery"] [class*="rounded-2xl"]:hover {
+html.light #contact [class*="rounded-xl"]:hover,
+html.light #contact [class*="rounded-2xl"]:hover,
+html.light [aria-label="Work Gallery"] [class*="rounded-2xl"]:hover,
+html.light main.work-page-main [class*="rounded-2xl"]:hover,
+html.light main.work-page-main [class*="rounded-xl"]:hover,
+html.light main.services-page-main [class*="rounded-xl"]:hover,
+html.light main.project-detail-main [class*="rounded-xl"]:hover,
+html.light main.project-detail-main [class*="rounded-2xl"]:hover {
   border-color: rgba(0, 191, 255, 0.65) !important;
   box-shadow:
     0 18px 48px rgba(0, 102, 255, 0.14),
@@ -1197,12 +1375,303 @@ html.light #work div[class*="p-5"] p {
    SELECTED WORK TYPOGRAPHY & HIGH CONTRAST (Light Mode Blueprint)
    ========================================================================== */
 
-/* 1. Main Section Heading: "चयनित कार्य" / "SELECTED WORK" */
+/* ==========================================================================
+   HIGH-CONTRAST SECTION HEADINGS & TITLES (LIGHT MODE)
+   Fixes invisible white text on light backgrounds in #why-me, #workflow,
+   #about, #experience, #stack, #github, #faq, and Testimonials.
+   Dark mode is 100% untouched.
+   ========================================================================== */
 html.light #work h2,
-html.light [aria-label="Work Gallery"] h2 {
+html.light [aria-label="Work Gallery"] h2,
+html.light #why-me h2,
+html.light #workflow h2,
+html.light #about h2,
+html.light #experience h2,
+html.light #stack h2,
+html.light #github h2,
+html.light #philosophy h2,
+html.light #faq h2,
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] h2,
+html.light [aria-label="Values and Collaboration Standards"] h2 {
   color: #00081C !important;
   font-weight: 800 !important;
   text-shadow: none !important;
+}
+
+/* Secondary Headings & Card Titles (h3) */
+html.light #why-me h3,
+html.light #workflow h3,
+html.light #about h3,
+html.light #experience h3,
+html.light #stack h3,
+html.light #github h3,
+html.light #philosophy h3,
+html.light #faq h3,
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] h3,
+html.light [aria-label="Values and Collaboration Standards"] h3 {
+  color: #00081C !important;
+  font-weight: 700 !important;
+}
+
+/* Section Sub-Category labels and numbers (Telemetry Style) */
+html.light #work div.flex span.text-\[\#38BDF8\],
+html.light #work div.border-b span.text-\[\#38BDF8\],
+html.light #services div.flex span.text-\[\#38BDF8\],
+html.light #services div.border-b span.text-\[\#38BDF8\],
+html.light .services-section-wrapper div.flex span.text-\[\#38BDF8\],
+html.light #why-me div.flex span.text-\[\#38BDF8\],
+html.light #workflow div.flex span.text-\[\#38BDF8\],
+html.light #about div.flex span.text-\[\#38BDF8\],
+html.light #experience div.flex span.text-\[\#38BDF8\],
+html.light #stack div.flex span.text-\[\#38BDF8\],
+html.light #github div.flex span.text-\[\#38BDF8\],
+html.light #philosophy div.flex span.text-\[\#38BDF8\],
+html.light #faq div.flex span.text-\[\#38BDF8\],
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] div.flex span.text-\[\#38BDF8\],
+html.light [aria-label="Values and Collaboration Standards"] div.flex span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.22em !important;
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.4) !important;
+}
+
+html.light #work div.flex span.text-\[\#94A3B8\],
+html.light #work div.border-b span.text-\[\#94A3B8\],
+html.light #services div.flex span.text-\[\#94A3B8\],
+html.light #services div.border-b span.text-\[\#94A3B8\],
+html.light .services-section-wrapper div.flex span.text-\[\#94A3B8\],
+html.light #why-me div.flex span.text-\[\#94A3B8\],
+html.light #workflow div.flex span.text-\[\#94A3B8\],
+html.light #about div.flex span.text-\[\#A8B4C7\],
+html.light #experience div.flex span.text-\[\#94A3B8\],
+html.light #stack div.flex span.text-\[\#94A3B8\],
+html.light #github div.flex span.text-\[\#94A3B8\],
+html.light #philosophy div.flex span.text-\[\#94A3B8\],
+html.light #faq div.flex span.text-\[\#94A3B8\],
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] div.flex span.text-\[\#94A3B8\],
+html.light [aria-label="Values and Collaboration Standards"] div.flex span.text-\[\#94A3B8\] {
+  color: #475569 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.22em !important;
+}
+
+html.light #work span.bg-\[\#1E3A5F\],
+html.light #services span.bg-\[\#1E3A5F\],
+html.light .services-section-wrapper span.bg-\[\#1E3A5F\],
+html.light #why-me span.bg-\[\#1E3A5F\],
+html.light #workflow span.bg-\[\#1E3A5F\],
+html.light #about span.bg-\[\#1E3A5F\],
+html.light #experience span.bg-\[\#1E3A5F\],
+html.light #stack span.bg-\[\#1E3A5F\],
+html.light #github span.bg-\[\#1E3A5F\],
+html.light #philosophy span.bg-\[\#1E3A5F\],
+html.light #faq span.bg-\[\#1E3A5F\],
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] span.bg-\[\#1E3A5F\],
+html.light [aria-label="Values and Collaboration Standards"] span.bg-\[\#1E3A5F\] {
+  background-color: rgba(0, 102, 255, 0.45) !important;
+  box-shadow: 0 0 6px rgba(0, 191, 255, 0.4) !important;
+}
+
+/* Section Descriptions & Body text */
+html.light #why-me p,
+html.light #workflow p,
+html.light #about p,
+html.light #experience p,
+html.light #stack p,
+html.light #github p,
+html.light #philosophy p,
+html.light #faq p,
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] p,
+html.light [aria-label="Values and Collaboration Standards"] p {
+  color: #334155 !important;
+}
+
+/* Specific accent headings */
+html.light #why-me h2 span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+/* Why Work With Me Section (#why-me) Light Mode Card Typography */
+html.light #why-me .text-white {
+  color: #00081C !important;
+}
+
+html.light #why-me h3 {
+  color: #00081C !important;
+}
+
+html.light #why-me p.font-body {
+  color: #334155 !important;
+}
+
+html.light #why-me div.rounded-xl span {
+  color: #1E293B !important;
+}
+
+html.light #why-me div.rounded-xl svg {
+  color: #0066FF !important;
+}
+
+/* Execution Methodology Section (#workflow) Light Mode Typography */
+html.light #workflow .text-white {
+  color: #00081C !important;
+}
+
+html.light #workflow h3 {
+  color: #00081C !important;
+}
+
+html.light #workflow p.font-body {
+  color: #334155 !important;
+}
+
+html.light #workflow button.rounded-full {
+  background-color: #FFFFFF !important;
+  border-color: #D8E3F0 !important;
+  color: #475569 !important;
+}
+
+html.light #workflow button.rounded-full:hover {
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+}
+
+html.light #workflow span[class*="bg-[#07152F]"] {
+  background-color: #EEF4FB !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Breadcrumbs in #workflow */
+html.light #workflow div[class*="overflow-x-auto"] {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: #D8E3F0 !important;
+}
+
+html.light #workflow div[class*="overflow-x-auto"] button:not([class*="bg-[#0067FE]"]) {
+  color: #475569 !important;
+}
+
+html.light #workflow div[class*="overflow-x-auto"] button:not([class*="bg-[#0067FE]"]):hover {
+  background-color: #F1F5F9 !important;
+  color: #0066FF !important;
+}
+
+/* FAQ question buttons */
+html.light #faq button span.text-white {
+  color: #00081C !important;
+  font-weight: 700 !important;
+}
+
+html.light #faq button span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+/* Experience timeline roles & dates */
+html.light #experience .text-white {
+  color: #00081C !important;
+}
+
+html.light #experience .text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+html.light #experience .text-\[\#CBD5E1\] {
+  color: #334155 !important;
+}
+
+/* GitHub repo links & titles */
+html.light #github a h3,
+html.light #github .text-white {
+  color: #00081C !important;
+}
+
+html.light #github .text-\[\#94A3B8\],
+html.light #github .text-\[\#CBD5E1\] {
+  color: #475569 !important;
+}
+
+/* Values / Testimonials / Engineering Philosophy cards (#philosophy) */
+html.light #philosophy,
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] {
+  color: #334155 !important;
+}
+
+html.light #philosophy .text-white,
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] .text-white,
+html.light [aria-label="Values and Collaboration Standards"] .text-white {
+  color: #00081C !important;
+}
+
+html.light #philosophy .text-\[\#CBD5E1\],
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] .text-\[\#CBD5E1\],
+html.light [aria-label="Values and Collaboration Standards"] .text-\[\#CBD5E1\] {
+  color: #334155 !important;
+}
+
+html.light #philosophy .text-\[\#94A3B8\],
+html.light [aria-label="Engineering Philosophy & Collaboration Principles"] .text-\[\#94A3B8\],
+html.light [aria-label="Values and Collaboration Standards"] .text-\[\#94A3B8\] {
+  color: #475569 !important;
+}
+
+/* Card inner dividers & status telemetry */
+html.light #philosophy div.rounded-xl div.border-b,
+html.light #philosophy div.rounded-xl div.border-t,
+html.light #philosophy div.border-b {
+  border-color: #D8E3F0 !important;
+}
+
+html.light #philosophy div.rounded-xl span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+}
+
+html.light #philosophy div.rounded-xl span.rounded-full.bg-\[\#38BDF8\],
+html.light #philosophy div.rounded-xl span.w-1\.5 {
+  background-color: #00BFFF !important;
+  box-shadow: 0 0 8px #00BFFF, 0 0 14px rgba(0, 191, 255, 0.8) !important;
+}
+
+html.light #philosophy div.rounded-xl h3 {
+  color: #00081C !important;
+  font-weight: 800 !important;
+  transition: color 0.2s ease !important;
+}
+
+html.light #philosophy div.rounded-xl:hover h3 {
+  color: #0066FF !important;
+}
+
+html.light #philosophy div.rounded-xl span.font-mono.text-xs.text-\[\#38BDF8\].block {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+}
+
+html.light #philosophy div.rounded-xl p {
+  color: #334155 !important;
+  line-height: 1.65 !important;
+}
+
+html.light #philosophy div.rounded-xl div.border-t span:first-child {
+  color: #475569 !important;
+  font-weight: 600 !important;
+}
+
+html.light #philosophy div.rounded-xl div.border-t span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+}
+
+/* About Section bio & workstation */
+html.light #about .text-white {
+  color: #00081C !important;
+}
+
+html.light #about .text-\[\#A8B4C7\],
+html.light #about .text-\[\#CBD5E1\] {
+  color: #334155 !important;
 }
 
 /* 2. Section Sub-Category and Section Number */
@@ -1341,155 +1810,541 @@ html.light #stack div[class*="rounded-xl"][class*="border"]:hover {
 }
 
 /* ==========================================================================
-   7. CONTACT SECTION (Dark Cyber Glass & Floor Glow Blueprint)
+   7. CLEAN & LUMINOUS LIGHT MODE CONTACT SECTION
+   - Luminous light gradient background (#EDF3FA -> #F8FAFC -> #F1F5F9)
+   - Frosted glass containers with crisp light surfaces & subtle cyan rim
+   - High-contrast crisp typography (#00081C, #1E293B, #334155, #64748B)
+   - Clean light input fields with crisp borders & electric blue focus ring
+   - Styled LocationCard with high-contrast telemetry & dark holographic radar
+   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules strictly scoped to html.light)
    ========================================================================== */
 html.light #contact {
-  background-color: #00081C !important;
+  color: #475569 !important;
+  border-bottom: 1px solid rgba(0, 102, 255, 0.12) !important;
   position: relative !important;
   overflow: hidden !important;
 }
 
-/* Futuristic Cyber Floor Glow Reflection Beam (Attachment Blueprint) */
+/* Hide dark floor glow reflection beam in light mode */
 html.light #contact::before {
-  content: "";
-  position: absolute;
-  inset-x: 0;
-  bottom: -20px;
-  height: 380px;
-  pointer-events: none;
-  background: radial-gradient(ellipse 85% 65% at 50% 100%,
-      rgba(0, 191, 255, 0.45) 0%,
-      rgba(0, 102, 255, 0.24) 40%,
-      rgba(0, 8, 28, 0) 75%) !important;
-  filter: blur(35px) !important;
-  z-index: 1;
+  display: none !important;
 }
 
-html.light #contact h1,
-html.light #contact h2,
-html.light #contact h3,
-html.light #contact h4 {
-  color: #F5F7FF !important;
+/* Architectural dot grid pattern in light mode */
+html.light #contact div[style*="radial-gradient(#38BDF8"] {
+  opacity: 0.04 !important;
 }
 
-html.light #contact .text-white {
-  color: #F5F7FF !important;
+/* Header category & index tags */
+html.light #contact span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
 }
 
-html.light #contact .text-\[\#CBD5E1\] {
-  color: #CBD5E1 !important;
+html.light #contact span.text-\[\#94A3B8\] {
+  color: #64748B !important;
+  font-weight: 600 !important;
 }
 
-html.light #contact .text-\[\#94A3B8\] {
-  color: #94A3B8 !important;
+html.light #contact span.bg-\[\#1E3A5F\] {
+  background-color: #CBD5E1 !important;
 }
 
-html.light #contact .text-\[\#38BDF8\] {
-  color: #00BFFF !important;
-  text-shadow: 0 0 16px rgba(0, 191, 255, 0.6) !important;
+/* Header Headings */
+html.light #contact h2 {
+  color: #00081C !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
 }
 
-/* Cyber Glass Form Container */
+html.light #contact h2 span.text-\[\#38BDF8\] {
+  background: linear-gradient(135deg, #0056EE 0%, #0088FF 50%, #00BFFF 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 4px 16px rgba(0, 191, 255, 0.25)) !important;
+}
+
+/* Header description */
+html.light #contact p.text-\[\#CBD5E1\] {
+  color: #334155 !important;
+}
+
+/* Header direct email pill button */
+html.light #contact a[href^="mailto:"][class*="bg-[#001238]"] {
+  background-color: #FFFFFF !important;
+  border-color: #D8E3F0 !important;
+  color: #0066FF !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light #contact a[href^="mailto:"][class*="bg-[#001238]"]:hover {
+  background-color: #F8FAFC !important;
+  border-color: #0066FF !important;
+  color: #0056EE !important;
+  box-shadow: 0 4px 14px rgba(0, 102, 255, 0.12) !important;
+}
+
+/* Section divider */
+html.light #contact .border-b {
+  border-color: #D8E3F0 !important;
+}
+
+/* Frosted glass main card containers (Direct channels, LocationCard, Form container) */
 html.light #contact [class*="bg-[#0D1D3A]"] {
-  background-color: rgba(13, 29, 58, 0.75) !important;
-  backdrop-filter: blur(24px) !important;
-  border: 1px solid rgba(0, 191, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(216, 227, 240, 0.95) !important;
   box-shadow:
-    0 16px 48px rgba(0, 8, 28, 0.8),
-    0 0 24px rgba(0, 191, 255, 0.15),
-    inset 0 1px 1px rgba(0, 191, 255, 0.2) !important;
+    0 12px 36px rgba(0, 102, 255, 0.05),
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px #FFFFFF !important;
 }
 
-/* Cyber Form Inputs */
+/* Nested sub-cards inside Direct Channels (Email, WhatsApp, Location, Availability, Response Time) */
+html.light #contact [class*="bg-[#07152F]"] {
+  background-color: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Direct Channels card title & pulse dot */
+html.light #contact span.tracking-widest {
+  color: #0066FF !important;
+}
+
+html.light #contact span.animate-pulse {
+  background-color: #0066FF !important;
+}
+
+/* Sub-card labels & values */
+html.light #contact [class*="bg-[#07152F]"] .text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+html.light #contact [class*="bg-[#07152F]"] .text-white {
+  color: #00081C !important;
+}
+
+html.light #contact [class*="bg-[#07152F]"] a.text-white:hover {
+  color: #0066FF !important;
+}
+
+/* WhatsApp chat pill badge */
+html.light #contact [class*="bg-[#07152F]"] a[class*="text-[#25D366]"] {
+  background-color: rgba(37, 211, 102, 0.12) !important;
+  border-color: rgba(37, 211, 102, 0.3) !important;
+  color: #15803D !important;
+}
+
+/* Social buttons row in Direct Channels */
+html.light #contact [class*="grid-cols-3"] a {
+  background-color: #F8FAFC !important;
+  border: 1px solid #D8E3F0 !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+html.light #contact [class*="grid-cols-3"] a:hover {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.1) !important;
+}
+
+/* LocationCard styling in light mode */
+html.light #contact [class*="bg-[#001238]"] {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #1E293B !important;
+}
+
+/* Keep radar display crisp & futuristic */
+html.light #contact [class*="bg-[#000E29]"] {
+  background-color: #07152F !important;
+  border-color: #1E3A5F !important;
+}
+
+html.light #contact [class*="bg-[#00081C]"] {
+  background-color: rgba(7, 21, 47, 0.9) !important;
+  border-color: #1E3A5F !important;
+}
+
+/* LocationCard text values */
+html.light #contact [class*="group hover:border-"] .text-white {
+  color: #00081C !important;
+}
+
+html.light #contact [class*="group hover:border-"] .text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+html.light #contact a[class*="group/link"] {
+  color: #0066FF !important;
+}
+
+html.light #contact a[class*="group/link"]:hover {
+  color: #0056EE !important;
+}
+
+/* Project Inquiry Form Labels */
+html.light #contact label {
+  color: #1E293B !important;
+  font-weight: 600 !important;
+}
+
+/* Form Inputs, Selects & Textareas */
 html.light #contact input,
 html.light #contact select,
 html.light #contact textarea {
-  background-color: rgba(7, 21, 47, 0.85) !important;
-  color: #F5F7FF !important;
-  border: 1px solid rgba(30, 58, 95, 0.95) !important;
+  background-color: #F8FAFC !important;
+  color: #00081C !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  transition: all 0.2s ease !important;
 }
 
 html.light #contact input:focus,
 html.light #contact select:focus,
 html.light #contact textarea:focus {
-  border-color: #00BFFF !important;
-  box-shadow: 0 0 18px rgba(0, 191, 255, 0.4) !important;
+  background-color: #FFFFFF !important;
+  border-color: #0066FF !important;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.15) !important;
+  color: #00081C !important;
 }
 
 html.light #contact input::placeholder,
 html.light #contact textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+/* Select options */
+html.light #contact select option {
+  background-color: #FFFFFF !important;
+  color: #00081C !important;
+}
+
+html.light #contact svg.text-\[\#94A3B8\] {
   color: #64748B !important;
 }
 
-/* Send Message / Start Project Action Button (Attachment Blueprint) */
+/* Submit Action Button */
 html.light #contact button[type="submit"] {
-  background: linear-gradient(135deg, #00BFFF, #0066FF) !important;
+  background: linear-gradient(135deg, #0067FE 0%, #0056EE 100%) !important;
   color: #FFFFFF !important;
   border: none !important;
-  box-shadow:
-    0 6px 24px rgba(0, 102, 255, 0.5),
-    0 0 20px rgba(0, 191, 255, 0.4) !important;
+  box-shadow: 0 4px 18px rgba(0, 103, 254, 0.35) !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
 }
 
-html.light #contact button[type="submit"]:hover {
-  box-shadow:
-    0 8px 32px rgba(0, 102, 255, 0.7),
-    0 0 28px rgba(0, 191, 255, 0.6) !important;
+html.light #contact button[type="submit"]:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056EE 0%, #0045CC 100%) !important;
+  box-shadow: 0 8px 28px rgba(0, 103, 254, 0.45) !important;
   transform: translateY(-2px) !important;
 }
 
-/* ==========================================================================
-   8. FUTURISTIC FOOTER (Attachment Blueprint)
-   ========================================================================== */
-html.light footer {
-  background-color: #00081C !important;
-  border-top: 1px solid rgba(0, 191, 255, 0.4) !important;
-  box-shadow: 0 -8px 30px rgba(0, 191, 255, 0.15) !important;
+/* Success State in Light Mode */
+html.light #contact div.animate-fadeIn h3 {
+  color: #00081C !important;
 }
 
+html.light #contact div.animate-fadeIn p {
+  color: #475569 !important;
+}
+
+html.light #contact div.animate-fadeIn button[class*="bg-[#07152F]"] {
+  background-color: #F8FAFC !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #1E293B !important;
+}
+
+html.light #contact div.animate-fadeIn button[class*="bg-[#07152F]"]:hover {
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+}
+
+/* ==========================================================================
+   8. CLEAN & LUMINOUS LIGHT MODE FOOTER
+   - Soft elegant light background (#F8FAFC / #F1F5F9) matching the light system
+   - High-contrast crisp typography (#00081C, #1E293B, #475569)
+   - Luminous subtle blue/cyan accents (#0066FF, #00BFFF)
+   - Clean frosted cards with soft borders (#D8E3F0)
+   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules strictly scoped to html.light)
+   ========================================================================== */
+html.light footer {
+  color: #475569 !important;
+  border-top: 1px solid rgba(0, 102, 255, 0.14) !important;
+  box-shadow: 0 -4px 24px rgba(0, 102, 255, 0.04) !important;
+}
+
+/* Background grid pattern in light footer */
+html.light footer div[style*="radial-gradient(#38BDF8"] {
+  opacity: 0.04 !important;
+}
+
+/* Floor reflection pool in light footer */
+html.light footer div[style*="radial-gradient(ellipse 70% 55%"] {
+  background: radial-gradient(ellipse 70% 55% at 50% 100%, rgba(0, 191, 255, 0.12) 0%, rgba(0, 102, 255, 0.05) 40%, transparent 75%) !important;
+  filter: blur(32px) !important;
+  opacity: 0.8 !important;
+}
+
+/* Luminous floor highlight reflection bar */
+html.light footer div[style*="boxShadow: 0 0 24px"] {
+  background: linear-gradient(to right, transparent, rgba(0, 102, 255, 0.35), transparent) !important;
+  box-shadow: 0 0 20px 2px rgba(0, 102, 255, 0.2) !important;
+}
+
+/* Final CTA Banner inside footer */
+html.light footer div.mb-16 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 247, 255, 0.95) 50%, rgba(235, 244, 255, 0.92) 100%) !important;
+  border: 1px solid rgba(0, 102, 255, 0.2) !important;
+  box-shadow:
+    0 12px 36px rgba(0, 102, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    inset 0 1px 2px rgba(255, 255, 255, 1) !important;
+}
+
+html.light footer div.mb-16 span.font-mono {
+  color: #0066FF !important;
+}
+
+html.light footer div.mb-16 h3 {
+  color: #00081C !important;
+}
+
+html.light footer div.mb-16 a[href*="contact"] {
+  background: #0067FE !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 18px rgba(0, 103, 254, 0.35) !important;
+}
+
+html.light footer div.mb-16 a[href*="contact"]:hover {
+  background: #0056EE !important;
+  box-shadow: 0 6px 24px rgba(0, 103, 254, 0.45) !important;
+}
+
+/* Section Dividers inside footer */
+html.light footer .border-b,
+html.light footer [class*="border-[#1E3A5F]"] {
+  border-color: #D8E3F0 !important;
+}
+
+/* Logo in light footer: soft ambient blue/cyan glow instead of dark navy */
+html.light footer a[aria-label*="MD ARSAD"] div[class*="blur-lg"] {
+  background: radial-gradient(ellipse at 50% 30%, rgba(0, 191, 255, 0.25) 0%, rgba(0, 102, 255, 0.08) 50%, transparent 75%) !important;
+  opacity: 0.8 !important;
+}
+
+/* Headings & Brand Name */
 html.light footer h1,
 html.light footer h2,
 html.light footer h3,
 html.light footer h4 {
-  color: #F5F7FF !important;
+  color: #00081C !important;
 }
 
-html.light footer .text-white {
-  color: #F5F7FF !important;
+html.light footer h2 span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
 }
 
-html.light footer .text-\[\#CBD5E1\] {
-  color: #CBD5E1 !important;
+/* Description paragraph */
+html.light footer p {
+  color: #475569 !important;
 }
 
-html.light footer .text-\[\#94A3B8\] {
-  color: #94A3B8 !important;
+/* Action Hub Buttons (GitHub, Resume, Email) */
+html.light footer a[href*="github.com"]:not([class*="p-3"]) {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D8E3F0 !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
 }
 
-html.light footer a:hover {
-  color: #00BFFF !important;
-  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5) !important;
+html.light footer a[href*="github.com"]:not([class*="p-3"]):hover {
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.12) !important;
+}
+
+html.light footer a[download] {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D8E3F0 !important;
+  color: #0066FF !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light footer a[download]:hover {
+  border-color: #0066FF !important;
+  background-color: #F8FAFC !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.12) !important;
+}
+
+html.light footer a[href^="mailto:"] {
+  background: linear-gradient(135deg, #0067FE 0%, #0056EE 100%) !important;
+  border: 1px solid #0056EE !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 103, 254, 0.3) !important;
+}
+
+html.light footer a[href^="mailto:"]:hover {
+  background: linear-gradient(135deg, #0056EE 0%, #0045CC 100%) !important;
+  box-shadow: 0 6px 20px rgba(0, 103, 254, 0.45) !important;
+}
+
+html.light footer a[href^="mailto:"] svg {
+  color: #FFFFFF !important;
+}
+
+/* Telemetry, Navigation, and Channels Section Headers */
+html.light footer span.tracking-\[0\.2em\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+/* Telemetry list items */
+html.light footer .space-y-3 .text-\[\#CBD5E1\] {
+  color: #475569 !important;
+}
+
+html.light footer .space-y-3 svg.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+html.light footer .space-y-3 span.font-bold,
+html.light footer .space-y-3 span.font-semibold {
+  color: #00081C !important;
+}
+
+html.light footer .space-y-3 span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+}
+
+/* Status Pill in Telemetry */
+html.light footer div[class*="rounded-lg bg-[#001238]"] {
+  background-color: #FFFFFF !important;
+  border: 1px solid #D8E3F0 !important;
+  color: #1E293B !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light footer div[class*="rounded-lg bg-[#001238]"] span.animate-pulse {
+  background-color: #0066FF !important;
+}
+
+/* Navigation Links */
+html.light footer .grid a {
+  color: #475569 !important;
+}
+
+html.light footer .grid a:hover {
+  color: #0066FF !important;
+  text-shadow: none !important;
+}
+
+/* Social Channel Cards (WhatsApp, GitHub, LinkedIn) */
+html.light footer a[class*="bg-[#07152F]"] {
+  background: #FFFFFF !important;
+  border: 1px solid #D8E3F0 !important;
+  color: #1E293B !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.04) !important;
+}
+
+html.light footer a[class*="bg-[#07152F]"]:hover {
+  border-color: #0066FF !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.12) !important;
+}
+
+html.light footer a[class*="bg-[#07152F]"] div[class*="bg-[#001033]"] {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+}
+
+html.light footer a[class*="bg-[#07152F]"] .text-white {
+  color: #00081C !important;
+}
+
+html.light footer a[class*="bg-[#07152F]"] .text-\[\#CBD5E1\] {
+  color: #475569 !important;
+}
+
+html.light footer a[class*="bg-[#07152F]"] .text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+/* WhatsApp Specific in Light Mode */
+html.light footer a[href*="whatsapp"]:hover {
+  border-color: #25D366 !important;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.15) !important;
+}
+
+/* Bottom Bar: Copyright & Back to Top */
+html.light footer .pt-8 {
+  border-top: 1px solid #D8E3F0 !important;
+  color: #64748B !important;
+}
+
+html.light footer .pt-8 span {
+  color: #64748B !important;
+}
+
+html.light footer button[aria-label="Back to top of page"] {
+  color: #475569 !important;
+}
+
+html.light footer button[aria-label="Back to top of page"]:hover {
+  color: #0066FF !important;
+}
+
+html.light footer button[aria-label="Back to top of page"] svg {
+  color: #0066FF !important;
 }
 
 /* ==========================================================================
    9. STANDALONE WORK PAGES & SCROLLBAR
    ========================================================================== */
 html.light main:not(:has(#home)),
-html.light main.work-page-main {
-  background-color: #F8FAFC !important;
+html.light main.work-page-main,
+html.light main.project-detail-main,
+html.light main.services-page-main {
   color: #0F172A !important;
 }
 
-html.light main.work-page-main [class*="bg-[#0D1D3A]"] {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(216, 227, 240, 0.95) !important;
-  box-shadow: 0 8px 28px rgba(0, 102, 255, 0.06) !important;
+html.light main.work-page-main [class*="bg-[#0D1D3A]"],
+html.light main.work-page-main [class*="rounded-xl"][class*="bg-white"],
+html.light main.work-page-main [class*="rounded-2xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="rounded-xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="rounded-2xl"][class*="bg-white"],
+html.light main.project-detail-main [class*="bg-white/70"],
+html.light main.services-page-main .service-card-surface,
+html.light main.services-page-main [class*="rounded-xl"][class*="bg-white"] {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(240, 248, 255, 0.72) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(180%) contrast(102%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) contrast(102%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.90) !important;
+  box-shadow:
+    0 12px 32px -8px rgba(0, 102, 255, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.03),
+    0 0 20px rgba(0, 191, 255, 0.12),
+    inset 0 1.5px 1.5px #FFFFFF,
+    inset 0 -1px 1px rgba(0, 191, 255, 0.14) !important;
 }
 
-html.light main.work-page-main [class*="bg-[#07152F]"] {
-  background-color: rgba(241, 245, 249, 0.9) !important;
-  border-color: #D8E3F0 !important;
+html.light main.work-page-main [class*="bg-[#07152F]"],
+html.light main.services-page-main [class*="bg-[#07152F]"],
+html.light main.project-detail-main [class*="bg-[#EDF3FA]"] {
+  background: linear-gradient(
+    135deg,
+    rgba(241, 245, 249, 0.85) 0%,
+    rgba(235, 245, 255, 0.75) 100%
+  ) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(0, 191, 255, 0.20) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
 }
 
 /* Ensure buttons with blue backgrounds retain pure white text */
@@ -1518,52 +2373,237 @@ html.light main.work-page-main button[aria-pressed="true"] span {
 }
 
 /* ==========================================================================
-   10. HOME SERVICES SECTION (Cyber Dark Mode Enforced - Protected Reference)
+   10. SERVICES SECTION (Light Mode Frosted Glass & Cyber Dark Mode System)
    ========================================================================== */
-#services,
-html.light #services,
-.services-section-wrapper,
-html.light .services-section-wrapper {
+
+/* Dark Mode remains pure midnight cyber: */
+html:not(.light) #services,
+html:not(.light) .services-section-wrapper {
   background-color: #00081C !important;
   color: #CBD5E1 !important;
 }
 
-/* Headings in Home Services */
-#services h2,
+/* Light Mode: Luminous Soft Ice-Blue Canvas matching adjacent sections */
+html.light #services,
+html.light .services-section-wrapper {
+  color: #334155 !important;
+  border-color: #D8E3F0 !important;
+}
+
+/* Dot grid in light mode */
+html.light #services>div[style*="radial-gradient"],
+html.light .services-section-wrapper>div[style*="radial-gradient"] {
+  background-image: radial-gradient(#0067FE 1.1px, transparent 1.1px) !important;
+  opacity: 0.07 !important;
+}
+
+/* Ambient glow orbs in light mode */
+html.light #services div[class*="blur-"],
+html.light .services-section-wrapper div[class*="blur-"] {
+  opacity: 0.15 !important;
+}
+
+/* Section Header Dividers */
+html.light #services div.border-b,
+html.light .services-section-wrapper div.border-b {
+  border-bottom-color: #D8E3F0 !important;
+}
+
+/* Section Category & Number */
+html.light #services span.text-\[\#38BDF8\],
+html.light .services-section-wrapper span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+html.light #services span.text-\[\#94A3B8\],
+html.light .services-section-wrapper span.text-\[\#94A3B8\] {
+  color: #64748B !important;
+  font-weight: 600 !important;
+}
+
+html.light #services span.bg-\[\#1E3A5F\],
+html.light .services-section-wrapper span.bg-\[\#1E3A5F\] {
+  background-color: #CBD5E1 !important;
+}
+
+/* Section Title (h2): High-contrast Dark Midnight */
 html.light #services h2,
-.services-section-wrapper h2,
 html.light .services-section-wrapper h2 {
-  color: #FFFFFF !important;
+  color: #00081C !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
 }
 
-#services h3,
-html.light #services h3,
-.services-section-wrapper h3,
-html.light .services-section-wrapper h3 {
-  color: #FFFFFF !important;
+/* Section Description */
+html.light #services p.font-body,
+html.light .services-section-wrapper p.font-body {
+  color: #334155 !important;
 }
 
-#services p,
-html.light #services p,
-.services-section-wrapper p,
-html.light .services-section-wrapper p {
-  color: #94A3B8 !important;
+/* Availability Pill in Header */
+html.light #services div[class*="border-t"] span.text-\[\#38BDF8\],
+html.light .services-section-wrapper div[class*="border-t"] span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
 }
 
-/* Retain Dark Cyber Card Surfaces in Home Services */
-#services [class*="bg-[#07152F]"],
-html.light #services [class*="bg-[#07152F]"],
-.services-section-wrapper [class*="bg-[#07152F]"],
-html.light .services-section-wrapper [class*="bg-[#07152F]"] {
-  background-color: rgba(7, 21, 47, 0.9) !important;
-  color: #CBD5E1 !important;
+html.light #services div[class*="border-t"] span.bg-\[\#38BDF8\],
+html.light .services-section-wrapper div[class*="border-t"] span.bg-\[\#38BDF8\] {
+  background-color: #0066FF !important;
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.7) !important;
 }
 
-#services .text-\[\#38BDF8\],
-html.light #services .text-\[\#38BDF8\],
-.services-section-wrapper .text-\[\#38BDF8\],
-html.light .services-section-wrapper .text-\[\#38BDF8\] {
-  color: #38BDF8 !important;
+/* ==========================================================================
+   SERVICES SELECTABLE CARDS / ACCORDION PANELS (LIGHT MODE)
+   ========================================================================== */
+
+/* Inactive Card Surface */
+html.light #services [class*="rounded-xl"][class*="border"],
+html.light .services-section-wrapper [class*="rounded-xl"][class*="border"] {
+  background-color: rgba(255, 255, 255, 0.90) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-color: rgba(216, 227, 240, 0.95) !important;
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.04), inset 0 1px 1px #fff !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Inactive Card Hover */
+html.light #services [class*="rounded-xl"][class*="border"]:hover,
+html.light .services-section-wrapper [class*="rounded-xl"][class*="border"]:hover {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 191, 255, 0.6) !important;
+  box-shadow:
+    0 12px 32px rgba(0, 102, 255, 0.10),
+    0 0 20px rgba(0, 191, 255, 0.22),
+    inset 0 1px 1px #fff !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Active / Open Card Surface */
+html.light #services [class*="rounded-xl"][class*="border"]:has([aria-expanded="true"]),
+html.light .services-section-wrapper [class*="rounded-xl"][class*="border"]:has([aria-expanded="true"]) {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 102, 255, 0.55) !important;
+  box-shadow:
+    0 14px 40px rgba(0, 102, 255, 0.12),
+    0 0 24px rgba(0, 191, 255, 0.2),
+    inset 0 1px 1px #fff !important;
+}
+
+/* Active Left Indicator Bar */
+html.light #services div[class*="rounded-r"][class*="bg-\[\#38BDF8\]"],
+html.light .services-section-wrapper div[class*="rounded-r"][class*="bg-\[\#38BDF8\]"] {
+  background-color: #0066FF !important;
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.8) !important;
+}
+
+/* Number Label: "// 01" */
+html.light #services button span.text-\[\#38BDF8\],
+html.light .services-section-wrapper button span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 800 !important;
+}
+
+/* Service Title (h3): High-contrast Dark */
+html.light #services button h3,
+html.light .services-section-wrapper button h3 {
+  color: #00081C !important;
+  font-weight: 800 !important;
+  transition: color 0.2s ease !important;
+}
+
+html.light #services button:hover h3,
+html.light .services-section-wrapper button:hover h3 {
+  color: #0066FF !important;
+}
+
+/* Service Tagline */
+html.light #services button span.text-\[\#94A3B8\],
+html.light .services-section-wrapper button span.text-\[\#94A3B8\] {
+  color: #64748B !important;
+}
+
+/* Plus/Minus Circular Action Button */
+html.light #services button div[class*="rounded-full"][class*="border"],
+html.light .services-section-wrapper button div[class*="rounded-full"][class*="border"] {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #64748B !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light #services button:hover div[class*="rounded-full"][class*="border"],
+html.light .services-section-wrapper button:hover div[class*="rounded-full"][class*="border"] {
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+  background-color: #FFFFFF !important;
+}
+
+html.light #services button[aria-expanded="true"] div[class*="rounded-full"][class*="border"],
+html.light .services-section-wrapper button[aria-expanded="true"] div[class*="rounded-full"][class*="border"] {
+  background-color: rgba(0, 102, 255, 0.1) !important;
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+  box-shadow: 0 0 12px rgba(0, 102, 255, 0.25) !important;
+}
+
+html.light #services button div[class*="rounded-full"] svg,
+html.light .services-section-wrapper button div[class*="rounded-full"] svg {
+  color: #0066FF !important;
+}
+
+/* Expanded Panel Content */
+html.light #services div[role="region"],
+html.light .services-section-wrapper div[role="region"] {
+  border-top-color: #E2E8F0 !important;
+}
+
+/* Deliverables, Technologies & Use Cases Titles */
+html.light #services div[role="region"] span.text-\[\#38BDF8\],
+html.light .services-section-wrapper div[role="region"] span.text-\[\#38BDF8\] {
+  color: #0066FF !important;
+  font-weight: 700 !important;
+}
+
+/* Deliverables List Items */
+html.light #services div[role="region"] ul.font-body li span,
+html.light .services-section-wrapper div[role="region"] ul.font-body li span {
+  color: #1E293B !important;
+}
+
+html.light #services div[role="region"] ul.font-body li svg,
+html.light .services-section-wrapper div[role="region"] ul.font-body li svg {
+  color: #0066FF !important;
+}
+
+/* Technology Badges */
+html.light #services div[role="region"] span[class*="bg-\[\#07152F\]"],
+html.light .services-section-wrapper div[role="region"] span[class*="bg-\[\#07152F\]"] {
+  background-color: #EEF4FB !important;
+  color: #0F172A !important;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 600 !important;
+}
+
+/* Typical Use Cases Bullet List */
+html.light #services div[role="region"] ul.font-mono li,
+html.light .services-section-wrapper div[role="region"] ul.font-mono li {
+  color: #475569 !important;
+}
+
+/* Discuss Scope Link */
+html.light #services div[role="region"] a[href*="contact"],
+html.light .services-section-wrapper div[role="region"] a[href*="contact"] {
+  color: #0066FF !important;
+  border-top-color: #E2E8F0 !important;
+  font-weight: 700 !important;
+}
+
+html.light #services div[role="region"] a[href*="contact"]:hover,
+html.light .services-section-wrapper div[role="region"] a[href*="contact"]:hover {
+  color: #0056EE !important;
 }
 
 /* ==========================================================================

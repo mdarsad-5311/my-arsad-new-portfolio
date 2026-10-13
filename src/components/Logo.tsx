@@ -30,9 +30,9 @@ export default function Logo({
       className={`relative inline-flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105 select-none ${className}`}
       style={{ height: actualHeight, width: actualWidth }}
     >
-      {/* Ambient matching radial glow expanding naturally around the logo */}
+      {/* Ambient matching radial glow expanding naturally around the logo (Dark Mode only) */}
       <div
-        className="absolute -inset-3 pointer-events-none rounded-full blur-lg opacity-90"
+        className="logo-dark-glow absolute -inset-3 pointer-events-none rounded-full blur-lg opacity-90"
         style={{
           background:
             "radial-gradient(ellipse at 50% 30%, rgba(1, 28, 87, 0.95) 0%, rgba(0, 14, 48, 0.6) 45%, transparent 75%)",
@@ -40,18 +40,29 @@ export default function Logo({
         aria-hidden="true"
       />
 
+      {/* Dark mode logo (original logo1.png with dark background and smooth gradient mask) */}
       <Image
         src="/logo1.png"
         alt="MD ARSAD — Full-Stack Engineer"
         width={actualWidth * 2}
         height={actualHeight * 2}
-        className="w-full h-full object-contain relative z-10"
+        className="logo-dark-img w-full h-full object-contain relative z-10"
         style={{
           maskImage:
             "radial-gradient(ellipse at 50% 50%, black 45%, transparent 85%)",
           WebkitMaskImage:
             "radial-gradient(ellipse at 50% 50%, black 45%, transparent 85%)",
         }}
+        priority={priority}
+      />
+
+      {/* Light mode logo (transparent logo-light.png matching light navbar seamlessly) */}
+      <Image
+        src="/logo-light.png"
+        alt="MD ARSAD — Full-Stack Engineer"
+        width={actualWidth * 2}
+        height={actualHeight * 2}
+        className="logo-light-img w-full h-full object-contain relative z-10"
         priority={priority}
       />
     </div>

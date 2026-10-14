@@ -1580,10 +1580,55 @@ html.light #experience .text-\[\#CBD5E1\] {
   color: #334155 !important;
 }
 
+/* Experience Section Technology Badges & Track Pills (Light Mode Only) */
+html.light #experience span[class*="bg-[#001033]"] {
+  background-color: #EEF4FB !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  font-weight: 600 !important;
+}
+
+html.light #experience span[class*="bg-[#001033]"]:hover {
+  background-color: #E0EDFA !important;
+  border-color: #0066FF !important;
+  color: #0066FF !important;
+}
+
+html.light #experience span[class*="bg-[#000E2E]"] {
+  background-color: #EEF4FB !important;
+  color: #0066FF !important;
+  border-color: #CBD5E1 !important;
+  font-weight: 700 !important;
+}
+
+
 /* GitHub repo links & titles */
-html.light #github a h3,
-html.light #github .text-white {
+html.light #github h2.text-white,
+html.light #github a h3 {
   color: #00081C !important;
+}
+
+/* GitHub "VIEW GITHUB PROFILE" Button (Light Mode Only - ensure crisp white text) */
+html.light #github a[class*="bg-[#001D4D]"],
+html.light #github a[class*="bg-[#001D4D]"] span {
+  color: #FFFFFF !important;
+}
+
+html.light #github a[class*="bg-[#001D4D]"] svg {
+  color: #38BDF8 !important;
+}
+
+html.light #github a[class*="bg-[#001D4D]"]:hover {
+  background-color: #002766 !important;
+  border-color: #38BDF8 !important;
+}
+
+/* GitHub Repository Technology Badges (Light Mode Only) */
+html.light #github span[class*="bg-[#000B25]"] {
+  background-color: #EEF4FB !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+  font-weight: 600 !important;
 }
 
 html.light #github .text-\[\#94A3B8\],

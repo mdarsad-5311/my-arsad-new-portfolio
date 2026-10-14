@@ -117,22 +117,18 @@ export default function HowIWork() {
 
                   {/* Left Column / Card on Even, Right on Odd */}
                   <div
-                    className={`${
-                      isEven ? "md:text-right md:pr-12 lg:pr-16" : "md:order-2 md:pl-12 lg:pl-16"
+                    className={`text-left ${
+                      isEven ? "md:pr-12 lg:pr-16" : "md:order-2 md:pl-12 lg:pl-16"
                     }`}
                   >
                     <div
-                      className={`p-6 sm:p-8 rounded-2xl border transition-all duration-300 ${
+                      className={`p-6 sm:p-8 rounded-2xl border transition-all duration-300 text-left ${
                         isActive
                           ? "bg-[#0D1D3A]/90 border-[#38BDF8] shadow-[0_8px_30px_rgba(56,189,248,0.18)] ring-1 ring-[#38BDF8]/30"
                           : "bg-[#0D1D3A]/50 border-[#1E3A5F]/70 hover:border-[#38BDF8]/50 hover:bg-[#0D1D3A]/70"
                       }`}
                     >
-                      <div
-                        className={`flex items-center gap-3 pb-3 border-b border-[#1E3A5F]/50 mb-4 ${
-                          isEven ? "md:justify-end" : "justify-start"
-                        }`}
-                      >
+                      <div className="flex items-center gap-3 pb-3 border-b border-[#1E3A5F]/50 mb-4 justify-start">
                         <span className="font-mono text-sm font-bold text-[#38BDF8]">
                           PHASE {step.step}
                         </span>
@@ -157,11 +153,7 @@ export default function HowIWork() {
                         <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] block mb-2 font-semibold">
                           {t.howIWork.phaseDeliverables}:
                         </span>
-                        <div
-                          className={`flex flex-wrap gap-1.5 ${
-                            isEven ? "md:justify-end" : "justify-start"
-                          }`}
-                        >
+                        <div className="flex flex-wrap gap-1.5 justify-start">
                           {step.deliverables.map((item) => (
                             <span
                               key={item}

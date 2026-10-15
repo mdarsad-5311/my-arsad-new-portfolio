@@ -26,7 +26,7 @@ export default function HowIWork() {
 
       {/* Ambient Radial Glow */}
       <div
-        className="absolute bottom-10 right-10 w-[550px] h-[450px] rounded-full bg-[#0067FE]/[0.05] blur-[130px] pointer-events-none"
+        className="absolute bottom-10 right-10 w-137.5 h-112.5 rounded-full bg-[#0067FE]/5 blur-[130px] pointer-events-none"
         aria-hidden="true"
       />
 
@@ -82,7 +82,7 @@ export default function HowIWork() {
         <div className="relative mt-12 sm:mt-16">
           {/* Vertical Connecting Line Spine (Desktop) */}
           <div
-            className="hidden md:block absolute left-8 lg:left-1/2 top-4 bottom-4 w-0.5 -translate-x-1/2 bg-gradient-to-b from-[#38BDF8] via-[#0067FE] to-[#38BDF8]/30 pointer-events-none opacity-40"
+            className="hidden md:block absolute left-8 lg:left-1/2 top-4 bottom-4 w-0.5 -translate-x-1/2 bg-linear-to-b from-[#38BDF8] via-[#0067FE] to-[#38BDF8]/30 pointer-events-none opacity-40"
             aria-hidden="true"
           />
 

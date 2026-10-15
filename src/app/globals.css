@@ -283,11 +283,51 @@ body {
   z-index: 0;
 }
 
-/* Allow the continuous neon backlight to shine cleanly from navbar down to footer in dark mode */
+/* ==========================================================================
+   DARK MODE ARCHITECTURAL BLUEPRINT CANVAS (From Home to Footer)
+   - Continuous 48px Fine Hairline Cyan Grid Matrix
+   - Co-aligned 24px Dotted Coordinate System
+   - Deep Midnight Canvas (#00081C) with Cyan Edge Radiance
+   - Seamlessly flowing across Navbar, Hero, all Sections, and Footer
+   - STRICT SAFETY: Light Mode is 100% UNTOUCHED (all rules scoped to :not(html.light))
+   ========================================================================== */
+
+:not(html.light) html {
+  background-color: #00081C !important;
+}
+
+:not(html.light) body {
+  background-color: #00081C !important;
+  background-image:
+    /* Layer 1: Fine Hairline Cyan Grid Pattern (48px) */
+    linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+    /* Layer 2: Dotted Coordinate Matrix (24px) */
+    radial-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+  background-size:
+    48px 48px,
+    48px 48px,
+    24px 24px;
+  background-position:
+    center top,
+    center top,
+    center top;
+}
+
+/* Allow the continuous architectural blueprint canvas to shine through every section to footer */
 :not(html.light) main,
-:not(html.light) main>section {
+:not(html.light) main > section,
+:not(html.light) footer,
+:not(html.light) header {
   background-color: transparent !important;
 }
+
+/* Hide disparate per-section inline dot divs in dark mode so the seamless unified 48px/24px blueprint canvas displays cleanly */
+:not(html.light) section > div.absolute.inset-0.pointer-events-none[aria-hidden="true"],
+:not(html.light) footer > div.absolute.inset-0.pointer-events-none[aria-hidden="true"] {
+  display: none !important;
+}
+
 
 /* ==========================================================================
 /* ==========================================================================

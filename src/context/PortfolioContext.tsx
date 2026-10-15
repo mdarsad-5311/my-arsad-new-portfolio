@@ -28,6 +28,19 @@ import {
 
 export type Theme = "dark" | "light";
 
+export interface VisitorLocation {
+  city: string;
+  region: string;
+  country: string;
+  countryCode: string;
+  flagEmoji: string;
+  latitude: number | null;
+  longitude: number | null;
+  loading: boolean;
+  detected: boolean;
+  source: "ip" | "gps" | "fallback";
+}
+
 interface PortfolioContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -35,6 +48,8 @@ interface PortfolioContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
+  visitorLocation: VisitorLocation;
+  detectGpsLocation: () => Promise<void>;
   t: TranslationDictionary;
   services: ServiceItem[];
   whyWorkWithMe: WhyWorkItem[];
@@ -54,6 +69,131 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [theme, setThemeState] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
+  const [visitorLocation, setVisitorLocation] = useState<VisitorLocation>({
+    city: "Nashik",
+    region: "Maharashtra",
+    country: "India",
+    countryCode: "IN",
+    flagEmoji: "🇮🇳",
+    latitude: 19.9975,
+    longitude: 73.7898,
+    loading: true,
+    detected: false,
+    source: "fallback",
+  });
+
+  // Auto-catch Visitor Geolocation via high-speed, non-intrusive IP lookup
+  useEffect(() => {
+    let isCancelled = false;
+
+    const autoCatchLocation = async () => {
+      // 1. Check session cache first for instant load
+      try {
+        const cached = sessionStorage.getItem("portfolio_visitor_location");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (!isCancelled && parsed && parsed.city) {
+            setVisitorLocation({ ...parsed, loading: false });
+            return;
+          }
+        }
+      } catch {}
+
+      // 2. Query ipwho.is with 3.5s timeout
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const res = await fetch("https://ipwho.is/", { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (!isCancelled && data && data.success) {
+            const loc: VisitorLocation = {
+              city: data.city || "Nashik",
+              region: data.region || "Maharashtra",
+              country: data.country || "India",
+              countryCode: data.country_code || "IN",
+              flagEmoji: data.flag?.emoji || "🇮🇳",
+              latitude: typeof data.latitude === "number" ? data.latitude : 19.9975,
+              longitude: typeof data.longitude === "number" ? data.longitude : 73.7898,
+              loading: false,
+              detected: true,
+              source: "ip",
+            };
+            setVisitorLocation(loc);
+            try {
+              sessionStorage.setItem("portfolio_visitor_location", JSON.stringify(loc));
+            } catch {}
+            return;
+          }
+        }
+      } catch {
+        // Fallback gracefully on timeout/network error
+      }
+
+      // 3. Fallback to client browser timezone deduction
+      if (!isCancelled) {
+        try {
+          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+          const cityGuess = tz.split("/")[1]?.replace(/_/g, " ") || "Nashik";
+          const fallbackLoc: VisitorLocation = {
+            city: cityGuess,
+            region: "Detected Zone",
+            country: tz.includes("Kolkata") || tz.includes("Calcutta") ? "India" : "Global",
+            countryCode: tz.includes("Kolkata") || tz.includes("Calcutta") ? "IN" : "INTL",
+            flagEmoji: tz.includes("Kolkata") || tz.includes("Calcutta") ? "🇮🇳" : "🌐",
+            latitude: 19.9975,
+            longitude: 73.7898,
+            loading: false,
+            detected: true,
+            source: "fallback",
+          };
+          setVisitorLocation(fallbackLoc);
+        } catch {
+          setVisitorLocation((prev) => ({ ...prev, loading: false }));
+        }
+      }
+    };
+
+    autoCatchLocation();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  // Precise browser GPS auto-catch triggered on user demand
+  const detectGpsLocation = async () => {
+    if (typeof window === "undefined" || !("geolocation" in navigator)) {
+      return;
+    }
+    setVisitorLocation((prev) => ({ ...prev, loading: true }));
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setVisitorLocation((prev) => {
+          const updated: VisitorLocation = {
+            ...prev,
+            latitude: lat,
+            longitude: lng,
+            loading: false,
+            detected: true,
+            source: "gps",
+          };
+          try {
+            sessionStorage.setItem("portfolio_visitor_location", JSON.stringify(updated));
+          } catch {}
+          return updated;
+        });
+      },
+      () => {
+        setVisitorLocation((prev) => ({ ...prev, loading: false }));
+      },
+      { timeout: 8000, enableHighAccuracy: true }
+    );
+  };
 
   // Initialize from localStorage or defaults
   useEffect(() => {
@@ -220,6 +360,8 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     theme,
     setTheme,
     toggleTheme,
+    visitorLocation,
+    detectGpsLocation,
     t,
     services: localizedServices,
     whyWorkWithMe: localizedWhyWorkWithMe,

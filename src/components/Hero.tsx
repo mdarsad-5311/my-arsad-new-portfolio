@@ -77,10 +77,16 @@ export default function Hero() {
               {t.hero.roleTag}
             </span>
             <span className="hidden md:inline-block text-[#1E3A5F] select-none">/</span>
-            <span className="hidden md:inline-flex items-center gap-1.5 text-[#94A3B8] text-xs font-normal tracking-wider normal-case font-body">
-              <MapPin className="w-3.5 h-3.5 text-[#38BDF8]" />
-              Nashik, Maharashtra, India
-            </span>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(DEVELOPER_INFO.location)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View Nashik on Google Maps (opens in a new tab)"
+              className="hidden md:inline-flex items-center gap-1.5 text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-xs font-normal tracking-wider normal-case font-body cursor-pointer group"
+            >
+              <MapPin className="w-3.5 h-3.5 text-[#38BDF8] group-hover:scale-110 transition-transform" />
+              <span className="group-hover:underline underline-offset-4">Nashik, Maharashtra, India</span>
+            </a>
           </div>
 
           {/* STEP 2: GIANT TYPOGRAPHIC HEADLINE — "FULL-STACK ENGINEER." */}

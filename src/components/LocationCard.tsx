@@ -6,7 +6,7 @@ import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function LocationCard() {
-  const { t } = usePortfolio();
+  const { t, visitorLocation } = usePortfolio();
   const [istTime, setIstTime] = useState<string>("");
   const [visitorTime, setVisitorTime] = useState<string>("");
   const [visitorTz, setVisitorTz] = useState<string>("");
@@ -226,6 +226,14 @@ export default function LocationCard() {
           <span className="text-[10px] text-emerald-400 font-medium">
             {timeDiffText}
           </span>
+          <div className="mt-1 pt-1.5 border-t border-[#1E3A5F]/40 flex items-center justify-between text-[10px] text-[#94A3B8]">
+            <span className="flex items-center gap-1 truncate text-[#CBD5E1]">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+              <span className="truncate">{visitorLocation.city}, {visitorLocation.country}</span>
+              <span>{visitorLocation.flagEmoji}</span>
+            </span>
+            <span className="text-[9px] text-[#38BDF8] font-mono shrink-0 uppercase">Auto-Caught</span>
+          </div>
         </div>
       </div>
 

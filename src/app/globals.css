@@ -2300,6 +2300,10 @@ html.light footer .space-y-3 span.font-semibold {
   color: #00081C !important;
 }
 
+html.light footer .space-y-3 a:hover span.font-semibold {
+  color: #0066FF !important;
+}
+
 html.light footer .space-y-3 span.text-\[\#38BDF8\] {
   color: #0066FF !important;
 }
@@ -2314,6 +2318,28 @@ html.light footer div[class*="rounded-lg bg-[#001238]"] {
 
 html.light footer div[class*="rounded-lg bg-[#001238]"] span.animate-pulse {
   background-color: #0066FF !important;
+}
+
+/* Auto-Caught Location HUD in light mode */
+html.light footer div[class*="rounded-xl bg-[#001033]"] {
+  background-color: #FFFFFF !important;
+  border-color: #D8E3F0 !important;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.05) !important;
+}
+
+html.light footer div[class*="rounded-xl bg-[#001033]"] span.text-white {
+  color: #00081C !important;
+}
+
+html.light footer div[class*="rounded-xl bg-[#001033]"] button {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  color: #0066FF !important;
+}
+
+html.light footer div[class*="rounded-xl bg-[#001033]"] button:hover {
+  background-color: #0066FF !important;
+  color: #FFFFFF !important;
 }
 
 /* Navigation Links */

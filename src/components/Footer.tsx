@@ -9,7 +9,7 @@ import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons
 import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function Footer() {
-  const { t } = usePortfolio();
+  const { t, visitorLocation, detectGpsLocation } = usePortfolio();
   const [istTime, setIstTime] = useState<string>("");
 
   useEffect(() => {
@@ -172,17 +172,90 @@ export default function Footer() {
                   <span className="text-[#38BDF8] font-bold">{istTime || "12:00:00 PM"}</span>
                 </div>
 
-                <div className="flex items-center gap-2.5 text-[#CBD5E1]">
-                  <MapPin className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(DEVELOPER_INFO.location)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open Base Station (Nashik) on Google Maps (opens in a new tab)"
+                  className="group/loc flex items-center gap-2.5 text-[#CBD5E1] hover:text-white transition-colors duration-200 cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#38BDF8] shrink-0 group-hover/loc:scale-110 transition-transform" />
                   <span>{t.footer.locationHeading}</span>
-                  <span className="text-white font-semibold">{DEVELOPER_INFO.location}</span>
+                  <span className="text-white font-semibold group-hover/loc:text-[#38BDF8] transition-colors flex items-center gap-1 underline-offset-4 group-hover/loc:underline">
+                    {DEVELOPER_INFO.location}
+                    <ArrowUpRight className="w-3 h-3 text-[#38BDF8] opacity-60 group-hover/loc:opacity-100 group-hover/loc:translate-x-0.5 group-hover/loc:-translate-y-0.5 transition-all" />
+                  </span>
+                </a>
+
+                {/* Live Auto-Caught Visitor Location HUD */}
+                <div className="p-2.5 rounded-xl bg-[#001033] border border-[#1E3A5F]/80 flex flex-col gap-1.5 transition-all duration-300">
+                  <div className="flex items-center justify-between text-[10px] text-[#94A3B8]">
+                    <span className="flex items-center gap-1.5 uppercase tracking-wider font-semibold">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      Auto-Caught Location:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        detectGpsLocation();
+                      }}
+                      title="Scan precise browser GPS location"
+                      className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-[#07152F] hover:bg-[#0067FE] text-[#38BDF8] hover:text-white border border-[#1E3A5F] hover:border-[#38BDF8] transition-all cursor-pointer"
+                    >
+                      {visitorLocation.source === "gps" ? "GPS Active" : "GPS Scan"}
+                    </button>
+                  </div>
+
+                  <a
+                    href={
+                      visitorLocation.latitude && visitorLocation.longitude
+                        ? `https://www.google.com/maps/search/?api=1&query=${visitorLocation.latitude},${visitorLocation.longitude}`
+                        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                            `${visitorLocation.city} ${visitorLocation.region} ${visitorLocation.country}`
+                          )}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Open your detected location on Google Maps (opens in a new tab)"
+                    className="flex items-center justify-between text-white hover:text-[#38BDF8] transition-colors group/live"
+                  >
+                    <span className="font-semibold text-xs flex items-center gap-1.5 truncate">
+                      {visitorLocation.loading ? (
+                        <span className="animate-pulse text-[#38BDF8]">Catching live location...</span>
+                      ) : (
+                        <>
+                          <span className="text-white group-hover/live:text-[#38BDF8] truncate">
+                            {visitorLocation.city}, {visitorLocation.region || visitorLocation.country}
+                          </span>
+                          <span className="text-sm shrink-0">{visitorLocation.flagEmoji}</span>
+                        </>
+                      )}
+                    </span>
+                    <span className="text-[10px] text-[#38BDF8] flex items-center gap-0.5 shrink-0 opacity-80 group-hover/live:opacity-100 font-mono">
+                      <span>MAP</span>
+                      <ArrowUpRight className="w-3 h-3 group-hover/live:translate-x-0.5 group-hover/live:-translate-y-0.5 transition-transform" />
+                    </span>
+                  </a>
                 </div>
 
-                <div className="flex items-center gap-2.5 text-[#CBD5E1]">
-                  <Compass className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("19.9975,73.7898")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Open GPS Coordinates on Google Maps (opens in a new tab)"
+                  className="group/coord flex items-center gap-2.5 text-[#CBD5E1] hover:text-white transition-colors duration-200 cursor-pointer"
+                >
+                  <Compass className="w-3.5 h-3.5 text-[#38BDF8] shrink-0 group-hover/coord:rotate-45 transition-transform" />
                   <span>{t.footer.coordinatesHeading}</span>
-                  <span className="text-[#38BDF8] font-mono font-semibold">{DEVELOPER_INFO.coordinates.display}</span>
-                </div>
+                  <span className="text-[#38BDF8] font-mono font-semibold group-hover/coord:text-white transition-colors flex items-center gap-1 underline-offset-4 group-hover/coord:underline">
+                    {DEVELOPER_INFO.coordinates.display}
+                    <ArrowUpRight className="w-3 h-3 text-[#38BDF8] opacity-60 group-hover/coord:opacity-100 group-hover/coord:translate-x-0.5 group-hover/coord:-translate-y-0.5 transition-all" />
+                  </span>
+                </a>
 
                 <div className="flex items-center gap-2.5 text-[#CBD5E1]">
                   <Globe className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />

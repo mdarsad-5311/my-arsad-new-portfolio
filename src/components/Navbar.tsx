@@ -11,7 +11,7 @@ import { usePortfolio } from "@/context/PortfolioContext";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { language, toggleLanguage, theme, toggleTheme, t } = usePortfolio();
+  const { language, toggleLanguage, theme, toggleTheme, t, visitorLocation } = usePortfolio();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -213,12 +213,18 @@ export default function Navbar() {
               </button>
 
               {/* Subtle Location & Local Time pill */}
-              <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0D1D3A]/70 border border-[#1E3A5F] font-mono text-[11px] tracking-wider text-[#94A3B8]">
-                <MapPin className="w-3 h-3 text-[#38BDF8]" />
-                <span className="text-white font-medium">{t.navbar.location}</span>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(DEVELOPER_INFO.location)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Base: ${DEVELOPER_INFO.location} • Auto-Caught Visitor: ${visitorLocation.city}, ${visitorLocation.country} (opens in a new tab)`}
+                className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0D1D3A]/70 border border-[#1E3A5F] hover:border-[#38BDF8]/60 font-mono text-[11px] tracking-wider text-[#94A3B8] hover:text-white transition-all duration-200 cursor-pointer group"
+              >
+                <MapPin className="w-3 h-3 text-[#38BDF8] group-hover:scale-110 transition-transform" />
+                <span className="text-white font-medium group-hover:text-[#38BDF8] transition-colors">{t.navbar.location}</span>
                 <span className="text-[#38BDF8]/40">•</span>
                 <span className="text-[#38BDF8] font-bold">{istTime || "IST"}</span>
-              </div>
+              </a>
 
               {/* WhatsApp Quick Chat Action */}
               <a

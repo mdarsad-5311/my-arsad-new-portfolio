@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Check, Plus, Minus, ArrowUpRight, Terminal, ShieldCheck, Zap, Clock } from "lucide-react";
+import { Check, Plus, Minus, ArrowUpRight } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
 
 interface ServicesSectionProps {

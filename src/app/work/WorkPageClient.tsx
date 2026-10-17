@@ -9,7 +9,7 @@ import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function WorkPageClient() {
-  const { projects, t, language } = usePortfolio();
+  const { projects, t } = usePortfolio();
 
   return (
     <main className="work-page-main relative min-h-screen bg-[#F8FAFC] dark:bg-[#00081C] text-slate-900 dark:text-white pt-24 sm:pt-32 selection:bg-[#0067FE] selection:text-white overflow-hidden">

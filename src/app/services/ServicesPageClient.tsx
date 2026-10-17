@@ -20,7 +20,7 @@ import { DEVELOPER_INFO } from "@/data/portfolioData";
 import { WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function ServicesPageClient() {
-  const { services, t, language } = usePortfolio();
+  const { services, t } = usePortfolio();
   const [activeService, setActiveService] = useState<number | null>(0);
 
   const toggleService = (index: number) => {

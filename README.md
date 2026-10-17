@@ -191,14 +191,16 @@ SMTP_FROM="MD Arsad Portfolio" <your_email@gmail.com>
 | `/` | Static (SSG) | Homepage assembling all editorial sections: Hero, Trust Strip, Selected Work, Services, How I Work, About, Experience, Stack, Repositories, FAQs, and Contact Form. |
 | `/work` | Static (SSG) | Full case study gallery with client-side category filtering (All, Full-Stack, EdTech, Healthcare, Corporate) and real-time search. |
 | `/work/[slug]` | Dynamic (SSG via `generateStaticParams`) | Deep-dive case study page detailing problem statements, architectures, highlights, key features, workflows, and deliverables. |
+| `/services` | Static (SSG) | Architectural client solutions and engineering capabilities tailored for startups and businesses. |
 | `/api/contact` | Route Handler (Node.js) | `POST` endpoint for enquiry submissions; `GET` endpoint for health check. |
-| `/sitemap.xml` | Generated Route | Dynamic XML sitemap containing root, `/work`, and all case study URLs. |
+| `/sitemap.xml` | Generated Route | Dynamic XML sitemap containing root, `/work`, `/services`, and all case study URLs. |
 | `/robots.txt` | Generated Route | Web crawler directives allowing all agents and linking to `/sitemap.xml`. |
 
 ### Permanent Redirects (`next.config.ts`)
 Legacy URLs are automatically forwarded with 308 permanent status codes:
 - `/work/aura-ecommerce` &rarr; `/work/al-umaima-ecommerce`
-- `/work/edusphere-erp` &rarr; `/work/al-umaima-school-erp`
+- `/work/edusphere-erp` &rarr; `/work/docusense-ai`
+- `/work/al-umaima-school-erp` &rarr; `/work/docusense-ai`
 - `/work/pharmflow-system` &rarr; `/work/nexus-metrics`
 - `/work/medicare-hospital-erp` &rarr; `/work/nexus-metrics`
 - `/work/apex-business` &rarr; `/work/kalycor-corporate`

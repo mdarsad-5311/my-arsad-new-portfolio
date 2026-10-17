@@ -34,9 +34,8 @@ export default function ContactSection() {
     message: string;
   } | null>(null);
   const [isCopied, setIsCopied] = useState(false);
-
   const [honeypot, setHoneypot] = useState("");
-  const [initTimestamp] = useState(() => Date.now());
+
 
   const projectTypes = [
     "Business Website",

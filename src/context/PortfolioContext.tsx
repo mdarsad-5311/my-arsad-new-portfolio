@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { Language, TranslationDictionary } from "@/types/translations";
 import { translations } from "@/data/translations";
-import { hindiContent, LocalizedContent } from "@/data/hindiContent";
+import { hindiContent } from "@/data/hindiContent";
 import {
   SERVICES,
   WHY_WORK_WITH_ME,
@@ -65,10 +65,21 @@ interface PortfolioContextType {
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(undefined);
 
+function applyThemeClass(newTheme: Theme) {
+  if (typeof document === "undefined") return;
+  const root = document.documentElement;
+  if (newTheme === "light") {
+    root.classList.add("light");
+    root.classList.remove("dark");
+  } else {
+    root.classList.add("dark");
+    root.classList.remove("light");
+  }
+}
+
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [theme, setThemeState] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
   const [visitorLocation, setVisitorLocation] = useState<VisitorLocation>({
     city: "Nashik",
     region: "Maharashtra",
@@ -199,36 +210,28 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const savedLang = localStorage.getItem("portfolio_language") as Language | null;
-      if (savedLang === "en" || savedLang === "hi") {
-        setLanguageState(savedLang);
-        document.documentElement.lang = savedLang;
-      }
-
       const savedTheme = localStorage.getItem("portfolio_theme") as Theme | null;
-      if (savedTheme === "dark" || savedTheme === "light") {
-        setThemeState(savedTheme);
-        applyThemeClass(savedTheme);
-      } else {
-        // Default theme is dark as requested
-        setThemeState("dark");
-        applyThemeClass("dark");
-      }
+
+      queueMicrotask(() => {
+        if (savedLang === "en" || savedLang === "hi") {
+          setLanguageState(savedLang);
+          if (typeof document !== "undefined") {
+            document.documentElement.lang = savedLang;
+          }
+        }
+
+        if (savedTheme === "dark" || savedTheme === "light") {
+          setThemeState(savedTheme);
+          applyThemeClass(savedTheme);
+        } else {
+          setThemeState("dark");
+          applyThemeClass("dark");
+        }
+      });
     } catch {
       // localStorage may not be available in private mode
     }
-    setMounted(true);
   }, []);
-
-  const applyThemeClass = (newTheme: Theme) => {
-    const root = document.documentElement;
-    if (newTheme === "light") {
-      root.classList.add("light");
-      root.classList.remove("dark");
-    } else {
-      root.classList.add("dark");
-      root.classList.remove("light");
-    }
-  };
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono, Rajdhani, Teko, Poppins } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono, Rajdhani, Poppins } from "next/font/google";
 import { SITE_CONFIG } from "@/data/portfolioData";
 import "./globals.css";
 
@@ -26,13 +26,6 @@ const jetbrainsMono = JetBrains_Mono({
 
 const rajdhani = Rajdhani({
   variable: "--font-rajdhani",
-  subsets: ["devanagari", "latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
-});
-
-const teko = Teko({
-  variable: "--font-teko",
   subsets: ["devanagari", "latin"],
   display: "swap",
   weight: ["500", "600", "700"],
@@ -125,7 +118,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolageGrotesque.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${rajdhani.variable} ${teko.variable} ${poppins.variable} h-full antialiased scroll-smooth`}
+      className={`${bricolageGrotesque.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${rajdhani.variable} ${poppins.variable} h-full antialiased scroll-smooth`}
     >
       <head>
         <script

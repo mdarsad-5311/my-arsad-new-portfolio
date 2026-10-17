@@ -65,8 +65,8 @@ export default function SelectedWork() {
         {/* Editorial Project Showcase: Alternating Asymmetrical Composition */}
         <div className="mt-16 sm:mt-24 flex flex-col gap-24 sm:gap-36">
           {projects.map((project, index) => {
-            // Flagship monumental layout for projects 01 & 04
-            const isMonumental = index === 0 || index === 3;
+            // Flagship monumental layout for projects 01, 04 & 07
+            const isMonumental = index === 0 || index === 3 || index === 6;
             // Alternating split composition for other projects
             const isReversed = index % 2 === 1;
 

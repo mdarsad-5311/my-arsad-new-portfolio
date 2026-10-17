@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitBranch, ShieldCheck, Cpu, Database, Server, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, GitBranch, ShieldCheck, Cpu, Database, Server, Globe, Smartphone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { PROJECTS, DEVELOPER_INFO } from "@/data/portfolioData";
@@ -79,19 +79,20 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const project = PROJECTS[projectIndex];
   const prevProject = PROJECTS[(projectIndex - 1 + PROJECTS.length) % PROJECTS.length];
   const nextProject = PROJECTS[(projectIndex + 1) % PROJECTS.length];
+  const isMobile = project.platform === "mobile";
 
   // Group technologies for Technical Architecture
   const frontendTech = project.technologies.filter((t) =>
-    ["React", "Next.js", "TypeScript", "Tailwind CSS", "Modern CSS", "Responsive Web Design"].includes(t)
+    ["React", "Next.js", "TypeScript", "Tailwind CSS", "Modern CSS", "Responsive Web Design", "React Native", "Expo", "React Navigation"].includes(t)
   );
   const backendTech = project.technologies.filter((t) =>
-    ["Python", "Django", "Django REST Framework", "Django REST", "REST API", "Stripe API"].includes(t)
+    ["Python", "Django", "Django REST Framework", "Django REST", "REST API", "Stripe API", "Context API"].includes(t)
   );
   const databaseTech = project.technologies.filter((t) =>
-    ["PostgreSQL", "Relational Database"].includes(t)
+    ["PostgreSQL", "Relational Database", "AsyncStorage", "SQLite3 / PostgreSQL"].includes(t)
   );
   const infraTech = project.technologies.filter((t) =>
-    ["Docker", "Vercel", "Git", "GitHub"].includes(t)
+    ["Docker", "Vercel", "Git", "GitHub", "EAS"].includes(t)
   );
 
   return (
@@ -306,7 +307,69 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* 6. TECHNICAL ARCHITECTURE (Frontend, Backend, Database, Infrastructure) */}
+        {/* 4.5. INTERACTIVE MOBILE SCREENS GALLERY (For Mobile & Cross-Platform Projects) */}
+        {project.screenshots && project.screenshots.length > 0 && (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-b border-[#D8E3F0] dark:border-[#1E3A5F]/60 bg-[#F8FAFC]/50 dark:bg-[#00081C]/40 relative z-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#D8E3F0] dark:border-[#1E3A5F]/60">
+              <div>
+                <div className="flex items-center gap-2 mb-2 font-mono text-xs uppercase tracking-widest text-[#0067FE] dark:text-[#38BDF8] font-bold">
+                  <Smartphone className="w-4 h-4" />
+                  <span>MOBILE APP SCREENS &amp; FLOWS</span>
+                </div>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight text-slate-900 dark:text-white">
+                  Native Screen Architecture &amp; UI
+                </h2>
+              </div>
+              <p className="font-body text-sm sm:text-base text-slate-600 dark:text-[#94A3B8] max-w-md">
+                Cross-platform mobile interfaces built with React Native and Expo, featuring rapid state synchronization and touch-optimized gestures.
+              </p>
+            </div>
+
+            <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-start">
+              {project.screenshots.map((screen, idx) => (
+                <div
+                  key={screen.title}
+                  className="flex flex-col rounded-3xl bg-white dark:bg-[#0D1D3A]/80 border border-slate-200 dark:border-[#1E3A5F] overflow-hidden shadow-[0_12px_40px_rgba(0,103,254,0.06)] dark:shadow-[0_16px_45px_rgba(0,0,0,0.5)] group hover:border-[#0067FE]/60 dark:hover:border-[#38BDF8]/60 transition-all duration-300"
+                >
+                  {/* Smartphone device chrome frame */}
+                  <div className="p-5 sm:p-6 bg-slate-100/70 dark:bg-[#07152F] flex justify-center border-b border-slate-200 dark:border-[#1E3A5F]/60">
+                    <div className="relative w-full max-w-[280px] aspect-[460/1024] rounded-[32px] overflow-hidden border-[7px] border-slate-800 dark:border-slate-700 shadow-2xl bg-slate-900 ring-1 ring-white/10">
+                      {/* Dynamic Island pill */}
+                      <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-20 pointer-events-none flex items-center justify-end pr-2.5">
+                        <span className="w-2 h-2 rounded-full bg-slate-800" />
+                      </div>
+                      <Image
+                        src={screen.image}
+                        alt={screen.title}
+                        fill
+                        className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                        sizes="(max-width: 768px) 100vw, 320px"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Card Content & Caption */}
+                  <div className="p-6 flex flex-col gap-2.5">
+                    <div className="flex items-center justify-between font-mono text-[11px] text-[#0067FE] dark:text-[#38BDF8] font-bold">
+                      <span>SCREEN 0{idx + 1}</span>
+                      <span className="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-[#07152F] border border-blue-200 dark:border-[#1E3A5F] text-[10px] uppercase">
+                        React Native + Expo
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold uppercase tracking-tight text-slate-900 dark:text-white mt-1">
+                      {screen.title}
+                    </h3>
+                    <p className="font-body text-xs sm:text-sm text-slate-600 dark:text-[#CBD5E1] leading-relaxed">
+                      {screen.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 5. TECHNICAL ARCHITECTURE (Frontend/Mobile, Backend, Database, Infrastructure) */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 border-b border-[#D8E3F0] dark:border-[#1E3A5F]/60 bg-[#EDF3FA] dark:bg-transparent relative z-10">
           <div className="mb-10 pb-6 border-b border-[#D8E3F0] dark:border-[#1E3A5F]/60">
             <span className="font-mono text-xs uppercase tracking-widest text-[#0067FE] dark:text-[#38BDF8] font-bold block mb-2">
@@ -318,37 +381,52 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-mono text-xs">
-            {/* Frontend */}
+            {/* Frontend / Mobile */}
             <div className="p-6 rounded-xl bg-white dark:bg-[#0D1D3A]/60 border border-slate-200 dark:border-[#1E3A5F] shadow-2xs">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-[#1E3A5F]/60 text-[#0067FE] dark:text-[#38BDF8]">
-                <Cpu className="w-4 h-4" />
-                <span className="font-bold uppercase tracking-wider">Frontend Architecture</span>
+                {isMobile ? <Smartphone className="w-4 h-4" /> : <Cpu className="w-4 h-4" />}
+                <span className="font-bold uppercase tracking-wider">
+                  {isMobile ? "Mobile Architecture" : "Frontend Architecture"}
+                </span>
               </div>
               <ul className="mt-4 space-y-2 text-slate-700 dark:text-[#CBD5E1]">
                 {frontendTech.length > 0 ? (
                   frontendTech.map((t) => <li key={t}>• {t}</li>)
+                ) : isMobile ? (
+                  <>
+                    <li>• React Native Core</li>
+                    <li>• Expo SDK Workflow</li>
+                    <li>• React Navigation Tabs</li>
+                  </>
                 ) : (
                   <li>• Next.js App Router</li>
                 )}
               </ul>
             </div>
 
-            {/* Backend */}
+            {/* Backend / API */}
             <div className="p-6 rounded-xl bg-white dark:bg-[#0D1D3A]/60 border border-slate-200 dark:border-[#1E3A5F] shadow-2xs">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-[#1E3A5F]/60 text-[#0067FE] dark:text-[#38BDF8]">
                 <Server className="w-4 h-4" />
-                <span className="font-bold uppercase tracking-wider">Backend &amp; API Layer</span>
+                <span className="font-bold uppercase tracking-wider">
+                  {isMobile ? "API & State Layer" : "Backend & API Layer"}
+                </span>
               </div>
               <ul className="mt-4 space-y-2 text-slate-700 dark:text-[#CBD5E1]">
                 {backendTech.length > 0 ? (
                   backendTech.map((t) => <li key={t}>• {t}</li>)
+                ) : isMobile ? (
+                  <>
+                    <li>• RESTful Hyperlocal APIs</li>
+                    <li>• Context API State Engine</li>
+                  </>
                 ) : (
                   <li>• Django REST Framework</li>
                 )}
               </ul>
             </div>
 
-            {/* Database */}
+            {/* Database & Storage */}
             <div className="p-6 rounded-xl bg-white dark:bg-[#0D1D3A]/60 border border-slate-200 dark:border-[#1E3A5F] shadow-2xs">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-[#1E3A5F]/60 text-[#0067FE] dark:text-[#38BDF8]">
                 <Database className="w-4 h-4" />
@@ -357,13 +435,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <ul className="mt-4 space-y-2 text-slate-700 dark:text-[#CBD5E1]">
                 {databaseTech.length > 0 ? (
                   databaseTech.map((t) => <li key={t}>• {t}</li>)
+                ) : isMobile ? (
+                  <>
+                    <li>• AsyncStorage Persistence</li>
+                    <li>• Client-Side Cart Caching</li>
+                  </>
                 ) : (
                   <li>• PostgreSQL Relational Engine</li>
                 )}
               </ul>
             </div>
 
-            {/* Infrastructure */}
+            {/* Infrastructure & Deployment */}
             <div className="p-6 rounded-xl bg-white dark:bg-[#0D1D3A]/60 border border-slate-200 dark:border-[#1E3A5F] shadow-2xs">
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-[#1E3A5F]/60 text-[#0067FE] dark:text-[#38BDF8]">
                 <Globe className="w-4 h-4" />
@@ -372,6 +455,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <ul className="mt-4 space-y-2 text-slate-700 dark:text-[#CBD5E1]">
                 {infraTech.length > 0 ? (
                   infraTech.map((t) => <li key={t}>• {t}</li>)
+                ) : isMobile ? (
+                  <>
+                    <li>• Expo Application Services (EAS)</li>
+                    <li>• Cross-Platform iOS &amp; Android</li>
+                  </>
                 ) : (
                   <>
                     <li>• Vercel Edge Hosting</li>

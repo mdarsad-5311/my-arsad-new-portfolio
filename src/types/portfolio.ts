@@ -14,6 +14,12 @@ export interface ProjectFeature {
   description: string;
 }
 
+export interface ProjectScreenshot {
+  title: string;
+  image: string;
+  description: string;
+}
+
 export interface ProjectItem {
   id: string;
   slug: string;
@@ -36,6 +42,8 @@ export interface ProjectItem {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
+  platform?: "web" | "mobile" | "cross-platform";
+  screenshots?: ProjectScreenshot[];
 }
 
 export interface ServiceItem {

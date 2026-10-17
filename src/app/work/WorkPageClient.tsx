@@ -101,7 +101,7 @@ export default function WorkPageClient() {
                   <span>{t.workPage.coreArchitecture}</span>
                 </span>
                 <span className="text-slate-900 dark:text-white font-bold">
-                  Next.js + Django
+                  Next.js • Django • React Native
                 </span>
               </div>
 

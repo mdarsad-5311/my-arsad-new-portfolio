@@ -75,6 +75,7 @@ export const DEVELOPER_INFO = {
 
   coreCompetencies: [
     "Frontend Engineering (React, Next.js, TypeScript)",
+    "Mobile App Engineering (React Native, Expo)",
     "Backend Architecture (Python, Django REST Framework)",
     "RESTful API Design & Integration",
     "Database Modeling & Integration (PostgreSQL)",
@@ -98,6 +99,8 @@ export const TRUST_TECHNOLOGIES = [
   { name: "React", category: "Frontend" },
   { name: "Next.js", category: "Framework" },
   { name: "TypeScript", category: "Language" },
+  { name: "React Native", category: "Mobile" },
+  { name: "Expo", category: "Framework" },
   { name: "Django", category: "Backend" },
   { name: "Python", category: "Language" },
   { name: "PostgreSQL", category: "Database" },
@@ -601,6 +604,118 @@ export const PROJECTS: ProjectItem[] = [
       "Production Next.js educational news and career portal deployed live on Vercel.",
       "Comprehensive notification categorization across government jobs and board results.",
       "Accessible dark/light design system with zero layout shifts and sub-second navigation.",
+    ],
+  },
+  {
+    id: "freshly-grocery-app",
+    slug: "freshly-grocery-app",
+    number: "07",
+    title: "Freshly — Hyperlocal Farm-Fresh Produce & Grocery App",
+    shortDescription:
+      "A cross-platform mobile application engineered with React Native and Expo delivering 10–15 minute hyperlocal grocery delivery, interactive produce categorization, real-time cart state, and frictionless user profile management.",
+    category: "Mobile Application (iOS & Android)",
+    year: "2026",
+    technologies: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Navigation",
+      "Context API",
+      "REST API",
+    ],
+    image: "/projects/freshly-mobile-app.png",
+    role: "Mobile Application Architecture & Engineering",
+    projectType: "Mobile Production System",
+    platform: "mobile",
+    githubUrl: "https://github.com/mdarsad-5311/freshly-grocery-app",
+    liveUrl: "https://github.com/mdarsad-5311/freshly-grocery-app",
+    featured: true,
+    screenshots: [
+      {
+        title: "Hyperlocal Home & Quick Tour Discovery",
+        image: "/projects/freshly-home.jpg",
+        description:
+          "Geolocated delivery address switcher ('HSR Layout, Bengaluru'), 10–15 min quick delivery badge, guided onboarding tour, seasonal harvest promo hero, and quick category roundels.",
+      },
+      {
+        title: "Produce Taxonomy & Dual-Column Catalog",
+        image: "/projects/freshly-categories.jpg",
+        description:
+          "Structured 2-column catalog grid for fresh vegetables, fruits, leafy greens, root vegetables, exotic produce, and seasonal fruits with unified search querying.",
+      },
+      {
+        title: "Account Hub, Address Book & Cart State",
+        image: "/projects/freshly-profile.jpg",
+        description:
+          "User profile center with order tracking, saved address books, favourite items, promotional coupon wallets, active 3-item cart counter badge, and support channels.",
+      },
+    ],
+    overview:
+      "Freshly is a modern, high-performance mobile grocery application developed with React Native and Expo targeting iOS and Android. Engineered around rapid 10–15 minute hyperlocal delivery, the app features an intuitive home dashboard with live geolocation switching, seasonal farm-fresh harvest highlights, structured produce discovery (fruits, vegetables, leafy greens, exotic produce), dynamic search query filtering, client-side cart synchronization with live counter badges, and complete user profile and order history navigation.",
+    problem:
+      "Hyperlocal quick-commerce mobile apps demand sub-second UI responsiveness, buttery smooth 60 FPS transitions, reliable state synchronization across multi-item carts, and crystal-clear visual hierarchy for shoppers purchasing perishable produce under tight delivery timeframes.",
+    solution:
+      "Architected an agile React Native and Expo mobile architecture utilizing TypeScript, modular component design, optimized image rendering, lightweight Context API state orchestration for persistent multi-item carts, and intuitive bottom tab navigation (Home, Categories, Cart with live badge count, Profile) ensuring frictionless UX on both iOS and Android.",
+    highlights: [
+      { label: "Platform", value: "iOS & Android (Expo)" },
+      { label: "Delivery ETA", value: "10–15 Min Hyperlocal" },
+      { label: "State Sync", value: "Client-Side Cart & Badges" },
+      { label: "UI Framework", value: "React Native & NativeWind" },
+    ],
+    features: [
+      {
+        title: "Hyperlocal Home & Interactive Guided Onboarding",
+        description:
+          "Dynamic geolocation address selector (e.g. HSR Layout, Bengaluru), 10–15 minute ETA indicator pill, step-by-step interactive walkthrough tour, and promotional farm-fresh harvest hero banner.",
+      },
+      {
+        title: "Dual-Column Produce Category Explorer",
+        description:
+          "High-density responsive grid categorizing fresh fruits, vine tomatoes, crisp leafy spinach, root carrots, exotic broccoli, and seasonal mangoes with instantaneous search filtering.",
+      },
+      {
+        title: "Persistent Cart & Bottom Tab Navigation",
+        description:
+          "Floating action badges reflecting live item counts (3 items in cart), instantaneous quantity adjustments, and fluid React Navigation tab transitions.",
+      },
+      {
+        title: "Comprehensive Account & Order Architecture",
+        description:
+          "Full user profile suite containing order tracking, saved multi-address geolocations, wishlisted favorites, promotional coupon wallets, and help desk integration.",
+      },
+    ],
+    process: [
+      {
+        phase: "Phase 01",
+        title: "Mobile UX & Hyperlocal Information Architecture",
+        description:
+          "Structured screen flows and component hierarchies for 10–15 min quick-commerce shopping, onboarding tours, category taxonomy, and checkout flows.",
+      },
+      {
+        phase: "Phase 02",
+        title: "Expo & React Native Foundation",
+        description:
+          "Bootstrapped cross-platform Expo workflow with strict TypeScript typing, asset preloading, vector icon sets, and React Navigation bottom tabs.",
+      },
+      {
+        phase: "Phase 03",
+        title: "Catalog Grid & Cart State Management",
+        description:
+          "Engineered dual-column category layouts, search query debouncing, client-side cart context with live badge indicators, and saved address arrays.",
+      },
+      {
+        phase: "Phase 04",
+        title: "Device Optimization & Cross-Platform QA",
+        description:
+          "Profiled memory footprints, optimized asset caching, ensured WCAG contrast on soft yellow/cream and forest green palettes, and tested across iOS and Android simulators.",
+      },
+    ],
+    deliverables: [
+      "Cross-platform React Native and Expo mobile app suite targeting iOS and Android.",
+      "Comprehensive screen flows: Hyperlocal Home, Dual-Column Categories, Cart Drawer, and Customer Profile.",
+      "Strict TypeScript component architecture with centralized cart and address state management.",
+      "Production-ready mobile design system with cohesive emerald green, sun-yellow, and organic cream aesthetics.",
     ],
   },
 ];

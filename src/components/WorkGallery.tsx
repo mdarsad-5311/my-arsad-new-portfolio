@@ -30,6 +30,7 @@ const PROJECT_DOMAINS: Record<string, string> = {
   "kalycor-corporate": "kalycor.global",
   "daania-skincare": "mdarsad5311.pythonanywhere.com",
   "educareer360": "career360-zeta.vercel.app",
+  "freshly-grocery-app": "freshly.app",
 };
 
 export default function WorkGallery({ projects: initialProjects }: WorkGalleryProps) {
@@ -51,7 +52,7 @@ export default function WorkGallery({ projects: initialProjects }: WorkGalleryPr
     const techSet = new Set<string>();
     projects.forEach((p) => {
       p.technologies.forEach((t) => {
-        if (["Next.js", "Django", "TypeScript", "React", "Tailwind CSS", "PostgreSQL", "Python"].includes(t)) {
+        if (["Next.js", "Django", "TypeScript", "React", "React Native", "Expo", "Tailwind CSS", "PostgreSQL", "Python"].includes(t)) {
           techSet.add(t);
         }
       });

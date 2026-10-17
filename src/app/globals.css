@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* Recommended Color Palette */
   --deep-navy: #07152F;
@@ -39,6 +41,14 @@ html {
   scroll-behavior: smooth;
   color-scheme: light dark;
   overflow-x: hidden;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {

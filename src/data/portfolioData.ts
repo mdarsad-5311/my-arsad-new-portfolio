@@ -612,24 +612,26 @@ export const PROJECTS: ProjectItem[] = [
     number: "07",
     title: "Freshly — Hyperlocal Farm-Fresh Produce & Grocery App",
     shortDescription:
-      "A cross-platform mobile application engineered with React Native and Expo delivering 10–15 minute hyperlocal grocery delivery, interactive produce categorization, real-time cart state, and frictionless user profile management.",
+      "Full-stack grocery delivery mobile app built with React Native (Expo) and Django REST Framework. Features optimistic Zustand cart state with haptics, server-side bill/coupon calculations, JWT token rotation, and SQLite 3 database modeling.",
     category: "Mobile Application (iOS & Android)",
     year: "2026",
     technologies: [
       "React Native",
       "Expo",
       "TypeScript",
-      "Tailwind CSS",
-      "React Navigation",
-      "Context API",
+      "Django",
+      "Django REST Framework",
+      "Python",
+      "SQLite 3",
+      "Zustand",
       "REST API",
     ],
     image: "/projects/freshly-mobile-app.png",
-    role: "Mobile Application Architecture & Engineering",
+    role: "Full-Stack Mobile Architecture & Engineering",
     projectType: "Mobile Production System",
     platform: "mobile",
-    githubUrl: "https://github.com/mdarsad-5311/freshly-grocery-app",
-    liveUrl: "https://github.com/mdarsad-5311/freshly-grocery-app",
+    githubUrl: "https://github.com/mdarsad-5311/freshdash",
+    liveUrl: "https://github.com/mdarsad-5311/freshdash",
     featured: true,
     screenshots: [
       {
@@ -642,80 +644,80 @@ export const PROJECTS: ProjectItem[] = [
         title: "Produce Taxonomy & Dual-Column Catalog",
         image: "/projects/freshly-categories.jpg",
         description:
-          "Structured 2-column catalog grid for fresh vegetables, fruits, leafy greens, root vegetables, exotic produce, and seasonal fruits with unified search querying.",
+          "Structured 2-column catalog grid for fresh vegetables, fruits, leafy greens, root vegetables, exotic produce, and seasonal fruits with Django REST search filtering.",
       },
       {
         title: "Account Hub, Address Book & Cart State",
         image: "/projects/freshly-profile.jpg",
         description:
-          "User profile center with order tracking, saved address books, favourite items, promotional coupon wallets, active 3-item cart counter badge, and support channels.",
+          "User profile center with order tracking, saved address books, favourite items, promotional coupon wallets (FRESH20), active cart badge, and JWT auth state.",
       },
     ],
     overview:
-      "Freshly is a modern, high-performance mobile grocery application developed with React Native and Expo targeting iOS and Android. Engineered around rapid 10–15 minute hyperlocal delivery, the app features an intuitive home dashboard with live geolocation switching, seasonal farm-fresh harvest highlights, structured produce discovery (fruits, vegetables, leafy greens, exotic produce), dynamic search query filtering, client-side cart synchronization with live counter badges, and complete user profile and order history navigation.",
+      "Built to simulate a fast hyperlocal grocery shopping experience. The mobile client uses Expo and React Native with Zustand for instant, optimistic cart updates and local haptic feedback. The backend is powered by Django REST Framework and SQLite 3, handling catalog filtering, promo validation (FRESH20), and atomic checkout transactions. A custom Axios interceptor manages JWT token refresh invisibly in the background so users are never interrupted while browsing or ordering.",
     problem:
-      "Hyperlocal quick-commerce mobile apps demand sub-second UI responsiveness, buttery smooth 60 FPS transitions, reliable state synchronization across multi-item carts, and crystal-clear visual hierarchy for shoppers purchasing perishable produce under tight delivery timeframes.",
+      "Quick-commerce apps can easily feel sluggish if every tap (incrementing cart, toggling favorites) waits on a network round-trip. At the same time, critical business logic—like item pricing, discount coupons, and delivery fee thresholds (₹199)—cannot be trusted on the client. Managing token expiration smoothly on mobile without abrupt logouts is another common challenge.",
     solution:
-      "Architected an agile React Native and Expo mobile architecture utilizing TypeScript, modular component design, optimized image rendering, lightweight Context API state orchestration for persistent multi-item carts, and intuitive bottom tab navigation (Home, Categories, Cart with live badge count, Profile) ensuring frictionless UX on both iOS and Android.",
+      "Decoupled UI responsiveness from backend verification. The mobile client updates cart and favorites state immediately in Zustand, while an asynchronous service syncs with Django APIs. In Django, we used transaction.atomic() for checkout to lock cart items, snapshot prices, validate coupons, and clear the basket safely. On the client, an Axios interceptor catches 401s to refresh SimpleJWT tokens transparently, and a produce sprite atlas eliminates individual image network requests.",
     highlights: [
-      { label: "Platform", value: "iOS & Android (Expo)" },
-      { label: "Delivery ETA", value: "10–15 Min Hyperlocal" },
-      { label: "State Sync", value: "Client-Side Cart & Badges" },
-      { label: "UI Framework", value: "React Native & NativeWind" },
+      { label: "Frontend", value: "React Native (Expo SDK 57)" },
+      { label: "State Layer", value: "Zustand (Optimistic Cart)" },
+      { label: "Backend API", value: "Django REST Framework" },
+      { label: "Database", value: "SQLite 3 (Relational ORM)" },
     ],
     features: [
       {
-        title: "Hyperlocal Home & Interactive Guided Onboarding",
+        title: "Optimistic Cart & Real-Time Bill Summary",
         description:
-          "Dynamic geolocation address selector (e.g. HSR Layout, Bengaluru), 10–15 minute ETA indicator pill, step-by-step interactive walkthrough tour, and promotional farm-fresh harvest hero banner.",
+          "Instant item increment and decrement with haptic feedback; syncs with Django backend to compute delivery fees (free above ₹199), savings, and promo discounts (FRESH20).",
       },
       {
-        title: "Dual-Column Produce Category Explorer",
+        title: "JWT Authentication with Transparent Token Rotation",
         description:
-          "High-density responsive grid categorizing fresh fruits, vine tomatoes, crisp leafy spinach, root carrots, exotic broccoli, and seasonal mangoes with instantaneous search filtering.",
+          "SimpleJWT authentication supporting email or username login. Axios interceptor queues failed requests and automatically replays them upon background token refresh.",
       },
       {
-        title: "Persistent Cart & Bottom Tab Navigation",
+        title: "Produce Catalog & High-Performance Atlas",
         description:
-          "Floating action badges reflecting live item counts (3 items in cart), instantaneous quantity adjustments, and fluid React Navigation tab transitions.",
+          "Browse produce by category with price sorting and debounced search. Uses a local 4x3 sprite sheet atlas to render produce icons with zero network latency.",
       },
       {
-        title: "Comprehensive Account & Order Architecture",
+        title: "Atomic Checkout & Address Management",
         description:
-          "Full user profile suite containing order tracking, saved multi-address geolocations, wishlisted favorites, promotional coupon wallets, and help desk integration.",
+          "Multi-address selector (Home/Work) and atomic order creation via Django transactions, capturing historical price snapshots and order status.",
       },
     ],
     process: [
       {
         phase: "Phase 01",
-        title: "Mobile UX & Hyperlocal Information Architecture",
+        title: "Data Modeling & Django REST APIs",
         description:
-          "Structured screen flows and component hierarchies for 10–15 min quick-commerce shopping, onboarding tours, category taxonomy, and checkout flows.",
+          "Designed relational models for products, categories, cart items, coupons, and orders in Django. Implemented custom serializers, permissions (IsOwner), and seed scripts.",
       },
       {
         phase: "Phase 02",
-        title: "Expo & React Native Foundation",
+        title: "Mobile Architecture & State Layer",
         description:
-          "Bootstrapped cross-platform Expo workflow with strict TypeScript typing, asset preloading, vector icon sets, and React Navigation bottom tabs.",
+          "Set up Expo Router v57 with TypeScript. Built a centralized Zustand store (useShop) with request deduplication (pendingFavoriteRequests) and platform haptics.",
       },
       {
         phase: "Phase 03",
-        title: "Catalog Grid & Cart State Management",
+        title: "Auth Pipeline & Network Interceptors",
         description:
-          "Engineered dual-column category layouts, search query debouncing, client-side cart context with live badge indicators, and saved address arrays.",
+          "Integrated SimpleJWT with Expo SecureStore for encrypted token storage. Configured Axios interceptors for automatic header injection and token rotation.",
       },
       {
         phase: "Phase 04",
-        title: "Device Optimization & Cross-Platform QA",
+        title: "Automated Testing & End-to-End Verification",
         description:
-          "Profiled memory footprints, optimized asset caching, ensured WCAG contrast on soft yellow/cream and forest green palettes, and tested across iOS and Android simulators.",
+          "Wrote and verified 31 automated backend unit tests covering token rotation, cart math, rate limiting, and order checkout flows.",
       },
     ],
     deliverables: [
-      "Cross-platform React Native and Expo mobile app suite targeting iOS and Android.",
-      "Comprehensive screen flows: Hyperlocal Home, Dual-Column Categories, Cart Drawer, and Customer Profile.",
-      "Strict TypeScript component architecture with centralized cart and address state management.",
-      "Production-ready mobile design system with cohesive emerald green, sun-yellow, and organic cream aesthetics.",
+      "Cross-platform mobile client (React Native / Expo SDK 57) with optimistic Zustand state and haptics.",
+      "Layered Django REST Framework backend with SQLite 3 database and custom seed data commands.",
+      "Automated test suite (31 unit tests) covering JWT auth, rate-limiting, cart totals, and IDOR protection.",
+      "Versioned OpenAPI 3.0 / Swagger documentation (drf-spectacular) for all /api/v1/ endpoints.",
     ],
   },
 ];

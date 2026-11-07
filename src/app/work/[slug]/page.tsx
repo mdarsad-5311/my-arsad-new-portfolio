@@ -83,13 +83,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   // Group technologies for Technical Architecture
   const frontendTech = project.technologies.filter((t) =>
-    ["React", "Next.js", "TypeScript", "Tailwind CSS", "Modern CSS", "Responsive Web Design", "React Native", "Expo", "React Navigation"].includes(t)
+    ["React", "Next.js", "TypeScript", "Tailwind CSS", "Modern CSS", "Responsive Web Design", "React Native", "Expo", "React Navigation", "Zustand"].includes(t)
   );
   const backendTech = project.technologies.filter((t) =>
     ["Python", "Django", "Django REST Framework", "Django REST", "REST API", "Stripe API", "Context API"].includes(t)
   );
   const databaseTech = project.technologies.filter((t) =>
-    ["PostgreSQL", "Relational Database", "AsyncStorage", "SQLite3 / PostgreSQL"].includes(t)
+    ["PostgreSQL", "Relational Database", "AsyncStorage", "SQLite3 / PostgreSQL", "SQLite 3", "SQLite3", "SQLite"].includes(t)
   );
   const infraTech = project.technologies.filter((t) =>
     ["Docker", "Vercel", "Git", "GitHub", "EAS"].includes(t)
@@ -409,7 +409,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-[#1E3A5F]/60 text-[#0067FE] dark:text-[#38BDF8]">
                 <Server className="w-4 h-4" />
                 <span className="font-bold uppercase tracking-wider">
-                  {isMobile ? "API & State Layer" : "Backend & API Layer"}
+                  {isMobile && !backendTech.some((t) => ["Django", "Python"].includes(t)) ? "API & State Layer" : "Backend & API Layer"}
                 </span>
               </div>
               <ul className="mt-4 space-y-2 text-slate-700 dark:text-[#CBD5E1]">

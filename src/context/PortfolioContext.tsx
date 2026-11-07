@@ -1,6 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useCallback,
+} from "react";
 import { Language, TranslationDictionary } from "@/types/translations";
 import { translations } from "@/data/translations";
 import { hindiContent } from "@/data/hindiContent";
@@ -39,6 +47,54 @@ export interface VisitorLocation {
   loading: boolean;
   detected: boolean;
   source: "ip" | "gps" | "fallback";
+  error?: string | null;
+}
+
+interface CachedVisitorLocation {
+  location: VisitorLocation;
+  timestamp: number;
+}
+
+const LOCATION_CACHE_KEY = "portfolio_visitor_location_v2";
+const CACHE_VALID_MS = 30 * 60 * 1000; // 30 mins for verified IP / GPS
+const CACHE_FALLBACK_MS = 10 * 60 * 1000; // 10 mins for timezone fallback
+
+function getTimezoneFallback(): VisitorLocation {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const parts = tz.split("/");
+    const rawCity = parts.length > 1 ? parts[parts.length - 1] : parts[0];
+    const cityGuess = rawCity?.replace(/_/g, " ").trim() || "Local";
+    const isIndia = tz.includes("Kolkata") || tz.includes("Calcutta") || tz.toLowerCase().includes("india");
+
+    return {
+      city: cityGuess,
+      region: isIndia ? "Maharashtra" : "Local Zone",
+      country: isIndia ? "India" : "Global",
+      countryCode: isIndia ? "IN" : "INTL",
+      flagEmoji: isIndia ? "🇮🇳" : "🌐",
+      latitude: null, // Strictly null: never spoof Nashik coordinates for international/unknown locations!
+      longitude: null,
+      loading: false,
+      detected: false,
+      source: "fallback",
+      error: null,
+    };
+  } catch {
+    return {
+      city: "Global",
+      region: "Remote",
+      country: "Worldwide",
+      countryCode: "WW",
+      flagEmoji: "🌐",
+      latitude: null,
+      longitude: null,
+      loading: false,
+      detected: false,
+      source: "fallback",
+      error: null,
+    };
+  }
 }
 
 interface PortfolioContextType {
@@ -86,84 +142,122 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     country: "India",
     countryCode: "IN",
     flagEmoji: "🇮🇳",
-    latitude: 19.9975,
-    longitude: 73.7898,
+    latitude: null, // Initial coordinates are null until detected to avoid spoofing
+    longitude: null,
     loading: true,
     detected: false,
     source: "fallback",
+    error: null,
   });
+
+  // Track GPS scan state to eliminate GPS/IP race conditions
+  const isGpsActiveRef = useRef(false);
+  const ipAbortControllerRef = useRef<AbortController | null>(null);
 
   // Auto-catch Visitor Geolocation via high-speed, non-intrusive IP lookup
   useEffect(() => {
     let isCancelled = false;
+    const controller = new AbortController();
+    ipAbortControllerRef.current = controller;
 
     const autoCatchLocation = async () => {
-      // 1. Check session cache first for instant load
+      // 1. Check session cache first for instant 0ms load without hitting APIs
       try {
-        const cached = sessionStorage.getItem("portfolio_visitor_location");
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          if (!isCancelled && parsed && parsed.city) {
-            setVisitorLocation({ ...parsed, loading: false });
-            return;
+        const cachedRaw = sessionStorage.getItem(LOCATION_CACHE_KEY);
+        if (cachedRaw) {
+          const parsed = JSON.parse(cachedRaw) as CachedVisitorLocation;
+          if (parsed?.location && typeof parsed.timestamp === "number") {
+            const ttl = parsed.location.source === "fallback" ? CACHE_FALLBACK_MS : CACHE_VALID_MS;
+            const isFresh = Date.now() - parsed.timestamp < ttl;
+            if (isFresh && parsed.location.city) {
+              if (!isCancelled && !isGpsActiveRef.current) {
+                setVisitorLocation({
+                  ...parsed.location,
+                  loading: false,
+                });
+              }
+              return;
+            }
           }
         }
       } catch {}
 
-      // 2. Query ipwho.is with 3.5s timeout
+      // 2. Prepare immediate timezone fallback so visitor is never left stranded
+      const fallbackLoc = getTimezoneFallback();
+
+      // If user already initiated manual GPS scan, skip IP lookup
+      if (isGpsActiveRef.current) {
+        return;
+      }
+
+      // 3. Query ipwho.is with 2500ms timeout
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3500);
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
         const res = await fetch("https://ipwho.is/", { signal: controller.signal });
         clearTimeout(timeoutId);
 
         if (res.ok) {
           const data = await res.json();
-          if (!isCancelled && data && data.success) {
+          if (!isCancelled && !isGpsActiveRef.current && data && data.success) {
+            const lat =
+              typeof data.latitude === "number" && !isNaN(data.latitude)
+                ? data.latitude
+                : null;
+            const lng =
+              typeof data.longitude === "number" && !isNaN(data.longitude)
+                ? data.longitude
+                : null;
+
             const loc: VisitorLocation = {
-              city: data.city || "Nashik",
-              region: data.region || "Maharashtra",
-              country: data.country || "India",
-              countryCode: data.country_code || "IN",
-              flagEmoji: data.flag?.emoji || "🇮🇳",
-              latitude: typeof data.latitude === "number" ? data.latitude : 19.9975,
-              longitude: typeof data.longitude === "number" ? data.longitude : 73.7898,
+              city: data.city || fallbackLoc.city,
+              region: data.region || fallbackLoc.region,
+              country: data.country || fallbackLoc.country,
+              countryCode: data.country_code || fallbackLoc.countryCode,
+              flagEmoji: data.flag?.emoji || fallbackLoc.flagEmoji,
+              latitude: lat,
+              longitude: lng,
               loading: false,
               detected: true,
               source: "ip",
+              error: null,
             };
-            setVisitorLocation(loc);
-            try {
-              sessionStorage.setItem("portfolio_visitor_location", JSON.stringify(loc));
-            } catch {}
+
+            setVisitorLocation((prev) => {
+              // Race-condition guard: never let older IP lookup overwrite user GPS result
+              if (prev.source === "gps" || isGpsActiveRef.current) {
+                return prev;
+              }
+              try {
+                const cachePayload: CachedVisitorLocation = {
+                  location: loc,
+                  timestamp: Date.now(),
+                };
+                sessionStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify(cachePayload));
+              } catch {}
+              return loc;
+            });
             return;
           }
         }
       } catch {
-        // Fallback gracefully on timeout/network error
+        // Fallback gracefully on adblocker blocking ipwho.is, timeout, or network failure
       }
 
-      // 3. Fallback to client browser timezone deduction
-      if (!isCancelled) {
-        try {
-          const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-          const cityGuess = tz.split("/")[1]?.replace(/_/g, " ") || "Nashik";
-          const fallbackLoc: VisitorLocation = {
-            city: cityGuess,
-            region: "Detected Zone",
-            country: tz.includes("Kolkata") || tz.includes("Calcutta") ? "India" : "Global",
-            countryCode: tz.includes("Kolkata") || tz.includes("Calcutta") ? "IN" : "INTL",
-            flagEmoji: tz.includes("Kolkata") || tz.includes("Calcutta") ? "🇮🇳" : "🌐",
-            latitude: 19.9975,
-            longitude: 73.7898,
-            loading: false,
-            detected: true,
-            source: "fallback",
-          };
-          setVisitorLocation(fallbackLoc);
-        } catch {
-          setVisitorLocation((prev) => ({ ...prev, loading: false }));
-        }
+      // 4. If IP lookup failed or was blocked, activate safe timezone fallback
+      if (!isCancelled && !isGpsActiveRef.current) {
+        setVisitorLocation((prev) => {
+          if (prev.source === "gps" || isGpsActiveRef.current) {
+            return prev;
+          }
+          try {
+            const cachePayload: CachedVisitorLocation = {
+              location: fallbackLoc,
+              timestamp: Date.now(),
+            };
+            sessionStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify(cachePayload));
+          } catch {}
+          return fallbackLoc;
+        });
       }
     };
 
@@ -171,19 +265,40 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
 
     return () => {
       isCancelled = true;
+      controller.abort();
     };
   }, []);
 
-  // Precise browser GPS auto-catch triggered on user demand
-  const detectGpsLocation = async () => {
+  // Precise browser GPS auto-catch triggered strictly on user demand
+  const detectGpsLocation = useCallback(async (): Promise<void> => {
     if (typeof window === "undefined" || !("geolocation" in navigator)) {
+      setVisitorLocation((prev) => ({
+        ...prev,
+        error: "Browser does not support Geolocation",
+      }));
       return;
     }
-    setVisitorLocation((prev) => ({ ...prev, loading: true }));
+
+    // Flag GPS active to immediately preempt and cancel any pending IP lookup
+    isGpsActiveRef.current = true;
+    if (ipAbortControllerRef.current) {
+      try {
+        ipAbortControllerRef.current.abort();
+      } catch {}
+    }
+
+    setVisitorLocation((prev) => ({
+      ...prev,
+      loading: true,
+      source: "gps",
+      error: null,
+    }));
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
+
         setVisitorLocation((prev) => {
           const updated: VisitorLocation = {
             ...prev,
@@ -192,19 +307,32 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
             loading: false,
             detected: true,
             source: "gps",
+            error: null,
           };
           try {
-            sessionStorage.setItem("portfolio_visitor_location", JSON.stringify(updated));
+            const cachePayload: CachedVisitorLocation = {
+              location: updated,
+              timestamp: Date.now(),
+            };
+            sessionStorage.setItem(LOCATION_CACHE_KEY, JSON.stringify(cachePayload));
           } catch {}
           return updated;
         });
       },
-      () => {
-        setVisitorLocation((prev) => ({ ...prev, loading: false }));
+      (err) => {
+        setVisitorLocation((prev) => {
+          // If user denies permission or GPS times out, revert loading state and retain previous city info
+          return {
+            ...prev,
+            loading: false,
+            source: prev.detected && prev.latitude !== null ? "ip" : "fallback",
+            error: err.code === 1 ? "Permission denied" : "Location unavailable",
+          };
+        });
       },
-      { timeout: 8000, enableHighAccuracy: true }
+      { timeout: 10000, enableHighAccuracy: true, maximumAge: 60000 }
     );
-  };
+  }, []);
 
   // Initialize from localStorage or defaults
   useEffect(() => {

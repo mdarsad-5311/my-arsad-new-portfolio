@@ -217,7 +217,15 @@ export default function Navbar() {
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(DEVELOPER_INFO.location)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                title={`Base: ${DEVELOPER_INFO.location} • Auto-Caught Visitor: ${visitorLocation.city}, ${visitorLocation.country} (opens in a new tab)`}
+                title={`Base: ${DEVELOPER_INFO.location} • Visitor: ${
+                  visitorLocation.loading
+                    ? "Detecting location..."
+                    : `${visitorLocation.city}${
+                        visitorLocation.country && visitorLocation.country !== "Global"
+                          ? `, ${visitorLocation.country}`
+                          : ""
+                      }`
+                } (opens in a new tab)`}
                 className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0D1D3A]/70 border border-[#1E3A5F] hover:border-[#38BDF8]/60 font-mono text-[11px] tracking-wider text-[#94A3B8] hover:text-white transition-all duration-200 cursor-pointer group"
               >
                 <MapPin className="w-3 h-3 text-[#38BDF8] group-hover:scale-110 transition-transform" />

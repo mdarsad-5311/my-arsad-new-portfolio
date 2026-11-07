@@ -62,13 +62,15 @@ export default function LocationCard() {
           const absH = Math.floor(diffHours);
           const absM = Math.round((diffHours - absH) * 60);
           const timeStr = absM > 0 ? `${absH}h ${absM}m` : `${absH}h`;
-          setTimeDiffText(`${timeStr} ${t.locationCard.aheadIST}`);
+          const suffix = t.locationCard.aheadIST.replace(/^hours\s+/i, "").replace(/^घंटे\s+/i, "");
+          setTimeDiffText(`${timeStr} ${suffix}`);
         } else {
           const posHours = Math.abs(diffHours);
           const absH = Math.floor(posHours);
           const absM = Math.round((posHours - absH) * 60);
           const timeStr = absM > 0 ? `${absH}h ${absM}m` : `${absH}h`;
-          setTimeDiffText(`${timeStr} ${t.locationCard.behindIST}`);
+          const suffix = t.locationCard.behindIST.replace(/^hours\s+/i, "").replace(/^घंटे\s+/i, "");
+          setTimeDiffText(`${timeStr} ${suffix}`);
         }
       } catch {
         setTimeDiffText("Global Remote Collaboration");
@@ -228,11 +230,35 @@ export default function LocationCard() {
           </span>
           <div className="mt-1 pt-1.5 border-t border-[#1E3A5F]/40 flex items-center justify-between text-[10px] text-[#94A3B8]">
             <span className="flex items-center gap-1 truncate text-[#CBD5E1]">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-              <span className="truncate">{visitorLocation.city}, {visitorLocation.country}</span>
-              <span>{visitorLocation.flagEmoji}</span>
+              <span
+                className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                  visitorLocation.loading
+                    ? "bg-amber-400 animate-pulse"
+                    : visitorLocation.source === "gps"
+                    ? "bg-emerald-400"
+                    : visitorLocation.detected
+                    ? "bg-emerald-400"
+                    : "bg-[#38BDF8]"
+                }`}
+              />
+              <span className="truncate">
+                {visitorLocation.loading
+                  ? "Detecting location..."
+                  : `${visitorLocation.city}, ${visitorLocation.country}`}
+              </span>
+              {!visitorLocation.loading && visitorLocation.flagEmoji && (
+                <span>{visitorLocation.flagEmoji}</span>
+              )}
             </span>
-            <span className="text-[9px] text-[#38BDF8] font-mono shrink-0 uppercase">Auto-Caught</span>
+            <span className="text-[9px] text-[#38BDF8] font-mono shrink-0 uppercase">
+              {visitorLocation.loading
+                ? "Locating"
+                : visitorLocation.source === "gps"
+                ? "GPS Live"
+                : visitorLocation.source === "ip"
+                ? "Auto-Caught"
+                : "Zone Guess"}
+            </span>
           </div>
         </div>
       </div>

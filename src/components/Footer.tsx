@@ -199,23 +199,42 @@ export default function Footer() {
                     </span>
                     <button
                       type="button"
+                      disabled={visitorLocation.loading && visitorLocation.source === "gps"}
                       onClick={(e) => {
                         e.preventDefault();
                         detectGpsLocation();
                       }}
                       title="Scan precise browser GPS location"
-                      className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-[#07152F] hover:bg-[#0067FE] text-[#38BDF8] hover:text-white border border-[#1E3A5F] hover:border-[#38BDF8] transition-all cursor-pointer"
+                      className={`px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider border transition-all cursor-pointer ${
+                        visitorLocation.source === "gps"
+                          ? "bg-emerald-950/80 border-emerald-500/60 text-emerald-400"
+                          : "bg-[#07152F] hover:bg-[#0067FE] text-[#38BDF8] hover:text-white border-[#1E3A5F] hover:border-[#38BDF8]"
+                      } ${visitorLocation.loading && visitorLocation.source === "gps" ? "opacity-60 cursor-not-allowed" : ""}`}
                     >
-                      {visitorLocation.source === "gps" ? "GPS Active" : "GPS Scan"}
+                      {visitorLocation.loading && visitorLocation.source === "gps"
+                        ? "Scanning..."
+                        : visitorLocation.source === "gps"
+                        ? "GPS Active"
+                        : "GPS Scan"}
                     </button>
                   </div>
 
                   <a
                     href={
-                      visitorLocation.latitude && visitorLocation.longitude
+                      visitorLocation.latitude !== null &&
+                      visitorLocation.longitude !== null &&
+                      visitorLocation.source !== "fallback"
                         ? `https://www.google.com/maps/search/?api=1&query=${visitorLocation.latitude},${visitorLocation.longitude}`
                         : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            `${visitorLocation.city} ${visitorLocation.region} ${visitorLocation.country}`
+                            [
+                              visitorLocation.city,
+                              visitorLocation.region && visitorLocation.region !== "Detected Zone" && visitorLocation.region !== "Local Zone"
+                                ? visitorLocation.region
+                                : "",
+                              visitorLocation.country && visitorLocation.country !== "Global" ? visitorLocation.country : "",
+                            ]
+                              .filter(Boolean)
+                              .join(", ") || DEVELOPER_INFO.location
                           )}`
                     }
                     target="_blank"

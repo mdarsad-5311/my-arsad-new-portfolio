@@ -52,7 +52,7 @@ export default function WorkGallery({ projects: initialProjects }: WorkGalleryPr
     const techSet = new Set<string>();
     projects.forEach((p) => {
       p.technologies.forEach((t) => {
-        if (["Next.js", "Django", "TypeScript", "React", "React Native", "Expo", "Tailwind CSS", "PostgreSQL", "Python"].includes(t)) {
+        if (["Next.js", "Django", "TypeScript", "React", "React Native", "Expo", "Tailwind CSS", "PostgreSQL", "Python", "SQLite 3"].includes(t)) {
           techSet.add(t);
         }
       });

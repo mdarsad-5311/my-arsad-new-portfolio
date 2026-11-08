@@ -62,18 +62,35 @@ const CACHE_FALLBACK_MS = 10 * 60 * 1000; // 10 mins for timezone fallback
 function getTimezoneFallback(): VisitorLocation {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const isIndia = tz.includes("Kolkata") || tz.includes("Calcutta") || tz.toLowerCase().includes("india");
+
+    if (isIndia) {
+      return {
+        city: "India",
+        region: "",
+        country: "India",
+        countryCode: "IN",
+        flagEmoji: "🇮🇳",
+        latitude: null, // Strictly null: never assume state or spoof GPS coordinates
+        longitude: null,
+        loading: false,
+        detected: false,
+        source: "fallback",
+        error: null,
+      };
+    }
+
     const parts = tz.split("/");
     const rawCity = parts.length > 1 ? parts[parts.length - 1] : parts[0];
-    const cityGuess = rawCity?.replace(/_/g, " ").trim() || "Local";
-    const isIndia = tz.includes("Kolkata") || tz.includes("Calcutta") || tz.toLowerCase().includes("india");
+    const cityGuess = rawCity?.replace(/_/g, " ").trim() || "Global";
 
     return {
       city: cityGuess,
-      region: isIndia ? "Maharashtra" : "Local Zone",
-      country: isIndia ? "India" : "Global",
-      countryCode: isIndia ? "IN" : "INTL",
-      flagEmoji: isIndia ? "🇮🇳" : "🌐",
-      latitude: null, // Strictly null: never spoof Nashik coordinates for international/unknown locations!
+      region: "",
+      country: "Global",
+      countryCode: "INTL",
+      flagEmoji: "🌐",
+      latitude: null, // Strictly null: never spoof coordinates for unknown locations!
       longitude: null,
       loading: false,
       detected: false,
@@ -83,7 +100,7 @@ function getTimezoneFallback(): VisitorLocation {
   } catch {
     return {
       city: "Global",
-      region: "Remote",
+      region: "",
       country: "Worldwide",
       countryCode: "WW",
       flagEmoji: "🌐",
@@ -137,8 +154,8 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [theme, setThemeState] = useState<Theme>("dark");
   const [visitorLocation, setVisitorLocation] = useState<VisitorLocation>({
-    city: "Nashik",
-    region: "Maharashtra",
+    city: "India",
+    region: "",
     country: "India",
     countryCode: "IN",
     flagEmoji: "🇮🇳",

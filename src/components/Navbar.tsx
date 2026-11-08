@@ -220,6 +220,8 @@ export default function Navbar() {
                 title={`Base: ${DEVELOPER_INFO.location} • Visitor: ${
                   visitorLocation.loading
                     ? "Detecting location..."
+                    : visitorLocation.city === visitorLocation.country
+                    ? visitorLocation.city
                     : `${visitorLocation.city}${
                         visitorLocation.country && visitorLocation.country !== "Global"
                           ? `, ${visitorLocation.country}`

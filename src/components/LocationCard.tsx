@@ -244,6 +244,8 @@ export default function LocationCard() {
               <span className="truncate">
                 {visitorLocation.loading
                   ? "Detecting location..."
+                  : visitorLocation.city === visitorLocation.country
+                  ? visitorLocation.city
                   : `${visitorLocation.city}, ${visitorLocation.country}`}
               </span>
               {!visitorLocation.loading && visitorLocation.flagEmoji && (

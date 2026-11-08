@@ -226,15 +226,21 @@ export default function Footer() {
                       visitorLocation.source !== "fallback"
                         ? `https://www.google.com/maps/search/?api=1&query=${visitorLocation.latitude},${visitorLocation.longitude}`
                         : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            [
-                              visitorLocation.city,
-                              visitorLocation.region && visitorLocation.region !== "Detected Zone" && visitorLocation.region !== "Local Zone"
-                                ? visitorLocation.region
-                                : "",
-                              visitorLocation.country && visitorLocation.country !== "Global" ? visitorLocation.country : "",
-                            ]
-                              .filter(Boolean)
-                              .join(", ") || DEVELOPER_INFO.location
+                            Array.from(
+                              new Set(
+                                [
+                                  visitorLocation.city,
+                                  visitorLocation.region &&
+                                  visitorLocation.region !== "Detected Zone" &&
+                                  visitorLocation.region !== "Local Zone"
+                                    ? visitorLocation.region
+                                    : "",
+                                  visitorLocation.country && visitorLocation.country !== "Global"
+                                    ? visitorLocation.country
+                                    : "",
+                                ].filter(Boolean)
+                              )
+                            ).join(", ") || DEVELOPER_INFO.location
                           )}`
                     }
                     target="_blank"
@@ -248,7 +254,16 @@ export default function Footer() {
                       ) : (
                         <>
                           <span className="text-white group-hover/live:text-[#38BDF8] truncate">
-                            {visitorLocation.city}, {visitorLocation.region || visitorLocation.country}
+                            {visitorLocation.city === visitorLocation.country
+                              ? visitorLocation.city
+                              : visitorLocation.region &&
+                                visitorLocation.region !== visitorLocation.city &&
+                                visitorLocation.region !== "Detected Zone" &&
+                                visitorLocation.region !== "Local Zone"
+                              ? `${visitorLocation.city}, ${visitorLocation.region}`
+                              : visitorLocation.country && visitorLocation.country !== "Global"
+                              ? `${visitorLocation.city}, ${visitorLocation.country}`
+                              : visitorLocation.city}
                           </span>
                           <span className="text-sm shrink-0">{visitorLocation.flagEmoji}</span>
                         </>

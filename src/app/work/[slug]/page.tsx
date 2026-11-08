@@ -163,7 +163,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0067FE] text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#0056EE] transition-all duration-300 shadow-[0_4px_20px_rgba(0,103,254,0.4)] rounded-lg group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0067FE] dark:focus-visible:ring-[#38BDF8]"
                 >
-                  <span>LIVE PROJECT</span>
+                  <span>{isMobile ? "EXPO BUILD / LIVE APP" : "LIVE PROJECT"}</span>
                   <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               )}
@@ -503,7 +503,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0067FE] text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#0056EE] transition-all duration-300 rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0067FE] dark:focus-visible:ring-[#38BDF8]"
                   >
-                    <span>VIEW LIVE PROJECT</span>
+                    <span>{isMobile ? "VIEW EXPO BUILD" : "VIEW LIVE PROJECT"}</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
                 )}

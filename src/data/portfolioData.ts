@@ -631,7 +631,7 @@ export const PROJECTS: ProjectItem[] = [
     projectType: "Mobile Production System",
     platform: "mobile",
     githubUrl: "https://github.com/mdarsad-5311/freshdash",
-    liveUrl: "https://github.com/mdarsad-5311/freshdash",
+    liveUrl: "https://expo.dev/accounts/mdarsad/projects/freshdash/builds/e5749cba-a40d-4f38-81a3-98f4c1cc9edd",
     featured: true,
     screenshots: [
       {

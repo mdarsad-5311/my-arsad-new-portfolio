@@ -30,7 +30,7 @@ const PROJECT_DOMAINS: Record<string, string> = {
   "kalycor-corporate": "kalycor.global",
   "daania-skincare": "mdarsad5311.pythonanywhere.com",
   "educareer360": "career360-zeta.vercel.app",
-  "freshly-grocery-app": "freshly.app",
+  "freshly-grocery-app": "expo.dev",
 };
 
 export default function WorkGallery({ projects: initialProjects }: WorkGalleryProps) {

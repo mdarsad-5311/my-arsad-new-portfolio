@@ -3,7 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Compass, Globe, ExternalLink, Radio } from "lucide-react";
 import { DEVELOPER_INFO } from "@/data/portfolioData";
-import { usePortfolio } from "@/context/PortfolioContext";
+import { usePortfolio, type VisitorLocation } from "@/context/PortfolioContext";
+
+function getVisitorDisplayLabel(loc: VisitorLocation): string {
+  if (loc.loading) return "Detecting location...";
+  if (loc.city === loc.country) return loc.city;
+  return `${loc.city}, ${loc.country}`;
+}
 
 export default function LocationCard() {
   const { t, visitorLocation } = usePortfolio();
@@ -242,11 +248,7 @@ export default function LocationCard() {
                 }`}
               />
               <span className="truncate">
-                {visitorLocation.loading
-                  ? "Detecting location..."
-                  : visitorLocation.city === visitorLocation.country
-                  ? visitorLocation.city
-                  : `${visitorLocation.city}, ${visitorLocation.country}`}
+                {getVisitorDisplayLabel(visitorLocation)}
               </span>
               {!visitorLocation.loading && visitorLocation.flagEmoji && (
                 <span>{visitorLocation.flagEmoji}</span>

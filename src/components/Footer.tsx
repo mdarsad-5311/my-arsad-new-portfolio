@@ -6,7 +6,40 @@ import { ArrowUp, ArrowUpRight, Download, Mail, Clock, MapPin, Globe, Compass } 
 import { DEVELOPER_INFO } from "@/data/portfolioData";
 import Logo from "@/components/Logo";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/SocialIcons";
-import { usePortfolio } from "@/context/PortfolioContext";
+import { usePortfolio, type VisitorLocation } from "@/context/PortfolioContext";
+
+function getVisitorDisplayLocation(loc: VisitorLocation): string {
+  if (loc.city === loc.country) {
+    return loc.city;
+  }
+  const hasRegion =
+    loc.region &&
+    loc.region !== loc.city &&
+    !loc.region.endsWith("Zone");
+
+  if (hasRegion) {
+    return `${loc.city}, ${loc.region}`;
+  }
+  if (loc.country && loc.country !== "Global") {
+    return `${loc.city}, ${loc.country}`;
+  }
+  return loc.city;
+}
+
+function getVisitorMapsUrl(loc: VisitorLocation): string {
+  if (loc.latitude !== null && loc.longitude !== null && loc.source !== "fallback") {
+    return `https://www.google.com/maps/search/?api=1&query=${loc.latitude},${loc.longitude}`;
+  }
+
+  const queryParts = [
+    loc.city,
+    loc.region && !loc.region.endsWith("Zone") ? loc.region : "",
+    loc.country && loc.country !== "Global" ? loc.country : "",
+  ].filter(Boolean);
+
+  const query = Array.from(new Set(queryParts)).join(", ") || DEVELOPER_INFO.location;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
 
 export default function Footer() {
   const { t, visitorLocation, detectGpsLocation } = usePortfolio();
@@ -220,29 +253,7 @@ export default function Footer() {
                   </div>
 
                   <a
-                    href={
-                      visitorLocation.latitude !== null &&
-                      visitorLocation.longitude !== null &&
-                      visitorLocation.source !== "fallback"
-                        ? `https://www.google.com/maps/search/?api=1&query=${visitorLocation.latitude},${visitorLocation.longitude}`
-                        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                            Array.from(
-                              new Set(
-                                [
-                                  visitorLocation.city,
-                                  visitorLocation.region &&
-                                  visitorLocation.region !== "Detected Zone" &&
-                                  visitorLocation.region !== "Local Zone"
-                                    ? visitorLocation.region
-                                    : "",
-                                  visitorLocation.country && visitorLocation.country !== "Global"
-                                    ? visitorLocation.country
-                                    : "",
-                                ].filter(Boolean)
-                              )
-                            ).join(", ") || DEVELOPER_INFO.location
-                          )}`
-                    }
+                    href={getVisitorMapsUrl(visitorLocation)}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Open your detected location on Google Maps (opens in a new tab)"
@@ -254,16 +265,7 @@ export default function Footer() {
                       ) : (
                         <>
                           <span className="text-white group-hover/live:text-[#38BDF8] truncate">
-                            {visitorLocation.city === visitorLocation.country
-                              ? visitorLocation.city
-                              : visitorLocation.region &&
-                                visitorLocation.region !== visitorLocation.city &&
-                                visitorLocation.region !== "Detected Zone" &&
-                                visitorLocation.region !== "Local Zone"
-                              ? `${visitorLocation.city}, ${visitorLocation.region}`
-                              : visitorLocation.country && visitorLocation.country !== "Global"
-                              ? `${visitorLocation.city}, ${visitorLocation.country}`
-                              : visitorLocation.city}
+                            {getVisitorDisplayLocation(visitorLocation)}
                           </span>
                           <span className="text-sm shrink-0">{visitorLocation.flagEmoji}</span>
                         </>

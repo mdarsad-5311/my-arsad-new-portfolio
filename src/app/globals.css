@@ -299,7 +299,7 @@ body {
    - Co-aligned 24px Dotted Coordinate System
    - Deep Midnight Canvas (#00081C) with Cyan Edge Radiance
    - Seamlessly flowing across Navbar, Hero, all Sections, and Footer
-   - STRICT SAFETY: Light Mode is 100% UNTOUCHED (all rules scoped to :not(html.light))
+   - Scoped to dark mode (:not(html.light))
    ========================================================================== */
 
 :not(html.light) html {
@@ -348,7 +348,7 @@ body {
    - Frosted Glass Skills & Tech Stack Tiles
    - Midnight Navy Contact Section with Cyber Showroom Floor Glow
    - Translucent Glass Cyber Footer with Glowing Dividers & Social Icons
-   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules scoped to html.light)
+   - Scoped to light mode (html.light)
    ========================================================================== */
 
 html.light {
@@ -673,7 +673,7 @@ html.light .backlight-ambient-bottom {
    - High-contrast Crisp Typography (#334155 to #0066FF)
    - Luminous Soft Ambient Blue/Cyan Logo Glow (no dark blotch on light header)
    - High-contrast Frosted Glass Control Pills (Language, Theme & Location)
-   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules scoped to html.light)
+   - Scoped to light mode (html.light)
    ========================================================================== */
 html.light header nav {
   background: linear-gradient(
@@ -1911,7 +1911,7 @@ html.light #stack div[class*="rounded-xl"][class*="border"]:hover {
    - High-contrast crisp typography (#00081C, #1E293B, #334155, #64748B)
    - Clean light input fields with crisp borders & electric blue focus ring
    - Styled LocationCard with high-contrast telemetry & dark holographic radar
-   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules strictly scoped to html.light)
+   - Scoped to light mode (html.light)
    ========================================================================== */
 html.light #contact {
   color: #475569 !important;
@@ -2163,7 +2163,7 @@ html.light #contact div.animate-fadeIn button[class*="bg-[#07152F]"]:hover {
    - High-contrast crisp typography (#00081C, #1E293B, #475569)
    - Luminous subtle blue/cyan accents (#0066FF, #00BFFF)
    - Clean frosted cards with soft borders (#D8E3F0)
-   - STRICT SAFETY: Dark Mode is 100% UNTOUCHED (all rules strictly scoped to html.light)
+   - Scoped to light mode (html.light)
    ========================================================================== */
 html.light footer {
   color: #475569 !important;

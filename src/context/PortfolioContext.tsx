@@ -71,7 +71,7 @@ function getTimezoneFallback(): VisitorLocation {
         country: "India",
         countryCode: "IN",
         flagEmoji: "🇮🇳",
-        latitude: null, // Strictly null: never assume state or spoof GPS coordinates
+        latitude: null,
         longitude: null,
         loading: false,
         detected: false,
@@ -90,7 +90,7 @@ function getTimezoneFallback(): VisitorLocation {
       country: "Global",
       countryCode: "INTL",
       flagEmoji: "🌐",
-      latitude: null, // Strictly null: never spoof coordinates for unknown locations!
+      latitude: null,
       longitude: null,
       loading: false,
       detected: false,
@@ -159,7 +159,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     country: "India",
     countryCode: "IN",
     flagEmoji: "🇮🇳",
-    latitude: null, // Initial coordinates are null until detected to avoid spoofing
+    latitude: null,
     longitude: null,
     loading: true,
     detected: false,
@@ -167,18 +167,18 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     error: null,
   });
 
-  // Track GPS scan state to eliminate GPS/IP race conditions
+  // Track active GPS scan to prevent IP lookup race conditions
   const isGpsActiveRef = useRef(false);
   const ipAbortControllerRef = useRef<AbortController | null>(null);
 
-  // Auto-catch Visitor Geolocation via high-speed, non-intrusive IP lookup
+  // Auto-detect visitor location on initial mount
   useEffect(() => {
     let isCancelled = false;
     const controller = new AbortController();
     ipAbortControllerRef.current = controller;
 
     const autoCatchLocation = async () => {
-      // 1. Check session cache first for instant 0ms load without hitting APIs
+      // 1. Check session cache first
       try {
         const cachedRaw = sessionStorage.getItem(LOCATION_CACHE_KEY);
         if (cachedRaw) {
@@ -199,15 +199,14 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         }
       } catch {}
 
-      // 2. Prepare immediate timezone fallback so visitor is never left stranded
+      // 2. Prepare timezone fallback
       const fallbackLoc = getTimezoneFallback();
 
-      // If user already initiated manual GPS scan, skip IP lookup
       if (isGpsActiveRef.current) {
         return;
       }
 
-      // 3. Query ipwho.is with 2500ms timeout
+      // 3. Query IP geolocation with 2.5s timeout
       try {
         const timeoutId = setTimeout(() => controller.abort(), 2500);
         const res = await fetch("https://ipwho.is/", { signal: controller.signal });
@@ -240,7 +239,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
             };
 
             setVisitorLocation((prev) => {
-              // Race-condition guard: never let older IP lookup overwrite user GPS result
+              // If user initiated GPS while IP was in-flight, preserve GPS
               if (prev.source === "gps" || isGpsActiveRef.current) {
                 return prev;
               }
@@ -257,10 +256,10 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
           }
         }
       } catch {
-        // Fallback gracefully on adblocker blocking ipwho.is, timeout, or network failure
+        // Fallback on network error or adblock
       }
 
-      // 4. If IP lookup failed or was blocked, activate safe timezone fallback
+      // 4. Activate timezone fallback
       if (!isCancelled && !isGpsActiveRef.current) {
         setVisitorLocation((prev) => {
           if (prev.source === "gps" || isGpsActiveRef.current) {
@@ -286,7 +285,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Precise browser GPS auto-catch triggered strictly on user demand
+  // User-triggered GPS detection
   const detectGpsLocation = useCallback(async (): Promise<void> => {
     if (typeof window === "undefined" || !("geolocation" in navigator)) {
       setVisitorLocation((prev) => ({
@@ -296,7 +295,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    // Flag GPS active to immediately preempt and cancel any pending IP lookup
+    // Cancel any pending IP lookup
     isGpsActiveRef.current = true;
     if (ipAbortControllerRef.current) {
       try {
@@ -338,7 +337,6 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
       },
       (err) => {
         setVisitorLocation((prev) => {
-          // If user denies permission or GPS times out, revert loading state and retain previous city info
           return {
             ...prev,
             loading: false,
